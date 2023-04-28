@@ -1,7 +1,7 @@
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "../utils/Modal";
-import imgLogo from "../images/tier_logo.png";
+
 import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
 
@@ -173,7 +173,7 @@ const Login = () => {
     return(
         <Container>
             <div className="item1">
-                <img src={imgLogo} alt="" />
+
             </div>
             <div className="item2">
                 <Input placeholder="이름" value ={inputId} onChange={onChangeId}/>
