@@ -43,7 +43,7 @@ const Header = () => {
             <div >
             ECO FRIENDS
             </div>
-            {/* <LoginBtn/> */}
+            <LoginBtn/>
             
         </header>
         </Headerst>
