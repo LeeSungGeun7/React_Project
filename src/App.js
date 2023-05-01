@@ -9,8 +9,14 @@ import Layout from './layout/Layout';
 function App() {
   return (
    <>
+   <Router>
+      <Routes>
+        <Route path="/" element={<Layout/>} />
+        <Route path="/About" element={<Login />} />
+
+      </Routes>
+    </Router>
    
-   <Layout/>
    </>
   );
 }

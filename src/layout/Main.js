@@ -40,6 +40,7 @@ const Mainst = styled.main`
         grid-column: 1 / 3 ;
      }
     .top , .map , .map1 , .bottom , .card-container {
+      margin : 2px;
         width: 100%;
         height: 350px;
         border: solid 1px black;
