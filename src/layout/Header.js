@@ -1,5 +1,6 @@
 import React from "react";
 import styled ,{css} from "styled-components";
+import LoginBtn from "../Components/LoginBtn";
 
 
 const Headerst = styled.header`
@@ -42,10 +43,10 @@ const Header = () => {
             <div >
             ECO FRIENDS
             </div>
-            
+
         </header>
         </Headerst>
     );
-}
+};
 
 export default Header;
