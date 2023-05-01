@@ -43,8 +43,7 @@ const Header = () => {
             <div >
             ECO FRIENDS
             </div>
-            <LoginBtn/>
-            
+
         </header>
         </Headerst>
     );
