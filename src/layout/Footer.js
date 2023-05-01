@@ -14,11 +14,11 @@ const Footerst = styled.footer`
 
 
 const Footer = () => {
-
+    const test = "";
     return(
         <Footerst>
         <footer>
-            footer
+            푸터 
         </footer>
         </Footerst>
     );
