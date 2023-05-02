@@ -19,7 +19,7 @@ const Layout = () => {
 
     return(
         <Container>
-        <Header/>
+        <Header overlap={true}/>
             
             <Main>
             
