@@ -4,7 +4,8 @@ import LoginBtn from "../Components/LoginBtn";
 
 
 const Headerst = styled.header`
-    position: absolute;
+
+    position: ${props => props.overlap ? `absolute` : 'static'};
     background-color: rgba(255, 255, 255, 0.5); /* 헤더의 배경색을 투명하게 설정 (투명도 조절 가능) */
 
     width: 100%;
@@ -14,17 +15,22 @@ const Headerst = styled.header`
     border: 1px solid black;
     display : grid;
     grid-columns: 1 / 2;
-    .logo {
-        background-color : green;
-        color : white;
-    }
     header{
         height: 80px;
         display : flex;
         flex-direction: flex-start;
     }
-    .logo:after {
-        color:red;
+    .logo {
+        width : 200px;
+       // background-image : url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3VHDuYYdNPDsW9nqOJQQAfQCI7dfHtFojHA&usqp=CAU');
+        background-repeat: no-repeat;
+        background-size: contain;
+        display:flex;
+        align-items:center;
+        color : black;
+        font-family: 'Yeon Sung', cursive;
+        font-size: 35px;
+        weight : bold;
     }
 `   
 ;
@@ -32,16 +38,20 @@ const Headerst = styled.header`
 
 
 
-const Header = () => {
+const Header = (props) => {
 
     return(
-        <Headerst>
+        <Headerst overlap={props.overlap} >
         <header>
-            <div className="logo">
-                LOGO
+        <style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&family=Yeon+Sung&display=swap');
+          
+        </style>
+        <div className="logo">
+            ECO FRIENDS
             </div>
             <div >
-            ECO FRIENDS
+           
             </div>
 
         </header>
