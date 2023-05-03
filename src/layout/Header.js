@@ -2,10 +2,10 @@ import React from "react";
 import styled ,{css} from "styled-components";
 
 import { Link } from "react-router-dom"; 
-import LoginBtn from "../Components/LoginBtn";
-import Login from "../pages/Login";
+// import LoginBtn from "../Components/LoginBtn";
+// import Login from "../pages/Login";
 
-import LoginBtn from "../Components/LoginBtn";
+
 
 
 
@@ -96,10 +96,8 @@ const Header = (props) => {
                 클릭버튼
             </div>
 
-            </div>
-            <div >
-           
-            </div>
+          
+          
 
 
         </header>
