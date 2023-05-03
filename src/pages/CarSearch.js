@@ -15,7 +15,7 @@ const CarSerachst = styled.body`
         margin: 50px;
         display: flex;
         flex-direction: column;
-        border: solid 1px black;
+        //border: solid 1px black;
         height:150vh;
     }
     &:hover {
