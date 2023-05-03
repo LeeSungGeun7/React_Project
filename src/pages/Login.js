@@ -12,7 +12,7 @@ const Container = styled.div`
 
 
   .Container {
-
+    background-color: black ;
     height: 100vh;
     display: flex;
     flex-wrap: wrap;
@@ -36,8 +36,8 @@ const Container = styled.div`
 
   }
   input {
-    width: 500px;
-    height: 32px;
+    width: 50%;
+    height: 20%;
     font-size: 15px;
     border: 0;
     border-radius: 15px;
@@ -88,7 +88,7 @@ const Login = () => {
             setIdMsg("올바른 형식 입니다.");
             setIsId(true);
         }
-    }
+    } 
 
     const onChangePw = (e) => {
         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
@@ -108,9 +108,9 @@ const Login = () => {
         const response = await AxiosApi.memberLogin(inputId,inputPw);
         console.log(response.data);
         if(response.data === true) {
-            navigate("/home");
+            navigate("/");
         } else {
-            console.log("로그인 에러 !!!")
+            alert("로그인 에러 !!!")
 ;        }
     }
 
@@ -121,9 +121,9 @@ const Login = () => {
 
               <div className="loginbar">
                         <div className="title">LOGIN</div>
-                       <input type="text" />
-                        <input type="text" />
-                        <button>Login</button>
+                       <input type="text" onChange={onChangeId} />
+                        <input type="text" onChnage={onChangePw} />
+                        <button onClick={onClickLogin}>Login</button>
                         <a href="">Forgot to Password?</a>
               </div>
         
