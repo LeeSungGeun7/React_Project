@@ -26,6 +26,7 @@ const Mainst = styled.main`
        // background-image : url('https://www.hyundai.com/contents/mainbanner/sonata-23fl-w.png');
         width: 100%;
         height: 20vh;
+
        // border: solid 1px black;
          
      }
@@ -33,6 +34,10 @@ const Mainst = styled.main`
 
       object-fit: cover;
       width: 100%;
+
+        border: solid 1px black;
+         
+
      }
       .map    {
         grid-column: 1 / 2 ;
@@ -77,9 +82,11 @@ const Mainst = styled.main`
       background-color: #333333 ;
       border: none;
     }
+    
 `;
 
 const Main = () => {
+
    const [vdValue,setVdValue] = useState(vd);
 
    const vdClick = () => {
@@ -110,6 +117,14 @@ const Main = () => {
         <div className="map">
         <KakaoMap/>
         </div>
+
+   
+    return(
+        <Mainst>
+        <div className="top">상단
+        </div>
+        <div className="map">지도</div>
+
         <div className="map1">마킹된 정보표시</div>
         <div className="bottom">하부</div>
         <div className="card-container">카드컨테이너

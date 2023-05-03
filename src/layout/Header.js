@@ -1,14 +1,22 @@
 import React from "react";
 import styled ,{css} from "styled-components";
+
 import { Link } from "react-router-dom"; 
 import LoginBtn from "../Components/LoginBtn";
 import Login from "../pages/Login";
+
+import LoginBtn from "../Components/LoginBtn";
+
 
 
 const Headerst = styled.header`
 
     position: ${props => props.overlap ? `absolute` : 'static'};
+
     background-color: none; /* 헤더의 배경색을 투명하게 설정 (투명도 조절 가능) */
+
+    background-color: rgba(255, 255, 255, 0.5); /* 헤더의 배경색을 투명하게 설정 (투명도 조절 가능) */
+
 
     width: 100%;
     top:0;
@@ -30,6 +38,7 @@ const Headerst = styled.header`
         background-size: contain;
         display:flex;
         align-items:center;
+
         color : white;
         font-family: 'Yeon Sung', cursive;
         font-size: 35px;
@@ -48,6 +57,12 @@ const Headerst = styled.header`
         z-index:100;
         font-size: 15px;
         text-decoration: none;
+
+        color : black;
+        font-family: 'Yeon Sung', cursive;
+        font-size: 35px;
+        weight : bold;
+
     }
 `   
 ;
@@ -66,6 +81,7 @@ const Header = (props) => {
         </style>
         <div className="logo">
             ECO FRIENDS
+
             </div>
             <div className="menu-group" >
             <nav className="menu">
@@ -79,9 +95,16 @@ const Header = (props) => {
             <div>
                 클릭버튼
             </div>
+
+            </div>
+            <div >
+           
+            </div>
+
+
         </header>
         </Headerst>
     );
-}
+};
 
 export default Header;

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const KH_DOMAIN = "http://localhost:8111";
-
+const EF_DOMAIN = "http://localhost:3737";
 
 
 const AxiosApi = {
@@ -14,7 +14,15 @@ const AxiosApi = {
         };
         return await axios.post(KH_DOMAIN + "/login" , login);  
     },
-
+    // 공공데이터 가져오기
+    chargerData : async(address) => {
+        const requset = {
+            pageNum : 1,
+            numOfRows : 306,
+            addr : address
+        };
+        return await axios.post(EF_DOMAIN + "/api/list", requset);
+    }
 
 };
 
