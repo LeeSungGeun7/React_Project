@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import CardItem from "../Components/CardItem";
+
 
 
 const Mainst = styled.main`
@@ -55,7 +57,10 @@ const Main = () => {
         <div className="map">지도</div>
         <div className="map1">마킹된 정보표시</div>
         <div className="bottom">하부</div>
-        <div className="card-container">카드컨테이너</div>
+        <div className="card-container">카드컨테이너
+            <CardItem></CardItem>
+               </div>        
+       
         </Mainst>
     );
 }

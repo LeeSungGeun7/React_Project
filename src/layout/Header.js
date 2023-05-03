@@ -3,6 +3,7 @@ import styled ,{css} from "styled-components";
 import LoginBtn from "../Components/LoginBtn";
 
 
+
 const Headerst = styled.header`
     position: absolute;
     background-color: rgba(255, 255, 255, 0.5); /* 헤더의 배경색을 투명하게 설정 (투명도 조절 가능) */
@@ -43,7 +44,9 @@ const Header = () => {
             <div >
             ECO FRIENDS
             </div>
-
+            <LoginBtn name="Login" type="btn1" Link="/Login"/>
+            <LoginBtn name="Sign up" type="btn2" Link="/Sign up"/>
+            
         </header>
         </Headerst>
     );
