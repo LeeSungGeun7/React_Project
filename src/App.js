@@ -12,10 +12,10 @@ function App() {
    <>
    <Router>
       <Routes>
-        <Route path="/" element={<Layout/>} />
-        <Route path="/About" element={<Login />} />
-        <Route path="/Car" element={<CarSerach />} />
-
+        <Route path="/Car" element={<CarSerach/>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Layout />} />
+        
       </Routes>
     </Router>
    

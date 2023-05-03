@@ -10,12 +10,16 @@ const CarSerachst = styled.body`
     display: grid;
     grid-template-columns: 1fr  ;
     grid-template-rows: repeat(2,minmax(80px,auto));
-
+    
     .Container {
         margin: 50px;
         display: flex;
         flex-direction: column;
+
+        //border: solid 1px black;
+
         border: solid 1px black;
+
         height:150vh;
     }
     &:hover {
