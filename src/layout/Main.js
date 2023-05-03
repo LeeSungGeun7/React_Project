@@ -4,6 +4,7 @@ import vd from "../images/video-src-pc (1).mp4";
 import vd2 from "../images/KakaoTalk_Video_2023-05-03-16-40-25.mp4";
 import KakaoMap from "../Components/KakaoMap";
 import CardSlider from "../Components/CardSlider";
+import MainBottom from "../Components/MainBottom";
 
 const Mainst = styled.main`
   display: grid;
@@ -111,7 +112,9 @@ const Main = () => {
         <KakaoMap />
       </div>
       <div className="map1">마킹된 정보표시</div>
-      <div className="bottom">하부</div>
+      <div className="bottom">
+        <MainBottom/>
+      </div>
       <div className="card-container">
         카드컨테이너
         <CardSlider />
