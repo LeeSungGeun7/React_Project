@@ -9,7 +9,7 @@ const AxiosApi = {
     // 로그인 
     memberLogin : async(id,pw) => {
         const requset = {
-            id : id, 
+            email : id, 
             pwd : pw
         };
         return await axios.post(EF_DOMAIN + "/member/login" , requset);  
