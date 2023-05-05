@@ -4,12 +4,11 @@ import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import { Link } from "react-router-dom";
 
-
 const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    background-color: #99FFDA;
+    background-color: #c8ff7a;
     padding: 100px;
     align-items: center;
     justify-content: center;
@@ -83,7 +82,7 @@ const Container = styled.div`
 
     .text {
         /* margin: 30px; */
-        margin-left: 14vh;
+        margin-left: 100px;
     }
 
     .InfoTable {
@@ -126,6 +125,15 @@ const Container = styled.div`
         padding: 5px;
     }
 
+    .modifyPhone, .modifyEmail {
+        width: 300px;
+        height: 30px;
+    }
+
+    .info {
+        margin: 0 5px;
+    }
+
     .card, .card2, .card3 {
         text-decoration: none;
     }
@@ -160,13 +168,35 @@ const Container = styled.div`
         margin: 0px 20px;
     }
 
-    .mypage{
+    .saveButton {
+        width: 100%;
+        align-items: center;
+        margin-bottom: 20px;
+        
+    }
+    .saveInfo {
+        display: block;
+        margin: auto;
+        width: 150px;
+        height: 50px;
+        border-radius: 10px;
+        border: none;
+        background-color: #5EBBFF;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        align-items: center;
+        justify-content: center;
+        
+    }
+
+    .modifyInfo {
         color: #5EBBFF;
     }
 `;
 
 
-const Mypage = () => {
+const ModifyInfo = () => {
     // const { user } = useUserState();
 
     return(
@@ -178,15 +208,15 @@ const Mypage = () => {
                 <div className="Mypage">
                     <div className="top">
                         <ul className="topMenu">
-                            <Link to="/Mypage"><li className="menu1"><a className="mypage" href="/">마이페이지</a></li></Link>
-                            <Link to="/ModifyInfo"><li className="menu2"><a className="modifyInfo" href="/ModifyInfo">내 정보 수정</a></li></Link>
-                            <Link to="/InterestStation"><li className="menu3"><a className="interestStation" href="/">관심 충전소</a></li></Link>
+                            <Link to="MyPage"><li className="menu1"><a className="mypage" href="/">마이페이지</a></li></Link>
+                            <li className="menu2"><a className="modifyInfo" href="/">내 정보 수정</a></li>
+                            <li className="menu3"><a className="interestStation" href="/">관심 충전소</a></li>
                             <li className="menu4"><a className="inquriyCost" href="/">주유비 조회</a></li>
                         </ul>
                         <br></br>
 
-                        <h1 className="text">마이페이지</h1>
-                        {/* <h4 className="text">모든 항목은 필수입력 사항입니다.</h4> */}
+                        <h1 className="text">내 정보 수정</h1>
+                        <h4 className="text">*모든 항목은 필수입력 사항입니다.</h4>
 
                     </div>
                     <div className="table">
@@ -201,11 +231,15 @@ const Mypage = () => {
                             </tr>
                             <tr>
                                 <th className="phone">휴대전화번호</th>
-                                <td className="loginPhone">010-2397-9934</td>
+                                <td className="loginPhone">
+                                    <input className="modifyPhone"></input><p className="info">*휴대전화 없을 시 유선전화번호 입력</p>
+                                </td>
                             </tr>
                             <tr>
                                 <th className="email">이메일</th>
-                                <td className="loginEmail">pooh9609@naver.com</td>
+                                <td className="loginEmail">
+                                    <input className="modifyEmail"></input><p className="info">*입력예시:Ecofriend@naver.com</p>
+                                </td>
                             </tr>
                             <tr>
                                 <th className="payment">결제 수단</th>
@@ -216,26 +250,20 @@ const Mypage = () => {
                                 </td>
                             </tr>
                         </table>
+                        
+                        <div className="saveButton">
+                            <button className="saveInfo">수정하기</button>
+                        </div>
 
-                        {/* <div className="Cotainer">
-                                전체    
-                                <div className="Mypage">
-                                    마이페이지바
-                                    <div className="top">
-                                        상단메뉴
-                                    </div>
-                                    <div className="table">
-                                        테이블
-                                    </div>
-                                </div>
-
-                        </div> */}
                     </div>
+
                 </div>
-            </div>    
+
+            </div>
+
         </Container>
         <Footer />
         </>
     );
 };
-export default Mypage;
+export default ModifyInfo
