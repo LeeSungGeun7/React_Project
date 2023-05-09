@@ -7,6 +7,11 @@ import Footer from "../layout/Footer";
 import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
 
+import { GoogleLogin } from "@react-oauth/google";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import jwtDecode from "jwt-decode";
+
+
 const Container = styled.div`
   
 
@@ -69,33 +74,50 @@ const Login = () => {
   const [inputId, setInputId] = useState("");
   const [inputPw, setInputPw] = useState("");
 
-  // // 오류메시지 
-  // const [idMsg , setIdMsg] = useState("");
-  // const [pwMsg , setPwMsg] = useState("");
+  // 오류메시지 
+  const [idMsg, setIdMsg] = useState("");
+  const [pwMsg, setPwMsg] = useState("");
 
-  // // 유효성 검사 
-  // const [isId , setIsId] = useState("");
-  // const [isPw , setIsPw] = useState("");
+  // 유효성 검사 
+  const [isId, setIsId] = useState("");
+  const [isPw, setIsPw] = useState("");
 
+  const clientId = "157067894615-cai8h2gq8gatlmoqpkfe08os9rhq92vp.apps.googleusercontent.com";
 
   const onChangeId = (e) => {
-    const currentId = e.target.value;
-    setInputId(currentId);
+    const regexId = /^\w{5,20}$/;
+    setInputId(e.target.value);
+    if (!regexId.test(e.target.value)) {
+      setIdMsg("5자리 이상 20자리 미만으로 입력해주세욧");
+      setIsId(false);
+    } else {
+      setIdMsg("올바른 형식 입니다.");
+      setIsId(true);
+    }
   }
 
   const onChangePw = (e) => {
-    const currentPassword = e.target.value;
-    setInputPw(currentPassword);
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
+    const passwordCurrent = e.target.value;
+    setInputPw(passwordCurrent)
+    if (!passwordRegex.test(passwordCurrent)) {
+      setPwMsg('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!')
+      setIsPw(false)
+    } else {
+      setPwMsg('안전한 비밀번호에요 : )');
+      setIsPw(true);
+    }
+
   }
   const onClickLogin = async () => {
     // 로그인을 위한 axios 호출 
     const response = await AxiosApi.memberLogin(inputId, inputPw);
     console.log(response.data);
     if (response.data === true) {
-      setInputId(inputId);
-      setInputPw(inputPw);
+      navigate("/home");
     } else {
-      alert("로그인 에러 !!!");
+      console.log("로그인 에러 !!!")
+        ;
     }
   }
 
@@ -110,8 +132,18 @@ const Login = () => {
           <input type="password" placeholder="비밀번호 입력" value={inputPw} onChange={onChangePw} />
           <button onClick={onClickLogin}>Login</button>
           <a href="">Forgot to Password?</a>
+          <GoogleOAuthProvider clientId={clientId}>
+            <GoogleLogin
+              onSuccess={(res) => {
+                AxiosApi.googlelogin(res.credential);
+                console.log(jwtDecode(res.credential));
+              }}
+              onFailure={(err) => {
+                console.log(err);
+              }}
+            />
+          </GoogleOAuthProvider>
         </div>
-
       </div>
       <Footer />
     </Container>
