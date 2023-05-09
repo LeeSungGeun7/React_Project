@@ -13,9 +13,9 @@ const Headerst = styled.header`
 
     position: ${props => props.overlap ? `absolute` : 'static'};
 
-    background-color: none; /* 헤더의 배경색을 투명하게 설정 (투명도 조절 가능) */
+      background-color: none; /* 헤더의 배경색을 투명하게 설정 (투명도 조절 가능) */
 
-    background-color: rgba(255, 255, 255, 0.5); /* 헤더의 배경색을 투명하게 설정 (투명도 조절 가능) */
+   // background-color: rgba(255, 255, 255, 0.5); /* 헤더의 배경색을 투명하게 설정 (투명도 조절 가능) */
 
 
     width: 100%;
@@ -58,10 +58,8 @@ const Headerst = styled.header`
         font-size: 15px;
         text-decoration: none;
 
-        color : black;
-        font-family: 'Yeon Sung', cursive;
-        font-size: 35px;
-        weight : bold;
+      
+       
 
     }
 `   
@@ -76,7 +74,7 @@ const Header = (props) => {
         <Headerst overlap={props.overlap} >
         <header>
         <style>
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&family=Yeon+Sung&display=swap');
+
           
         </style>
         <div className="logo">

@@ -80,7 +80,7 @@ const Mainst = styled.main`
 `;
 
 const Main = () => {
-  const [vdValue, setVdValue] = useState(vd);
+  const [vdValue, setVdValue] = useState(vd2);
 
   const vdClick = () => {
     setVdValue(vd2);

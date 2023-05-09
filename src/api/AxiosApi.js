@@ -8,11 +8,11 @@ const AxiosApi = {
 
     // 로그인 
     memberLogin : async(id,pw) => {
-        const login = {
-            id : id, 
+        const requset = {
+            email : id, 
             pwd : pw
         };
-        return await axios.post(KH_DOMAIN + "/login" , login);  
+        return await axios.post(EF_DOMAIN + "/member/login" , requset);  
     },
     // 공공데이터 가져오기
     chargerData : async(address) => {

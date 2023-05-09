@@ -17,7 +17,7 @@ const Container = styled.div`
 
 
   .Container {
-
+    background-color: black ;
     height: 100vh;
     display: flex;
     flex-wrap: wrap;
@@ -41,8 +41,8 @@ const Container = styled.div`
 
   }
   input {
-    width: 500px;
-    height: 32px;
+    width: 50%;
+    height: 20%;
     font-size: 15px;
     border: 0;
     border-radius: 15px;
@@ -128,9 +128,9 @@ const Login = () => {
 
         <div className="loginbar">
           <div className="title">LOGIN</div>
-          <input type="text" />
-          <input type="text" />
-          <button>Login</button>
+          <input type="text" placeholder="이메일 입력" value={inputId} onChange={onChangeId} />
+          <input type="password" placeholder="비밀번호 입력" value={inputPw} onChange={onChangePw} />
+          <button onClick={onClickLogin}>Login</button>
           <a href="">Forgot to Password?</a>
           <GoogleOAuthProvider clientId={clientId}>
             <GoogleLogin
