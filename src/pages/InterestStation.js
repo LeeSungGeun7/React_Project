@@ -10,7 +10,7 @@ const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    background-color: #99FFDA;
+    background-color: #FFF;
     padding: 100px;
     align-items: center;
     justify-content: center;
@@ -36,6 +36,7 @@ const Container = styled.div`
         min-width: 720px;
         background-color: #FFF;
         border-radius: 20px;
+        border: 1px solid #202632;
     }
 
     .top {
@@ -85,6 +86,7 @@ const Container = styled.div`
     .text {
         /* margin: 30px; */
         margin-left: 100px;
+        margin-bottom: 50px;
     }
 
     .bookmark {
@@ -169,7 +171,7 @@ const InterestStation = () => {
                             <Link to="/MyPage"><li className="menu1"><a className="mypage" href="/">마이페이지</a></li></Link>
                             <Link to="/ModifyInfo"><li className="menu2"><a className="modifyInfo" href="/ModifyInfo">내 정보 수정</a></li></Link>
                             <Link to="/InterestStation"><li className="menu3"><a className="interestStation" href="/">관심 충전소</a></li></Link>
-                            <li className="menu4"><a className="inquriyCost" href="/">주유비 조회</a></li>
+                            <Link to="/InquriyCost"><li className="menu4"><a className="inquriyCost" href="/">주유비 조회</a></li></Link>
                         </ul>
                         <br></br>
 
@@ -180,7 +182,7 @@ const InterestStation = () => {
                             </div>
                             <div className="stationInfo">
                                 <h2>강남 N 타워 전기차충전소</h2>
-                                <p>서울 강남구 테헤란로 129 (역삼동 648-9)</p>
+                                <p>서삼동 울 강남구 테헤란로 129 (역648-9)</p>
                             </div>
                             <div className="pointerIcon">
                                 <img className="pointer" src={pointer} alt="pointer_icon"></img>
@@ -204,7 +206,7 @@ const InterestStation = () => {
                             </div>
                             <div className="stationInfo">
                                 <h2>서울 서초구 서초2동 주민센터 전기차충전소</h2>
-                                <p>서울 서초구 서초대로70킬 51 (서초동 1332-6)</p>
+                                <p>서울 서초구 서초대로70길 51 (서초동 1332-6)</p>
                             </div>
                             <div className="pointerIcon">
                                 <img className="pointer" src={pointer} alt="pointer_icon"></img>

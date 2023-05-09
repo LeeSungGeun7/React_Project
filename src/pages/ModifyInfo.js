@@ -8,7 +8,7 @@ const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    background-color: #c8ff7a;
+    background-color: #FFF;
     padding: 100px;
     align-items: center;
     justify-content: center;
@@ -34,6 +34,7 @@ const Container = styled.div`
         min-width: 720px;
         background-color: #FFF;
         border-radius: 20px;
+        border: 1px solid #202632;  
     }
 
     .top {
@@ -107,8 +108,7 @@ const Container = styled.div`
         width: 140px;
         border-right: 1px solid gray;
         border-bottom: 1px solid gray;
-        background-color: #DDDDDD;
-        
+        background-color: #72DEFF;
     }
 
     .payment {
@@ -132,6 +132,8 @@ const Container = styled.div`
 
     .info {
         margin: 0 5px;
+        font-size: 14px;
+        color: red;
     }
 
     .card, .card2, .card3 {
@@ -208,10 +210,10 @@ const ModifyInfo = () => {
                 <div className="Mypage">
                     <div className="top">
                         <ul className="topMenu">
-                            <Link to="MyPage"><li className="menu1"><a className="mypage" href="/">마이페이지</a></li></Link>
-                            <li className="menu2"><a className="modifyInfo" href="/">내 정보 수정</a></li>
-                            <li className="menu3"><a className="interestStation" href="/">관심 충전소</a></li>
-                            <li className="menu4"><a className="inquriyCost" href="/">주유비 조회</a></li>
+                        <Link to="/MyPage"><li className="menu1"><a className="mypage" href="/">마이페이지</a></li></Link>
+                        <Link to="/ModifyInfo"><li className="menu2"><a className="modifyInfo" href="/ModifyInfo">내 정보 수정</a></li></Link>
+                        <Link to="/InterestStation"><li className="menu3"><a className="interestStation" href="/">관심 충전소</a></li></Link>
+                        <Link to="/InquriyCost"><li className="menu4"><a className="inquriyCost" href="/">주유비 조회</a></li></Link>
                         </ul>
                         <br></br>
 
