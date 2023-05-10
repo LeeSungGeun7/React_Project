@@ -1,7 +1,11 @@
-import React from "react";
+import React , {useContext} from "react";
 import styled ,{css} from "styled-components";
 
+import LoginBtn from "../Components/LoginBtn";
+
+import { BsFillFilePersonFill } from "react-icons/bs";
 import { Link } from "react-router-dom"; 
+import AuthContext, { AuthProvider } from "../context/AuthContext";
 // import LoginBtn from "../Components/LoginBtn";
 // import Login from "../pages/Login";
 
@@ -26,6 +30,7 @@ const Headerst = styled.header`
     display : grid;
     grid-columns: 1 / 2;
     header{
+        background-color: rgb(255,255,255,0.4);
         height: 80px;
         display : flex;
         flex-direction: row;
@@ -33,35 +38,45 @@ const Headerst = styled.header`
     }
     .logo {
         width : 200px;
-       // background-image : url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3VHDuYYdNPDsW9nqOJQQAfQCI7dfHtFojHA&usqp=CAU');
+        
         background-repeat: no-repeat;
         background-size: contain;
         display:flex;
         align-items:center;
-
-        color : white;
-        font-family: 'Yeon Sung', cursive;
+        justify-content: center;
+        
+        color : #41D3BD;
+        font-family: 'Do Hyeon', sans-serif;
+         
         font-size: 35px;
         weight : bold;
     }
     .menu{
         display:flex;
+       
         width:100%;
         height:100%;
         justify-content:center;
         align-items:center;
     }
     nav a {
-        color: white;
+        font-family: 'Do Hyeon', sans-serif;
+        min-width: 100px;
+        color: black;
         margin: 50px;
         z-index:100;
-        font-size: 15px;
+        font-size: 17px;
         text-decoration: none;
-
-      
-       
-
     }
+    .btns {
+        width: 100%;
+        height:100%;
+        display: flex;
+        
+        align-items: center;
+        justify-content:center;
+    }
+   
 `   
 ;
 
@@ -69,6 +84,7 @@ const Headerst = styled.header`
 
 
 const Header = (props) => {
+    const { isLoggedIn, logoutUser } = useContext(AuthContext);
 
     return(
         <Headerst overlap={props.overlap} >
@@ -78,20 +94,31 @@ const Header = (props) => {
           
         </style>
         <div className="logo">
-            ECO FRIENDS
+            에코 프렌즈
 
             </div>
             <div className="menu-group" >
             <nav className="menu">
-              <Link to="/">Home</Link> 
-               <Link to="car">전기차충전소</Link> 
-                <Link to="/">마이페이지</Link>
+                <Link to="/Service">고객센터</Link> 
+                <Link to="/car">전기차충전소</Link> 
+                <Link to="/Mypage">마이페이지</Link>
                 <Link to="/">회원가입</Link>
                 <Link to="/login">로그인</Link>
             </nav>
             </div>
-            <div>
-                클릭버튼
+            <div >
+                {isLoggedIn ? (
+                    <>
+                    <button onClick={logoutUser}>로그아웃</button>
+                    <Link to="/Mypage"><button ><BsFillFilePersonFill/>마이페이지</button></Link>
+                    </>
+                ) : (
+                    <div className="btns">
+                    <Link to="/login"> <LoginBtn name="로그인"/> </Link> 
+                    <LoginBtn name="회원가입" addr="/Mypage"/>
+                    </div>
+                     
+                )}
             </div>
 
           

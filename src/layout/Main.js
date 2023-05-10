@@ -4,13 +4,14 @@ import vd from "../images/video-src-pc (1).mp4";
 import vd2 from "../images/KakaoTalk_Video_2023-05-03-16-40-25.mp4";
 import KakaoMap from "../Components/KakaoMap";
 import CardSlider from "../Components/CardSlider";
+import { FaSearch } from 'react-icons/fa';
 
 const Mainst = styled.main`
   display: grid;
 
   // 메인 그리드로 수정
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
 
   .top {
     display: flex;
@@ -19,9 +20,9 @@ const Mainst = styled.main`
     background-color: none;
     background-repeat: no-repeat;
     background-size: contain;
-    // background-image : url('https://www.hyundai.com/contents/mainbanner/sonata-23fl-w.png');
+
     width: 100%;
-    height: 20vh;
+    height: 100vh;
 
     // border: solid 1px black;
   }
@@ -31,39 +32,68 @@ const Mainst = styled.main`
 
     border: solid 1px black;
   }
-  .map {
+  .maps {
+    margin: 15px;
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: column;
+
     grid-column: 1 / 2;
     grid-row: 2/3;
-    width: 100%;
-    height: 350px;
-    // border: solid 1px black;
+    width: 95%;
+    height: 100%;
+     border: solid 1px black;
   }
-  .map1 {
+   /* .map1 {
+
     grid-column: 2 / 3;
     grid-row: 2/3;
+  }  */
+  .mapInfo {
+    margin: 15px;
+    grid-column: 2 / 3;
+    grid-row: 2/3;
+    width: 95%;
+    height: 100%;
+    border : solid 1px black;
   }
-  .bottom {
+
+  .card-container {
+    padding-top:10px;
     grid-column: 1 / 3;
     grid-row: 3/4;
-  }
-  .card-container {
-    grid-column: 1 / 3;
-  }
-  .top,
-  .map,
-  .map1,
-  .bottom,
-  .card-container {
-    margin: 2px;
     width: 100%;
-    height: 350px;
-    // border: solid 1px black;
+    height:100%;
+  }
+  
+  .map {
+    width: 100%;
+    height: 50%;
+    align-items:center;
+  }
+
+  .map1{
+    width:100%;
+    height:50%;
+  }
+
+  .bottom,
+   {
+    
+   // margin: 20px;
+    width: 100%;
+    height: 100%;
+     border: solid 1px black;
   }
   .Homeinput {
     position: absolute;
-    top: 15%;
-    left: 45%;
+    top: 25%;
+    left: 37%;
     width: 25%;
+
+  width: 400px;
+  height: 30px;
+  margin: 10px auto;
     font-size: 15px;
     color: #222222;
     border: none;
@@ -76,6 +106,24 @@ const Mainst = styled.main`
     border-bottom-right-radius: 25%;
     background-color: #333333;
     border: none;
+  }
+  .Homeinput input {
+    padding-left: 20px;
+    position: relative;
+    border: 1px solid #F1F1F1;
+    border-radius: 50px;
+    width: 100%;
+    height: 100%;
+  }
+  .fa {
+    color: #808080;
+    position: absolute;
+    display: flex;
+  justify-content: space-between;
+  position: absolute;
+
+  bottom: 5px;  
+  left: 380px;
   }
 `;
 
@@ -93,7 +141,7 @@ const Main = () => {
     <Mainst>
       <div className="top">
         <video
-          onClick={vdClick}
+          // onClick={vdClick}
           src={vdValue}
           autoPlay
           muted
@@ -103,17 +151,21 @@ const Main = () => {
           controls={false}
         />
         <div className="Homeinput">
-          <input type="text" className="input" />
-          <button>검색</button>
+          <input type="text" className="input" import /><FaSearch className="fa"/>
+          
         </div>
       </div>
+    <div className="maps">
       <div className="map">
+        
         <KakaoMap />
       </div>
       <div className="map1">마킹된 정보표시</div>
-      <div className="bottom">하부</div>
+    </div>
+    <div className="mapInfo">셀렉트 상세정보</div>
+      {/* <div className="bottom">하부</div> */}
       <div className="card-container">
-        카드컨테이너
+      
         <CardSlider />
       </div>
     </Mainst>

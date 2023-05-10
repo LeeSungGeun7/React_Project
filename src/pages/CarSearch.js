@@ -17,14 +17,12 @@ const CarSerachst = styled.body`
         flex-direction: column;
 
         //border: solid 1px black;
-
+        background-color:#BCECE5;
         border: solid 1px black;
 
         height:150vh;
     }
-    &:hover {
-        background-color: lightblue;
-    }
+    
     .map , .line , .result {
         border: solid 1px black;
         width: 100%;

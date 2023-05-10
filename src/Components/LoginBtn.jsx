@@ -1,29 +1,49 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import styled from "styled-components";
+import styled , {css}from "styled-components";
+import { Link } from "react-router-dom";
+
 
 
 
 
 const Loginst = styled.div`
-    div {
-        font-size : 15px;
-        color : blue;
-        position : absolute;
-        top : 40px;
-        right : 100px;
-    }
+display: flex;
+align-items:center;
+justify-content:center;
+button {
+min-width: 100% ;
 
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 70%;
+  font-size: 12px;
+  cursor: pointer;
+  
+
+}
+  button:hover {
+    background-color: #0069d9;
+  }
 `;
 
-const LoginBtn = () => {
+const LoginBtn = (props) => {
+
+   
 
     return(
-        <Loginst>
-            <div>
-              <h3>로그인</h3>    
-            </div>  
+        
+       
+        <Loginst type="login">
+             
+            <button>
+             {props.name}  
+             </button> 
+             
         </Loginst>
+       
     );
 
 }

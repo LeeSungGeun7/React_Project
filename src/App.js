@@ -6,6 +6,8 @@ import SignUp from './pages/SignUp';
 import {BrowserRouter as Router , Route , Routes} from 'react-router-dom';
 import Layout from './layout/Layout';
 import CarSerach from './pages/CarSearch';
+import ServiceCenter from './pages/ServiceCenter';
+import MyPage from './pages/MyPage';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route path="/Car" element={<CarSerach/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Layout />} />
+        <Route path="/Mypage" element={<MyPage />} />
+        <Route path="/Service" element={<ServiceCenter />} />
         
       </Routes>
     </Router>

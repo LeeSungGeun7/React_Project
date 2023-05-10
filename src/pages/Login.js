@@ -1,18 +1,18 @@
-import {useState} from "react";
+import {useState , useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "../utils/Modal";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
-
 import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
+import AuthContext from "../context/AuthContext";
 
 const Container = styled.div`
   
 
 
   .Container {
-    background-color: black ;
+    background-color: #EAF6F7 ;
     height: 100vh;
     display: flex;
     flex-wrap: wrap;
@@ -23,7 +23,7 @@ const Container = styled.div`
   .loginbar {
     
     color: white;
-    background-color: #333333;
+    background-color: #31393C;
     display: flex;
     flex-direction: column;
     align-items:center;
@@ -38,14 +38,16 @@ const Container = styled.div`
   input {
     width: 50%;
     height: 20%;
-    font-size: 15px;
+    
+    font-size: 25px;
     border: 0;
     border-radius: 15px;
     outline: none;
-    padding-left: 10px;
+    padding-left: 20px;
     background-color: rgb(233, 233, 233);
   }
   button {
+
     border-top-left-radius: 20%;
     border-bottom-right-radius: 20%;
     //border-radius: 30%;
@@ -58,12 +60,19 @@ const Container = styled.div`
     font-size: 50px;
     weight: bold;
   }
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  
 `
 
 
 
 
 const Login = () => {
+  const { loginUser } = useContext(AuthContext);
+
     const navigate = useNavigate(); // 라우터 이동을 하기위해서
     // 키보드 입력
     const [inputId , setInputId] = useState("");
@@ -108,8 +117,10 @@ const Login = () => {
         const response = await AxiosApi.memberLogin(inputId,inputPw);
         console.log(response.data);
         if(response.data === true) {
+            loginUser();
             navigate("/");
         } else {
+          
             alert("로그인 에러 !!!")
 ;        }
     }
@@ -124,7 +135,11 @@ const Login = () => {
                        <input type="text" onChange={onChangeId} />
                         <input type="text" onChnage={onChangePw} />
                         <button onClick={onClickLogin}>Login</button>
+                        
+
                         <a href="">Forgot to Password?</a>
+                        <a href="">Sign Up</a>
+
               </div>
         
         </div>

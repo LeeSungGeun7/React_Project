@@ -7,8 +7,12 @@ const Footerst = styled.footer`
     justify-content : center;
     font-size: 50px;
     border: solid 1px black;
-    background-color: #494646;
+    background-color: #282c37;
     color : white;
+
+    footer a {
+        color: white;
+    }
 `;
 
 
