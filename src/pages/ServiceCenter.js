@@ -5,6 +5,8 @@ import Footer from "../layout/Footer";
 import styled from "styled-components";
 import { SlEarphonesAlt } from "react-icons/sl";
 import { FaSearch } from 'react-icons/fa';
+import AuthContext, { AuthProvider } from "../context/AuthContext";
+import { useContext } from "react";
 
 
 const Contain = styled.div`
@@ -137,6 +139,8 @@ const Contain = styled.div`
   
 
 const ServiceCenter = () => {
+    const { isLoggedIn, logoutUser } = useContext(AuthContext);
+   
 
 
     return(
@@ -209,7 +213,39 @@ const ServiceCenter = () => {
                                     1:1문의
                                 </div>
                         
-                                <div className="custom-box">
+
+
+                 {isLoggedIn ? (
+                      <div className="custom-box">
+                                   
+                      <div onClick={<Link to="login"/>} style={{backgroundColor: "#FFE83C"}} className="custom-item1">
+
+                          1:1문의하기
+                          <p style={{fontSize:"10px" , backgroundColor: "#FFE83C"}}>궁금한 점이 있으시면 1:1문의를 남겨주세요</p>
+                          <p style={{fontSize:"5px" , fontWeight: "100"}}>^&^</p>
+                      </div>
+                      <div className="custom-item2" style={{backgroundColor: "#C2FF30"}}>
+                          문의내역 조회
+                      </div>
+                  </div>
+                ) : (
+                   <div className="custom-box">
+                                   
+                  <div style={{backgroundColor: "#FFE83C"}} className="custom-item1">
+
+                        1:1문의하기 (로그인후 이용가능)
+                       
+                    </div>
+                    <div className="custom-item2" style={{backgroundColor: "#C2FF30"}}>
+                        문의내역 조회 (로그인후 이용가능)
+                    </div>
+                        </div>
+                    
+                )}
+
+
+                                {/* <div className="custom-box">
+                                   
                                     <div style={{backgroundColor: "#FFE83C"}} className="custom-item1">
 
                                         1:1문의하기
@@ -219,7 +255,7 @@ const ServiceCenter = () => {
                                     <div className="custom-item2" style={{backgroundColor: "#C2FF30"}}>
                                         문의내역 조회
                                     </div>
-                                </div>
+                                </div> */}
 
                         </div>  
 

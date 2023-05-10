@@ -1,12 +1,15 @@
-import React from "react";
+import React ,{useState}from "react";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import styled from "styled-components";
 import KaKao from "../Components/KakaoMap";
 
 
-const CarSerachst = styled.body`
 
+const CarSerachst = styled.body`
+     color : #333333;
+        font-family: 'Do Hyeon', sans-serif;
+        font-size: 25px;
     display: grid;
     grid-template-columns: 1fr  ;
     grid-template-rows: repeat(2,minmax(80px,auto));
@@ -60,11 +63,45 @@ const CarSerachst = styled.body`
         width: 20%;
         
     }
+    .charge-methods {
+        
+     display:flex; 
+       color: white;
+       font-size: 20px;
+       width: 100%;
+    }
+    .charge-methods input {
+        max-width : 10%;
+    }
+    .line button {
+        background-color: white ;
+        border: none;
+        width: 20px;
+        height:20px;
+        border-radius: 10px;
+    }
+    .line button:hover {
+        background-color: black; 
+    }
 `;
 
 
 
 const CarSerach = () => {
+    let [isVisible , setIsVisible] = useState(false);
+    
+
+    const toggleVisibility = () => {
+        setIsVisible(!isVisible);
+      };
+    
+      let [isVisible2 , setIsVisible2] = useState(false);
+    
+
+      const toggleVisibility2 = () => {
+          setIsVisible2(!isVisible2);
+        };  
+
 
     return (
         <CarSerachst>
@@ -76,8 +113,23 @@ const CarSerach = () => {
             <KaKao/>
             </div>
             <div className="line">
-                <div className="charge-method">충전방식</div>
-                <div className="service">서비스</div>
+                <div className="charge-method">충전방식 <button onClick={toggleVisibility}></button>
+
+                 {isVisible &&  <div className="charge-methods">
+                        <input type="radio" name="charge" id="charge" value={2} />급속
+                        <input type="radio" name="charge" id="charge" value={2}/>차지
+                        <input type="radio" name="charge" id="charge" value={1}/>콤보
+                    </div>
+                }   
+                </div>
+                <div className="service">서비스 <button onClick={toggleVisibility2}></button>
+                    {isVisible2 &&  <div className="charge-methods">
+                            <input type="radio" name="charge" id="charge" value={2} />점원
+                            <input type="radio" name="charge" id="charge" value={2}/>풀서비스
+                            <input type="radio" name="charge" id="charge" value={1}/>셀프
+                        </div>
+                    }   
+                </div>
                 <div className="local">시/군구</div>
                 <input type="text" placeholder="입력하세요"/>
             </div>
