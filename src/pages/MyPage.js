@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
-import { Link } from "react-router-dom";
-
+import { Link, useParams } from "react-router-dom";
+import AxiosApi from "../api/AxiosApi";
 
 const Container = styled.div`
     display: flex;
@@ -169,7 +169,17 @@ const Container = styled.div`
 
 
 const Mypage = () => {
-    // const { user } = useUserState();
+
+    const [myInfo, setMyInfo] = useState("");
+    const { id } = useParams();
+
+    useEffect(() => {
+        const myInfo = async(id) => {
+            const rsp = AxiosApi.getMyInfo(id);
+            if(rsp.status === 200)setMyInfo(rsp.data);
+            console.log(rsp.data);
+        }
+    }, []);
 
     return(
 
@@ -195,19 +205,19 @@ const Mypage = () => {
                         <table className="InfoTable"> 
                             <tr>
                                 <th className="name">이름</th>
-                                <td className="loginName">신형환</td>
+                                <td className="loginName">{myInfo.custNm}</td>
                             </tr>
                             <tr>
                                 <th className="id">아이디</th>
-                                <td className="loginId">somebodyhelpme</td>
+                                <td className="loginId">{myInfo.custNnm}</td>
                             </tr>
                             <tr>
                                 <th className="phone">휴대전화번호</th>
-                                <td className="loginPhone">010-2397-9934</td>
+                                <td className="loginPhone">{myInfo.custPhone}</td>
                             </tr>
                             <tr>
                                 <th className="email">이메일</th>
-                                <td className="loginEmail">pooh9609@naver.com</td>
+                                <td className="loginEmail">{myInfo.custEmail}</td>
                             </tr>
                             <tr>
                                 <th className="payment">결제 수단</th>
@@ -217,23 +227,13 @@ const Mypage = () => {
                                     <button className="kakaoPay"><a className="card3" href="/">KaKao PAY</a></button>
                                 </td>
                             </tr>
+
                         </table>
 
-                        {/* <div className="Cotainer">
-                                전체    
-                                <div className="Mypage">
-                                    마이페이지바
-                                    <div className="top">
-                                        상단메뉴
-                                    </div>
-                                    <div className="table">
-                                        테이블
-                                    </div>
-                                </div>
-
-                        </div> */}
                     </div>
+
                 </div>
+
             </div>    
         </Container>
         <Footer />

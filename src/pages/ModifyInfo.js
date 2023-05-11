@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import AxiosApi from "../api/AxiosApi";
 
 const Container = styled.div`
     display: flex;
@@ -176,7 +177,7 @@ const Container = styled.div`
         margin-bottom: 20px;
         
     }
-    .saveInfo {
+    .saveInfoBtn {
         display: block;
         margin: auto;
         width: 150px;
@@ -184,12 +185,15 @@ const Container = styled.div`
         border-radius: 10px;
         border: none;
         background-color: #5EBBFF;
-        color: white;
         font-size: 16px;
         font-weight: bold;
         align-items: center;
         justify-content: center;
-        
+    }
+
+    .saveInfo {
+        text-decoration: none;
+        color: #FFF;
     }
 
     .modifyInfo {
@@ -199,7 +203,19 @@ const Container = styled.div`
 
 
 const ModifyInfo = () => {
-    // const { user } = useUserState();
+
+    const [myInfo, setMyInfo] = useState("");
+    const { id } = useParams();
+
+    useEffect(() => {
+        const myInfo = async(id) => {
+            const rsp = AxiosApi.getMyInfo(id);
+            if(rsp.status === 200)setMyInfo(rsp.data);
+            console.log(rsp.data);
+        }
+    }, []);
+
+
 
     return(
 
@@ -225,11 +241,11 @@ const ModifyInfo = () => {
                         <table className="InfoTable"> 
                             <tr>
                                 <th className="name">이름</th>
-                                <td className="loginName">신형환</td>
+                                <td className="loginName">{myInfo.custNm}</td>
                             </tr>
                             <tr>
                                 <th className="id">아이디</th>
-                                <td className="loginId">somebodyhelpme</td>
+                                <td className="loginId">{myInfo.custNnm}</td>
                             </tr>
                             <tr>
                                 <th className="phone">휴대전화번호</th>
@@ -254,7 +270,7 @@ const ModifyInfo = () => {
                         </table>
                         
                         <div className="saveButton">
-                            <button className="saveInfo">수정하기</button>
+                            <button className="saveInfoBtn"><a className="saveInfo" href="/">수정하기</a></button>
                         </div>
 
                     </div>

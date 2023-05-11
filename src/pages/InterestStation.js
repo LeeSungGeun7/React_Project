@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import flagIcon from "../images/free-icon-flag-1244563.png"
 import pointer from "../images/free-icon-location-4475519.png"
+import AxiosApi from "../api/AxiosApi";
 
 const Container = styled.div`
     display: flex;
@@ -97,7 +98,7 @@ const Container = styled.div`
         height: 95%;
         margin: auto;
         margin-bottom: 20px;
-        background-color: #FFFDEB;
+        background-color: #FFFEF3;
         border: 1px solid #202632;
         
     }
@@ -129,15 +130,11 @@ const Container = styled.div`
         display: flex;
         float: right;
         align-items: center;
-        justify-content: right  ;
+        justify-content: right;
         margin: 20px;
         width: 80px;
         height: 80px;
         }
-
-
-
-
 
     .interestStation {
         color: #5EBBFF;
@@ -157,7 +154,17 @@ const Container = styled.div`
 // };
 
 const InterestStation = () => {
-    // const { user } = useUserState();
+
+    const [wishStation, setWishStation] = useState([]);
+    const { address } = useParams();
+
+    useEffect(() => {
+        const wishStation = async(address) => {
+            const rsp = AxiosApi.chargerData(address);
+            if(rsp.status === 200)setWishStation(rsp.data);
+            console.log(rsp.data);
+        }
+    }, []);
 
     return(
 
@@ -182,10 +189,10 @@ const InterestStation = () => {
                             </div>
                             <div className="stationInfo">
                                 <h2>강남 N 타워 전기차충전소</h2>
-                                <p>서삼동 울 강남구 테헤란로 129 (역648-9)</p>
+                                <p>서울 강남구 테헤란로 129 (역삼동 648-9)</p>
                             </div>
                             <div className="pointerIcon">
-                                <img className="pointer" src={pointer} alt="pointer_icon"></img>
+                                <a href="/"><img className="pointer" src={pointer} alt="pointer_icon"></img></a>
                             </div>
                         </div>
                         <div className="bookmark">
@@ -197,7 +204,7 @@ const InterestStation = () => {
                                 <p>서울 강남구 학동로20길 25 (논현동 133-13)</p>
                             </div>
                             <div className="pointerIcon">
-                                <img className="pointer" src={pointer} alt="pointer_icon"></img>
+                                <a href="/"><img className="pointer" src={pointer} alt="pointer_icon"></img></a>
                             </div>
                         </div>
                         <div className="bookmark">
@@ -209,12 +216,12 @@ const InterestStation = () => {
                                 <p>서울 서초구 서초대로70길 51 (서초동 1332-6)</p>
                             </div>
                             <div className="pointerIcon">
-                                <img className="pointer" src={pointer} alt="pointer_icon"></img>
+                                <a href="/"><img className="pointer" src={pointer} alt="pointer_icon"></img></a>
                             </div>
+
                         </div>
 
                     </div>
-                    
 
                 </div>
 

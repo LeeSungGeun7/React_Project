@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import { Link } from "react-router-dom";
 import arrow_down from "../images/free-icon-expand-arrow-down60799.png"
 import arrow_up from "../images/free-icon-expand-arrow-up60799.png"
+import AxiosApi from "../api/AxiosApi";
 
 const Container = styled.div`
     display: flex;
@@ -97,7 +98,7 @@ const Container = styled.div`
         height: 95%;
         margin: auto;
         margin-bottom: 20px;
-        background-color: #FFFDEB;
+        background-color: #FFFEF3;
         border: 1px solid #202632;
     }
 
@@ -109,7 +110,7 @@ const Container = styled.div`
         height: 95%;
         margin: auto;
         margin-bottom: 20px;
-        background-color: #FFFDEB;
+        background-color: #FFFEF3;
         border: 1px solid #202632;
     }
 
@@ -121,19 +122,25 @@ const Container = styled.div`
         margin: 0 40px;
     }
 
+    .infoTable {
+        margin: 20px;
+    }
+
     .detailInfo {
-        display: block;
+        display: flex;
     }
 
     .category {
-        display: block;
+        margin: 5px;
+        width: 150px;
+        text-align: left;
         align-items: center;
         justify-content: center;
         float: left;
     }
 
     .content {
-        display: block;
+        margin: 5px;
         align-items: center;
         justify-content: center;
         float: right;
@@ -163,8 +170,22 @@ const Container = styled.div`
 
 
 const InquriyCost = () => {
-    // render()
-    // const { user } = useUserState();
+    
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async() => {
+        try {
+            const response = await AxiosApi.get('');
+            setData(response.data);
+        } catch(error) {
+            console.log('Error fetching data', error);
+        }
+
+    }
 
     return(
 
@@ -203,7 +224,7 @@ const InquriyCost = () => {
 
                             </div>
                             <div className="arrowIcon_down">
-                                <img className="arrow_down" src={arrow_down} alt="arrow_down_icon"></img>
+                                <a href="/"><img className="arrow_down" src={arrow_down} alt="arrow_down_icon"></img></a>
                             </div>
                         </div>
                         <div className="receipt">
@@ -214,7 +235,7 @@ const InquriyCost = () => {
                                 <h3 className="charge">18,000원</h3>
                             </div>
                             <div className="arrowIcon_down">
-                                <img className="arrow_down" src={arrow_down} alt="arrow_down_icon"></img>
+                                <a href="/"><img className="arrow_down" src={arrow_down} alt="arrow_down_icon"></img></a>
                             </div>
                         </div>
                         <div className="receipt">
@@ -224,40 +245,50 @@ const InquriyCost = () => {
                                 <h3 className="charge">33,000원</h3>
                             </div>
                             <div className="arrowIcon_down">
-                                <img className="arrow_down" src={arrow_down} alt="arrow_down_icon"></img>
+                                <a href="/"><img className="arrow_down" src={arrow_down} alt="arrow_down_icon"></img></a>
                             </div>
                         </div>
 
                         <div className="receipt_info">
                             <div className="stationInfo">
                                 <h2>서울 서초구 서초2동 주민센터 전기차충전소</h2>
-                                <tr className="detailInfo">
-                                    <th className="category">날짜</th>
-                                    <td className="content">2023.3.19</td>
-                                    
-                                    <th className="category">주소</th>
-                                    <td className="content">서울 서초구 서초대로70길 51 (서초동 1332-6)</td>
-
-                                    <th className="category">충전타입</th>
-                                    <td className="content">DC콤보</td>
-
-                                    <th className="category">충전량</th>
-                                    <td className="content">400kW</td>
-
-                                    <th className="category">결제금액</th>
-                                    <td className="content">33,000원</td>
-
-                                    <th className="category">결제수단</th>
-                                    <td className="content">신한카드</td>
-
-                                </tr>
+                                <table className="infoTable">
+                                    <tr className="detailInfo">
+                                        <th className="category">날짜</th>
+                                        <td className="content">2023.3.19</td>
+                                    </tr>
+                                    <tr className="detailInfo">
+                                        <th className="category">주소</th>
+                                        <td className="content">서울 서초구 서초대로70길 51 (서초동 1332-6)</td>
+                                    </tr>
+                                    <tr className="detailInfo">
+                                        <th className="category">충전타입</th>
+                                        <td className="content">DC콤보</td>
+                                    </tr>
+                                    <tr className="detailInfo">
+                                        <th className="category">충전량</th>
+                                        <td className="content">400kW</td>
+                                    </tr>
+                                    <tr className="detailInfo">
+                                        <th className="category">결제금액</th>
+                                        <td className="content">33,000원</td>
+                                    </tr>
+                                    <tr className="detailInfo">
+                                        <th className="category">결제수단</th>
+                                        <td className="content">신한카드</td>
+                                    </tr>
+                                </table>
                             </div>
                             <div className="arrowIcon_up">
-                                <img className="arrow_up" src={arrow_up} alt="arrow_up_icon"></img>
+                                <a href="/"><img className="arrow_up" src={arrow_up} alt="arrow_up_icon"></img></a>
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
+                
             </div>  
 
         </Container>
