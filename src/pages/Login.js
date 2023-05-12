@@ -135,10 +135,11 @@ const Login = () => {
           <a href="">Forgot to Password?</a>
           <GoogleOAuthProvider clientId={clientId}>
             <GoogleLogin
-              onSuccess={(res) => {
-                // AxiosApi.googlelogin(res.credential);
+              onSuccess={async(res) => {
+                const result = await AxiosApi.googlelogin(res.credential);
                 console.log(jwtDecode(res.credential));
-                navigate("/signUp", {state : { data : jwtDecode(res.credential)}});
+                console.log(result);
+                // navigate("/signUp", {state : { data : jwtDecode(res.credential)}});
               }}
               onFailure={(err) => {
                 console.log(err);

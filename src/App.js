@@ -14,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/Car" element={<CarSerach/>} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/" element={<Layout />} />
         
       </Routes>

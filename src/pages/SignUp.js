@@ -275,11 +275,13 @@ const SignUp = () => {
     }
 	}
 
-	useEffect(() => {
-		const info = location.state.data;
-		setName(info.name);
-		setEmail(info.email);
-	});
+	// useEffect(() => {
+	// 	if(location.state.length > 0) {
+	// 		const info = location.state.data;
+	// 		setName(info.name);
+	// 		setEmail(info.email);
+	// 	}
+	// }, []);
 
 	return (
 		<Container>
