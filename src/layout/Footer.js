@@ -54,8 +54,6 @@ const Footerst = styled.footer`
 `;
 
       const Footer = () => {
-
-
         const [isModalOpen, setIsModalOpen] = useState(false);
         const [modalContents, setModalContents] = useState("");
         const [modalTitle, setModalTitle] = useState("");
