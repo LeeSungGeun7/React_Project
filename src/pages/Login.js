@@ -135,8 +135,9 @@ const Login = () => {
           <GoogleOAuthProvider clientId={clientId}>
             <GoogleLogin
               onSuccess={(res) => {
-                AxiosApi.googlelogin(res.credential);
+                // AxiosApi.googlelogin(res.credential);
                 console.log(jwtDecode(res.credential));
+                navigate("/signUp", {state : { data : jwtDecode(res.credential)}});
               }}
               onFailure={(err) => {
                 console.log(err);

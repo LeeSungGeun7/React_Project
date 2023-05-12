@@ -24,13 +24,13 @@ const AxiosApi = {
         return await axios.post(EF_DOMAIN + "/api/list", requset);
     },
 
-    //이메일 로그인
-    googlelogin : async(response) => {
-        const requset = {
-            res : response
-        }
-        return await axios.post(EF_DOMAIN + "/api/googleLogin", requset);
-    },
+    // //이메일 로그인
+    // googlelogin : async(response) => {
+    //     const requset = {
+    //         res : response
+    //     }
+    //     return await axios.post(EF_DOMAIN + "/api/googleLogin", requset);
+    // },
 
     // 회원조회
     getCustomerInfo : async(id) => {

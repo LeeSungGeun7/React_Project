@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../layout/Header";
 import arrow from "../images/right-arrow.png"
 import AxiosApi from "../api/AxiosApi";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 // import Modal from "react-modal";
 // import Post from "./Post";
@@ -167,6 +167,7 @@ const SignUp = () => {
 	const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
 	// 전화번호
 	// let tel = [];
+	const location = useLocation();
 
 	// 이메일 정규식 확인
 	const onChangeEmail = (e) => {
@@ -240,6 +241,9 @@ const SignUp = () => {
 	// 	const PhoneNumber = tel[0] + "-" + tel[1] + "-" + tel[2];
 	// 	setPhone(PhoneNumber);
 	// }
+	const onChangeAddress = (e) => {
+		setAddress(e.target.value);
+	}
 	const openDaumAddress = () => {
 		new window.daum.Postcode({
       oncomplete: function(data) {
@@ -263,9 +267,19 @@ const SignUp = () => {
 
 		}
 		console.log(data);
-		const isSignUp = await axios.signUp(data);
-		navigate("/", isSignUp);
+		const response = await AxiosApi.signUp(data);
+		if (response.data === true) {
+      navigate("/Login");
+    } else {
+      console.log("로그인 에러 !!!");
+    }
 	}
+
+	useEffect(() => {
+		const info = location.state.data;
+		setName(info.name);
+		setEmail(info.email);
+	});
 
 	return (
 		<Container>
@@ -323,7 +337,7 @@ const SignUp = () => {
 					<div className="inputBox">
 						<label id="addr">주소</label>
 						<br></br>
-						<Input className="inputInfo" type="addrdess" placeholder="ex) 서울특별시 강남구 테헤란로" value={address}/>
+						<Input className="inputInfo" type="addrdess" placeholder="ex) 서울특별시 강남구 테헤란로" value={address} onChange={onChangeAddress}/>
 						<button className="check"  onClick={openDaumAddress}>주소찾기</button>
 						{/* <Modal isOpen={true}>
 							<Post address={address} setAddress={setAddress} />
