@@ -10,6 +10,7 @@ import AxiosApi from "../api/AxiosApi";
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
+import { async } from "q";
 
 
 const Container = styled.div`
