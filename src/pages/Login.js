@@ -10,6 +10,7 @@ import AxiosApi from "../api/AxiosApi";
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
+import { async } from "q";
 
 
 const Container = styled.div`
@@ -134,9 +135,10 @@ const Login = () => {
           <a href="">Forgot to Password?</a>
           <GoogleOAuthProvider clientId={clientId}>
             <GoogleLogin
-              onSuccess={(res) => {
-                AxiosApi.googlelogin(res.credential);
+              onSuccess={async(res) => {
+                const result = await AxiosApi.googlelogin(res.credential);
                 console.log(jwtDecode(res.credential));
+                console.log (result);
               }}
               onFailure={(err) => {
                 console.log(err);
