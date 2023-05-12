@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const KH_DOMAIN = "http://localhost:8111";
+// const KH_DOMAIN = "http://localhost:8111";
 const EF_DOMAIN = "http://localhost:3737";
 
 
@@ -30,8 +30,23 @@ const AxiosApi = {
             res : response
         }
         return await axios.post(EF_DOMAIN + "/api/googleLogin", requset);
-    }
+    },
 
+    // 회원조회
+    getCustomerInfo : async(id) => {
+        return await axios.get(EF_DOMAIN + `/member/check?email=${id}`);
+    },
+    // 이메일 인증키 발급
+    getKeyCode : async(id) => {
+        return await axios.get(EF_DOMAIN + `/api/key?email=${id}`);
+    },
+    // 이메일 인증
+    confirmKey : async(id, key) => {
+        return await axios.get(EF_DOMAIN + `/api/email/confirm?email=${id}&key=${key}`);
+    },
+    signUp : async(data) => {
+        return await axios.post(EF_DOMAIN + "/member/signup", data);
+    }
 
 };
 
