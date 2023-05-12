@@ -102,7 +102,19 @@ const Container = styled.div`
         border: 1px solid #202632;
     }
 
-    .receipt_info {
+    .hide-menu {
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+        width: 95%;
+        height: 95%;
+        margin: auto;
+        margin-bottom: 20px;
+        background-color: #FFFEF3;
+        border: 1px solid #202632;
+    }
+
+    .show-menu {
         display: flex;
         align-items: center;
         /* justify-content: center; */
@@ -170,7 +182,13 @@ const Container = styled.div`
 
 
 const InquriyCost = () => {
-    
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const viewDetail = () => {
+        setIsOpen(isOpen => !isOpen);
+    }
+
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -245,11 +263,11 @@ const InquriyCost = () => {
                                 <h3 className="charge">33,000원</h3>
                             </div>
                             <div className="arrowIcon_down">
-                                <a href="/"><img className="arrow_down" src={arrow_down} alt="arrow_down_icon"></img></a>
+                                <a href="/"><img onClick={()=>viewDetail()} className="arrow_down" src={arrow_down} alt="arrow_down_icon"></img></a>
                             </div>
                         </div>
 
-                        <div className="receipt_info">
+                        <div className={isOpen ? "show-menu" : "hide-menu"}>
                             <div className="stationInfo">
                                 <h2>서울 서초구 서초2동 주민센터 전기차충전소</h2>
                                 <table className="infoTable">
@@ -280,7 +298,7 @@ const InquriyCost = () => {
                                 </table>
                             </div>
                             <div className="arrowIcon_up">
-                                <a href="/"><img className="arrow_up" src={arrow_up} alt="arrow_up_icon"></img></a>
+                                <a href="/"><img onClick={()=>viewDetail()} className="arrow_up" src={arrow_up} alt="arrow_up_icon"></img></a>
                             </div>
 
                         </div>

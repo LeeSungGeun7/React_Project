@@ -22,6 +22,10 @@ const AxiosApi = {
             addr : address
         };
         return await axios.post(EF_DOMAIN + "/api/list", requset);
+    },
+    // 회원조회
+    getMyInfo : async(id) => {
+        return await axios.get(EF_DOMAIN + "/member/list");
     }
 
 };
