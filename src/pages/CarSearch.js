@@ -88,13 +88,17 @@ const CarSerachst = styled.body`
     .charge-methods {
         
      display:flex; 
+
        color: white;
        font-size: 20px;
        width: 100%;
+       max-width: 20px;
     }
-    .charge-methods input {
+    .charge-methods input{
         max-width : 10%;
     }
+    
+
     .line button {
         background-color: white ;
         border: none;
@@ -148,7 +152,7 @@ const CarSerach = () => {
     const [service, setService] = useState(null);
 
     const handleChargeMethodChange = (event) => {
-    setChargeMethod(event.target.value);
+    setChargeMethod(parseInt(event.target.value));
     };
 
     const handleServiceChange = (event) => {
@@ -158,7 +162,7 @@ const CarSerach = () => {
     const filteredChargerInfo = chargerInfo.filter(charger => {
         const matchesChargeMethod = chargeMethod ? charger.cpTp === chargeMethod : true;
         const matchesService = service ? charger.cpStat === service : true;
-      
+        
         return matchesChargeMethod 
       });
 
@@ -230,9 +234,17 @@ const CarSerach = () => {
                 <div className="charge-method">충전방식 <button onClick={toggleVisibility}></button>
 
                  {isVisible &&  <div className="charge-methods">
-                  <input type="radio" name="charge" id="charge" value={10} onChange={handleChargeMethodChange} />
-                    <input type="radio" name="charge" id="charge" value={2} onChange={handleChargeMethodChange} />
-                    <input type="radio" name="charge" id="charge" value={1} onChange={handleChargeMethodChange} />
+                  <input type="radio" name="charge" id="charge" value={1} onChange={handleChargeMethodChange} />
+                  <label style={{ fontSize: '12px' }}>B타입(5핀)</label>
+                    <input type="radio" name="charge" id="charge" value={2} onChange={handleChargeMethodChange} />C타입(5핀)
+                    <input type="radio" name="charge" id="charge" value={3} onChange={handleChargeMethodChange} />BC타입(5핀)
+                    <input type="radio" name="charge" id="charge" value={4} onChange={handleChargeMethodChange} />BC타입(7핀)
+                    <input type="radio" name="charge" id="charge" value={5} onChange={handleChargeMethodChange} />DC차데모
+                    <input type="radio" name="charge" id="charge" value={6} onChange={handleChargeMethodChange} />AC3상
+                    <input type="radio" name="charge" id="charge" value={7} onChange={handleChargeMethodChange} />DC콤보
+                    <input type="radio" name="charge" id="charge" value={8} onChange={handleChargeMethodChange} />DC차데모+DC콤보
+                    <input type="radio" name="charge" id="charge" value={10} onChange={handleChargeMethodChange} />DC차데모+DC콤보+AC3상
+
 
                     </div>
                 }   

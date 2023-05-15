@@ -40,7 +40,7 @@ const LoginBtn = (props) => {
              
             <button>
              {props.name}  
-             </button> 
+            </button> 
              
         </Loginst>
        
