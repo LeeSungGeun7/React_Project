@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import vd from "../images/video-src-pc (1).mp4";
 import vd2 from "../images/KakaoTalk_Video_2023-05-03-16-40-25.mp4";
-import KakaoMap from "../Components/KakaoMap";
+
 import CardSlider from "../Components/CardSlider";
 import MainBottom from "../Components/MainBottom";
 import Mainitem from "./Mainitem";
@@ -12,7 +12,7 @@ const Mainst = styled.main`
 
   // 메인 그리드로 수정
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(1, 1fr);
 
   .top {
     display: flex;
@@ -33,17 +33,17 @@ const Mainst = styled.main`
 
     border: solid 1px black;
   }
-  .map {
+  /* .map {
     grid-column: 1 / 2;
     grid-row: 2/3;
     width: 100%;
     height: 350px;
     // border: solid 1px black;
-  }
-  .map1 {
+  } */
+  /* .map1 {
     grid-column: 2 / 3;
     grid-row: 2/3;
-  }
+  } */
   .bottom {
     grid-column: 1 / 3;
     grid-row: 3/4;
@@ -80,9 +80,11 @@ const Mainst = styled.main`
     border: none;
   }
   .mainitem {
+    grid-column: 1 / 2;
+    grid-row: 2/4;
     border: solid 1px;
-    width: 200%;
-    height: 200%;
+    width: 100%;
+    height: 100%;
   }
 `;
 
