@@ -4,6 +4,8 @@ const KH_DOMAIN = "http://localhost:8111";
 const EF_DOMAIN = "http://localhost:3737";
 
 
+
+
 const AxiosApi = {
 
     // 로그인 
@@ -18,7 +20,7 @@ const AxiosApi = {
     chargerData : async(address) => {
         const requset = {
             pageNum : 1,
-            numOfRows : 306,
+            numOfRows : 100,
             addr : address
         };
         return await axios.post(EF_DOMAIN + "/api/list", requset);
