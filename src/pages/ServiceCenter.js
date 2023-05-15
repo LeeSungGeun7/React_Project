@@ -128,6 +128,15 @@ const Contain = styled.div`
         margin-right:10px;
        // border: 1px solid black;
     }
+
+    .custom-item1:hover{
+
+    color: rgb(255, 255, 102);
+    filter: drop-shadow(0 0 2px rgba(255, 255, 102, 0.7))
+    drop-shadow(0 0 5px rgba(255, 255, 102, 0.7))
+    drop-shadow(0 0 15px rgba(255, 255, 102, 0.7));
+    }
+
     .questions {
         overflow : scroll;
         height:60%;

@@ -5,6 +5,8 @@ import vd2 from "../images/KakaoTalk_Video_2023-05-03-16-40-25.mp4";
 import KakaoMap from "../Components/KakaoMap";
 import CardSlider from "../Components/CardSlider";
 import { FaSearch } from 'react-icons/fa';
+import CarSerach from "../pages/CarSearch";
+
 
 const Mainst = styled.main`
   display: grid;
@@ -108,6 +110,8 @@ const Mainst = styled.main`
     border: none;
   }
   .Homeinput input {
+    font-weight: bold;
+    outline: none;
     padding-left: 20px;
     position: relative;
     border: 1px solid #F1F1F1;
@@ -158,7 +162,7 @@ const Main = () => {
     <div className="maps">
       <div className="map">
         
-        <KakaoMap />
+        {/* <KakaoMap /> */}
       </div>
       <div className="map1">마킹된 정보표시</div>
     </div>

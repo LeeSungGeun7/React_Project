@@ -4,7 +4,7 @@ import styled ,{css} from "styled-components";
 import LoginBtn from "../Components/LoginBtn";
 
 import { BsFillFilePersonFill } from "react-icons/bs";
-import { Link } from "react-router-dom"; 
+import { Link , useNavigate} from "react-router-dom"; 
 import AuthContext, { AuthProvider } from "../context/AuthContext";
 // import LoginBtn from "../Components/LoginBtn";
 // import Login from "../pages/Login";
@@ -47,7 +47,7 @@ const Headerst = styled.header`
         
         color : #41D3BD;
         font-family: 'Do Hyeon', sans-serif;
-         
+
         font-size: 35px;
         weight : bold;
     }
@@ -85,6 +85,11 @@ const Headerst = styled.header`
 
 const Header = (props) => {
     const { isLoggedIn, logoutUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+        
+    const handleHome = () => {
+        navigate('/');
+    }    
 
     return(
         <Headerst overlap={props.overlap} >
@@ -93,7 +98,7 @@ const Header = (props) => {
 
           
         </style>
-        <div className="logo">
+        <div className="logo" onClick={handleHome}>
             에코 프렌즈
 
             </div>
