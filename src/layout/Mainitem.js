@@ -12,7 +12,7 @@ const Mainitems = styled.div`
     background-color: #363636;
     position: relative;
 }
-b{
+b{ 
     opacity: 50%;
     position: absolute;
     left: 1px;
