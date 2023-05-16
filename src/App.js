@@ -25,7 +25,7 @@ function App() {
         <Route path="/InquriyCost" element={<InquriyCost />} />
       </Routes>
     </Router>
-   
+    
    </>
   );
 }
