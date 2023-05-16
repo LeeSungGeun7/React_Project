@@ -25,6 +25,7 @@ const Footerst = styled.footer`
     margin-right: 20px;
     text-align: center;
     justify-content: center;
+    cursor: pointer;
    }
 
    .div2 h2 {

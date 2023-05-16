@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 const Mainitems = styled.div`
-.Centeritem {
+    .Centeritem {
     margin-top: 20px;
     /* border: solid 1px; */
     width: 100%;

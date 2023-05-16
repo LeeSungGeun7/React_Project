@@ -59,6 +59,7 @@ const Container = styled.div`
     border : none;
     width: 15%;
     height:10%;
+    cursor: pointer;
   }
   .title {
     font-size: 50px;
