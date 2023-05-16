@@ -156,7 +156,29 @@ const Container = styled.div`
 const InterestStation = () => {
 
     const [wishStation, setWishStation] = useState([]);
-    const { address } = useParams();
+    const address = "서울특별시";
+
+    // const data = [
+    //     {
+    //         name : "강남 N 타워 전기차충전소",
+    //         addr : "서울 강남구 테헤란로 129 (역삼동 648-9)",
+    //         lat : 192.775483,
+    //         lng : 364.224689,
+    //     },
+    //     {
+    //         name : "서울 논현1동 주민센터 전기차 충전소",
+    //         addr : "서울 강남구 학동로20길 25 (논현동 133-13)",
+    //         lat : 157.114862,
+    //         lng : 370.913315,
+    //     },
+    //     {
+    //         name : "서울 서초구 서초2동 주민센터 전기차충전소",
+    //         addr : "서울 서초구 서초대로70길 51 (서초동 1332-6)",
+    //         lat : 200.854879,
+    //         lng : 399.694781,
+    //     }
+    // ]
+
 
     useEffect(() => {
         const wishStation = async(address) => {
@@ -164,6 +186,7 @@ const InterestStation = () => {
             if(rsp.status === 200)setWishStation(rsp.data);
             console.log(rsp.data);
         }
+        wishStation("서울특별시");
     }, []);
 
     return(
@@ -183,19 +206,22 @@ const InterestStation = () => {
                         <br></br>
 
                         <h1 className="text">즐겨찾기</h1>
-                        <div className="bookmark">
+                        {wishStation && wishStation.map(e => (
+                            <div className="bookmark">
                             <div className="flagIcon">
                                 <img className="flag" src={flagIcon} alt="flag_icon"></img>
                             </div>
                             <div className="stationInfo">
-                                <h2>강남 N 타워 전기차충전소</h2>
-                                <p>서울 강남구 테헤란로 129 (역삼동 648-9)</p>
+                                <h2 key={wishStation}>{e.csNm}</h2>
+                                <p key={wishStation}>{e.addr}</p>
                             </div>
                             <div className="pointerIcon">
                                 <a href="/"><img className="pointer" src={pointer} alt="pointer_icon"></img></a>
                             </div>
                         </div>
-                        <div className="bookmark">
+                        ))}
+                        
+                        {/* <div className="bookmark">
                             <div className="flagIcon">
                                 <img className="flag" src={flagIcon} alt="flag_icon"></img>
                             </div>
@@ -219,7 +245,7 @@ const InterestStation = () => {
                                 <a href="/"><img className="pointer" src={pointer} alt="pointer_icon"></img></a>
                             </div>
 
-                        </div>
+                        </div> */}
 
                     </div>
 

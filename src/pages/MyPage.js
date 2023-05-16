@@ -173,12 +173,20 @@ const Mypage = () => {
     const [myInfo, setMyInfo] = useState("");
     const { id } = useParams();
 
+    const data = {
+        name : "신형환",
+        email : "example@example.com",
+        nicName : "kh",
+        phone : "010-1234-5678",
+        pay : "empty"
+    }
+
     useEffect(() => {
-        const myInfo = async(id) => {
-            const rsp = AxiosApi.getMyInfo(id);
-            if(rsp.status === 200)setMyInfo(rsp.data);
-            console.log(rsp.data);
-        }
+        // const myInfo = async(id) => {
+        //     const rsp = AxiosApi.getMyInfo(id);
+        //     if(rsp.status === 200)setMyInfo(rsp.data);
+        //     console.log(rsp.data);
+        // }
     }, []);
 
     return(
@@ -205,19 +213,19 @@ const Mypage = () => {
                         <table className="InfoTable"> 
                             <tr>
                                 <th className="name">이름</th>
-                                <td className="loginName">{myInfo.custNm}</td>
+                                <td className="loginName">{data.name}</td>
                             </tr>
                             <tr>
-                                <th className="id">아이디</th>
-                                <td className="loginId">{myInfo.custNnm}</td>
+                                <th className="id">닉네임</th>
+                                <td className="loginId">{data.nicName}</td>
                             </tr>
                             <tr>
                                 <th className="phone">휴대전화번호</th>
-                                <td className="loginPhone">{myInfo.custPhone}</td>
+                                <td className="loginPhone">{data.phone}</td>
                             </tr>
                             <tr>
                                 <th className="email">이메일</th>
-                                <td className="loginEmail">{myInfo.custEmail}</td>
+                                <td className="loginEmail">{data.email}</td>
                             </tr>
                             <tr>
                                 <th className="payment">결제 수단</th>

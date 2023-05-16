@@ -207,6 +207,11 @@ const ModifyInfo = () => {
     const [myInfo, setMyInfo] = useState("");
     const { id } = useParams();
 
+    const data = {
+        name : "신형환",
+        nicName : "kh"
+    }
+
     useEffect(() => {
         const myInfo = async(id) => {
             const rsp = AxiosApi.getMyInfo(id);
@@ -241,11 +246,11 @@ const ModifyInfo = () => {
                         <table className="InfoTable"> 
                             <tr>
                                 <th className="name">이름</th>
-                                <td className="loginName">{myInfo.custNm}</td>
+                                <td className="loginName">{data.name}</td>
                             </tr>
                             <tr>
-                                <th className="id">아이디</th>
-                                <td className="loginId">{myInfo.custNnm}</td>
+                                <th className="id">닉네임</th>
+                                <td className="loginId">{data.nicName}</td>
                             </tr>
                             <tr>
                                 <th className="phone">휴대전화번호</th>
