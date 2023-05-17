@@ -26,8 +26,12 @@ const AxiosApi = {
         return await axios.post(EF_DOMAIN + "/api/list", requset);
     }, 
     // 세션조회
-    getSession : async() => {
-        return await axios.get(EF_DOMAIN + "/member/session");
+    getSession : async(value) => {
+        return await axios.post(EF_DOMAIN + `/member/session?uuid=${value}`);
+    },
+    // 로그아웃
+    logout : async(value) => {
+        return await axios.delete(EF_DOMAIN + `/member/logout?uuid=${value}`);
     }
 
 };
