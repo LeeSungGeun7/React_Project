@@ -121,7 +121,7 @@ const Main = () => {
         <MainBottom/>
       </div>
       <div className="card-container">
-        카드컨테이너
+        
         <CardSlider />
       </div>
     </Mainst>

@@ -14,8 +14,6 @@ import { async } from "q";
 
 
 const Container = styled.div`
-  
-
 
   .Container {
     background-color: black ;
@@ -66,9 +64,6 @@ const Container = styled.div`
     weight: bold;
   }
 `
-
-
-
 
 const Login = () => {
   const navigate = useNavigate(); // 라우터 이동을 하기위해서
