@@ -6,6 +6,7 @@ import LoginBtn from "../Components/LoginBtn";
 import { BsFillFilePersonFill } from "react-icons/bs";
 import { Link , useNavigate} from "react-router-dom"; 
 import AuthContext, { AuthProvider } from "../context/AuthContext";
+import MyPageBtn from "../Components/MyPageBtn";
 // import LoginBtn from "../Components/LoginBtn";
 // import Login from "../pages/Login";
 
@@ -28,7 +29,7 @@ const Headerst = styled.header`
     font-size: 50px;
    // border: 1px solid black;
     display : grid;
-    grid-columns: 1 / 2;
+    grid-template-columns: 1 / 2;
     header{
         background-color: rgb(255,255,255,0.4);
         height: 80px;
@@ -49,7 +50,7 @@ const Headerst = styled.header`
         font-family: 'Do Hyeon', sans-serif;
 
         font-size: 35px;
-        weight : bold;
+        //font-weight : bold;
     }
     .menu{
         display:flex;
@@ -76,7 +77,32 @@ const Headerst = styled.header`
         align-items: center;
         justify-content:center;
     }
-   
+    .header-customer{
+        display:flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:space-evenly;
+        align-items:center;
+        margin:15px;
+    }
+   .logout-btn {
+        border:none;
+        border-radius:15px;
+        color : white;
+        <background-color:grey></background-color:grey>;
+        font-family:'Do Hyeon', sans-serif;
+        &:hover{
+            color:#333333;
+        }
+   }
+   .customer-items {
+     display:flex;
+     align-items:center;
+     justify-content:center;   
+   }
+   .customer-item1 , .customer-item2 , .logout-btn{
+    margin:10px;
+   }
 `   
 ;
 
@@ -84,7 +110,7 @@ const Headerst = styled.header`
 
 
 const Header = (props) => {
-    const { isLoggedIn, logoutUser } = useContext(AuthContext);
+    const { isLoggedIn, logoutUser, username} = useContext(AuthContext);
     const navigate = useNavigate();
         
     const handleHome = () => {
@@ -99,24 +125,25 @@ const Header = (props) => {
           
         </style>
         <div className="logo" onClick={handleHome}>
-            에코 프렌즈
+            에코 프렌즈 
 
             </div>
             <div className="menu-group" >
             <nav className="menu">
                 <Link to="/Service">고객센터</Link> 
                 <Link to="/car">전기차충전소</Link> 
-                <Link to="/Mypage">마이페이지</Link>
+                {/* <Link to="/Mypage">마이페이지</Link> */}
                 <Link to="/">회원가입</Link>
-                <Link to="/login">로그인</Link>
+
             </nav>
             </div>
-            <div >
+            <div className="header-customer" >
                 {isLoggedIn ? (
-                    <>
-                    <button onClick={logoutUser}>로그아웃</button>
-                    <Link to="/Mypage"><button ><BsFillFilePersonFill/>마이페이지</button></Link>
-                    </>
+                <div className="customer-items">
+                    <div className="customer-item1" style={{fontSize:"15px" , color:"lightskyblue"}}>{username} 님 환영합니다</div>
+                    <MyPageBtn className="customer-item2" name={username}/> 
+                    <button className="logout-btn" onClick={logoutUser}>로그아웃</button>
+                </div>
                 ) : (
                     <div className="btns">
                     <Link to="/login"> <LoginBtn name="로그인"/> </Link> 

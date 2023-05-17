@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import styled from "styled-components";
@@ -141,7 +141,7 @@ const Contain = styled.div`
         overflow : scroll;
         height:60%;
     }
-
+    
 `
 
 
@@ -149,7 +149,7 @@ const Contain = styled.div`
 
 const ServiceCenter = () => {
     const { isLoggedIn, logoutUser } = useContext(AuthContext);
-   
+    const navigate = useNavigate();
 
 
     return(
@@ -227,7 +227,7 @@ const ServiceCenter = () => {
                  {isLoggedIn ? (
                       <div className="custom-box">
                                    
-                      <div onClick={<Link to="login"/>} style={{backgroundColor: "#FFE83C"}} className="custom-item1">
+                      <div onClick={()=> {navigate("/login")}} style={{backgroundColor: "#FFE83C"}} className="custom-item1">
 
                           1:1문의하기
                           <p style={{fontSize:"10px" , backgroundColor: "#FFE83C"}}>궁금한 점이 있으시면 1:1문의를 남겨주세요</p>
@@ -271,7 +271,9 @@ const ServiceCenter = () => {
                         <div className="post">
                         
                                 <div className="post1">
-                                    공지사항
+                                    <div>
+                                        공지사항
+                                    </div>
                                 </div>
 
                                 <div className="post2">

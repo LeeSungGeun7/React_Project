@@ -88,36 +88,18 @@ const Login = () => {
     
 
     const onChangeId = (e) => {
-        const regexId = /^\w{5,20}$/;
-        setInputId(e.target.value);
-        if(!regexId.test(e.target.value)){
-                setIdMsg("5자리 이상 20자리 미만으로 입력해주세욧");
-                setIsId(false);
-        } else {
-            setIdMsg("올바른 형식 입니다.");
-            setIsId(true);
-        }
+       setInputId(String(e.target.value));
     } 
 
     const onChangePw = (e) => {
-        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
-      const passwordCurrent = e.target.value;
-      setInputPw(passwordCurrent)
-      if (!passwordRegex.test(passwordCurrent)) {
-          setPwMsg('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!')
-          setIsPw(false)
-      } else {
-          setPwMsg('안전한 비밀번호에요 : )');
-          setIsPw(true);
-      }
-
+      setInputPw(String(e.target.value))
     }
     const onClickLogin = async() => {
         // 로그인을 위한 axios 호출 
         const response = await AxiosApi.memberLogin(inputId,inputPw);
         console.log(response.data);
-        if(response.data === true) {
-            loginUser();
+        if(response) {
+            loginUser(response.data);
             navigate("/");
         } else {
           
@@ -132,8 +114,8 @@ const Login = () => {
 
               <div className="loginbar">
                         <div className="title">LOGIN</div>
-                       <input type="text" onChange={onChangeId} />
-                        <input type="text" onChnage={onChangePw} />
+                       <input type="text" onChange={e=>onChangeId(e)} />
+                        <input type="text" onChange={e=>onChangePw(e)} />
                         <button onClick={onClickLogin}>Login</button>
                         
 

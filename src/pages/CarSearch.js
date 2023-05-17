@@ -1,4 +1,4 @@
-import React ,{useState , useEffect}from "react";
+import React ,{useState , useEffect, useRef}from "react";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import styled from "styled-components";
@@ -67,7 +67,8 @@ const CarSerachst = styled.body`
         align-items:center;
     }
     
-    input {
+    .SearchInput {
+            position: relative;
             width: 400px;
             height: 30px;
             margin: 20px;
@@ -83,25 +84,29 @@ const CarSerachst = styled.body`
     .charge-method , .service , .local {
         margin:19px;
         width: 20%;
-        
+        text-align:center;
     }
-    .charge-methods {
-        
-     display:flex; 
 
-       color: white;
-       font-size: 20px;
-       width: 100%;
-       max-width: 20px;
+    .charge-method {
+        position: relative;
     }
-    .charge-methods input{
-        max-width : 10%;
+
+    .charge-methods input  {
+        
+        display : flex ; 
+        justify-content: center;
+        min-width: 10px;
+
+        align-items:center;
     }
+
+   
     
 
     .line button {
         background-color: white ;
         border: none;
+        min-width: 250px;
         width: 20px;
         height:20px;
         border-radius: 10px;
@@ -125,18 +130,113 @@ const CarSerachst = styled.body`
         justify-content:center;
         flex-direction:column;
     }
-    
-    .search {
-        position: absolute;
-        right: 80px;
+    .local{
+        position: relative;
     }
-    
+    .search {
+        position: relative;
+        right: 60px;
+    }
+   
+    .charge-methodss {
+
+        z-index:999;
+        display:flex;
+        width: 100%;
+        flex-direction:column;
+        padding-right:7px;
+        border: none;
+        border-radius: 10px;
+        background-color : white;
+        padding-left:0;
+        max-height: 55vh;
+        overflow: scroll;
+        
+    }
+    .charge-methodss li {
+        
+        text-align: center;
+       
+        margin:3px;
+        height: 50px;
+        list-style:none;
+        padding-left:0px;
+        z-index: 100;
+        background-color: white;
+        color: black;
+        /* margin : 3px; */
+        border-radius: 10px;
+        min-width: 100%;
+    }
+
+    .charge-methodss li:hover {
+       border: 1px solid ;
+       background-color: #333333;
+       color: white; 
+    }
+   .dropdown {
+        position: absolute;
+        top:20px;
+        
+   }
+   .dropdown button {
+     font-weight: bold;
+   }
+   .dropdown button:hover {
+    color: white;
+    background-color: #333333;
+   }
+   .charge-methodss button {
+    min-width: 10px;
+    height: 15px;
+    position: absolute;
+    left:235px;
+    z-index: 1200;
+    top:60px;
+   }
+   input[type='radio'] {
+    appearance: none; // 맨 위에 있어야 아래의 속성이 먹힘!
+    background-color: black;
+    width: 10px;
+    height: 10px;
+    position:relative;
+    top:6px;
+    border-radius: 50%;
+    opacity: 30%;
+    margin: 10px;
+    border: none;
+
+  &:checked {
+    opacity: 1;
+  }
+}
    
 `;
 
 
 
 const CarSerach = () => {
+    const inputEl = useRef(null);
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+          handleSearchClick();
+        }
+      }
+
+    const [DropisVisible, setDropIsVisible] = useState(false);
+  const [selectedCharge, setSelectedCharge] = useState('');
+
+  const DroptoggleVisibility = () => {
+    setDropIsVisible(!DropisVisible);
+  }
+
+  const handleChargeMethodChange = (charge , name) => {
+    setSelectedCharge(name);
+    setChargeMethod(parseInt(charge));
+    setDropIsVisible(false);
+  }
+
+
     const statusColors = {
         1: "#52F911", // 충전 가능
         2: "FFF94E", // 충전 중
@@ -151,22 +251,22 @@ const CarSerach = () => {
     const [chargeMethod, setChargeMethod] = useState(null);
     const [service, setService] = useState(null);
 
-    const handleChargeMethodChange = (event) => {
-    setChargeMethod(parseInt(event.target.value));
-    };
+    // const handleChargeMethodChange = (event) => {
+    // setChargeMethod(parseInt(event.target.value));
+    // };
 
     const handleServiceChange = (event) => {
-    setService(event.target.value);
+    setService(parseInt(event.target.value));
     };
 
     const filteredChargerInfo = chargerInfo.filter(charger => {
         const matchesChargeMethod = chargeMethod ? charger.cpTp === chargeMethod : true;
-        const matchesService = service ? charger.cpStat === service : true;
+        const matchesService = service ? charger.chargeTp === service : true;
         
-        return matchesChargeMethod 
+        return matchesChargeMethod && matchesService;
       });
 
-    const chargeMethods = {1: "B타입(5핀)",2: "C타입(5핀)", 3:"BC타입(5핀)", 4:"BC타입(7핀)", 5:"DC차데모" , 6:"AC3상", 7:"DC콤보", 8:"DC차데모+DC콤보", 9:"그게뭔데" , 10:"DC차데모+AC3상+DC콤보"};
+    const chargeMethods = {1: "B타입(5핀)",2: "C타입(5핀)", 3:"BC타입(5핀)", 4:"BC타입(7핀)", 5:"DC차데모" , 6:"AC3상", 7:"DC콤보", 8:"DC차데모+DC콤보", null:"(상관없음)" , 10:"DC차데모+AC3상+DC콤보"};
     const cpStats = {1:"충전가능" , 2:"충전중" , 3:"고장/점검" , 4:"통신장애" , 5:"통신미연결"}
 
     const [addr,setAddr] = useState("");
@@ -174,6 +274,8 @@ const CarSerach = () => {
     const [cpStat,setCpStat] = useState("");
     const [times,setTime] = useState(Date());
     const [cpNm , setCpNm] = useState("");
+    const [lat,setLat] = useState(37.224);
+    const [lng , setLng] = useState(127.11);
 
 
 
@@ -202,10 +304,10 @@ const CarSerach = () => {
     fetchChargerInfo();
   }, [name]);
 
-   
+
 
    
-    let [isVisible , setIsVisible] = useState(false);
+    let [isVisible , setIsVisible] = useState(true);
     
     
 
@@ -228,37 +330,41 @@ const CarSerach = () => {
         </>
         <div className="Container">
             <div className="map">
-            <KaKao chargerInfo={chargerInfo}/>
+            <KaKao chargerInfo={chargerInfo} Lat={lat} Lng={lng}/>
             </div>
             <div className="line">
-                <div className="charge-method">충전방식 <button onClick={toggleVisibility}></button>
+                    <div className="charge-method">충전방식 
 
-                 {isVisible &&  <div className="charge-methods">
-                  <input type="radio" name="charge" id="charge" value={1} onChange={handleChargeMethodChange} />
-                  <label style={{ fontSize: '12px' }}>B타입(5핀)</label>
-                    <input type="radio" name="charge" id="charge" value={2} onChange={handleChargeMethodChange} />C타입(5핀)
-                    <input type="radio" name="charge" id="charge" value={3} onChange={handleChargeMethodChange} />BC타입(5핀)
-                    <input type="radio" name="charge" id="charge" value={4} onChange={handleChargeMethodChange} />BC타입(7핀)
-                    <input type="radio" name="charge" id="charge" value={5} onChange={handleChargeMethodChange} />DC차데모
-                    <input type="radio" name="charge" id="charge" value={6} onChange={handleChargeMethodChange} />AC3상
-                    <input type="radio" name="charge" id="charge" value={7} onChange={handleChargeMethodChange} />DC콤보
-                    <input type="radio" name="charge" id="charge" value={8} onChange={handleChargeMethodChange} />DC차데모+DC콤보
-                    <input type="radio" name="charge" id="charge" value={10} onChange={handleChargeMethodChange} />DC차데모+DC콤보+AC3상
+                     {/* <div className="charge-methods">      */}
+                                <div className="dropdown">
+                            
+                                    <button onClick={DroptoggleVisibility}>충전방식: {selectedCharge || '선택하세요'}</button>
+                                        {DropisVisible && 
+                                    <ul className="charge-methodss">
+                                        <button onClick={DroptoggleVisibility}>X</button>
+                                    {Object.entries(chargeMethods).map(([id, name]) => 
+                                        <li key={id} onClick={() => handleChargeMethodChange(id, name)}>
+                                        {name}
+                                        </li>
+                                    )}
+                                    </ul>
+                        }
+                            </div>
+          
+                    {/* </div> */}
+                
+                </div>
+                <div className="service"> 
+                    {/* {isVisible2 &&  <div className="charge-methods"> */}
+                    <input type="radio" name="service" id="service" value={1} onChange={handleServiceChange} />완속
+                    <input type="radio" name="service" id="service" value={2} onChange={handleServiceChange} />급속
+                    <input type="radio" name="service" id="service" value={{}} onChange={handleServiceChange} />All
 
-
-                    </div>
-                }   
+                {/* </div>
+                }  */}
                 </div>
-                <div className="service">서비스 <button onClick={toggleVisibility2}></button>
-                    {isVisible2 &&  <div className="charge-methods">
-                    <input type="radio" name="service" id="service" value={10} onChange={handleServiceChange} />점원
-                    <input type="radio" name="service" id="service" value={2} onChange={handleServiceChange} />풀서비스
-                    <input type="radio" name="service" id="service" value={1} onChange={handleServiceChange} />셀프
-                </div>
-                    }   
-                </div>
-                <div className="local">시/군구</div>
-                <input onChange={e=> handleInputChange(e)} type="text" placeholder="입력하세요"/>
+                <div className="local">시/군구 :</div>
+                <input className="SearchInput" onChange={e=> handleInputChange(e)} type="text" placeholder="입력하세요" ref={inputEl} onKeyDown={handleKeyDown}/>
                     <FaSearch className="search" onClick={handleSearchClick}/>
             </div>
             <div className="result">
@@ -266,8 +372,9 @@ const CarSerach = () => {
                 <div className="rst"> 
                     
                     <ul>
+                        <p style={{textAlign:"left"}}> {filteredChargerInfo.length}개의 검색결과</p>
                         {filteredChargerInfo.map((charger, index) => (
-                        <li onClick={()=> {setAddr(charger.csNm); setChargeTp(charger.cpTp); setCpStat(charger.cpStat); setTime(charger.statUpdateDatetime); setCpNm(charger.cpNm)}} 
+                        <li onClick={()=> {setAddr(charger.csNm); setChargeTp(charger.cpTp); setCpStat(charger.cpStat); setTime(charger.statUpdateDatetime); setCpNm(charger.cpNm); setLat(parseFloat(charger.lat)); setLng(parseFloat(charger.lng)); }} 
                             key={index}>
                             <h4 style={{color:"#0F2121"}}> {charger.csNm} </h4> 
                             <p style={{fontSize:"20px" , color:"#0F2121"}}> {charger.addr}</p>

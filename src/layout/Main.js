@@ -6,6 +6,9 @@ import KakaoMap from "../Components/KakaoMap";
 import CardSlider from "../Components/CardSlider";
 import { FaSearch } from 'react-icons/fa';
 import CarSerach from "../pages/CarSearch";
+import { useEffect } from "react";
+import AxiosApi from "../api/AxiosApi";
+import { cookie } from 'react-cookie';
 
 
 const Mainst = styled.main`
@@ -133,7 +136,6 @@ const Mainst = styled.main`
 
 const Main = () => {
   const [vdValue, setVdValue] = useState(vd2);
-
   const vdClick = () => {
     setVdValue(vd2);
     if (vdValue === vd2) {
@@ -141,6 +143,9 @@ const Main = () => {
     }
   };
 
+  useEffect(() => { 
+    
+  })
   return (
     <Mainst>
       <div className="top">
