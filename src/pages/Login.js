@@ -97,12 +97,14 @@ const Login = () => {
     const onClickLogin = async() => {
         // 로그인을 위한 axios 호출 
         const response = await AxiosApi.memberLogin(inputId,inputPw);
-        console.log(response.data);
+        console.log(response.config.data);
+      
+      //  response.config.data.map(data=> data)
+        
         if(response) {
             loginUser(response.data);
             navigate("/");
-        } else {
-          
+        } else {         
             alert("로그인 에러 !!!")
 ;        }
     }

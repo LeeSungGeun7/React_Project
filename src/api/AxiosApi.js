@@ -11,7 +11,7 @@ const AxiosApi = {
     // 로그인 
     memberLogin : async(id,pw) => {
         const requset = {
-            id : id, 
+            email : id, 
             pwd : pw
         };
         return await axios.post(EF_DOMAIN + "/member/login" , requset);  
@@ -24,6 +24,10 @@ const AxiosApi = {
             addr : address
         };
         return await axios.post(EF_DOMAIN + "/api/list", requset);
+    }, 
+    // 세션조회
+    getSession : async() => {
+        return await axios.get(EF_DOMAIN + "/member/session");
     }
 
 };
