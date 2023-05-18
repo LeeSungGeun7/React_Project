@@ -22,6 +22,7 @@ b {
     margin-left: 1100px;
     margin-top: 280px;
     color: royalblue;
+    font-style: oblique;
 }
 
 .Centeritem2 {
