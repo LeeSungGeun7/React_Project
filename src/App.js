@@ -1,4 +1,3 @@
-
 import './App.css';
 import Login from './pages/Login';
 import Home from './pages/Home';
@@ -11,6 +10,7 @@ import ModifyInfo from './pages/ModifyInfo';
 import InterestStation from "./pages/InterestStation"
 import InquriyCost from './pages/InquriyCost';
 
+
 function App() {
   return (
    <>
@@ -18,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/Car" element={<CarSerach/>} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/" element={<Layout />} />
         <Route path="/MyPage" element={<Mypage />} />
         <Route path="/ModifyInfo" element={<ModifyInfo />} />
