@@ -14,8 +14,6 @@ import { async } from "q";
 
 
 const Container = styled.div`
-  
-
 
   .Container {
     background-color: black ;
@@ -59,15 +57,13 @@ const Container = styled.div`
     border : none;
     width: 15%;
     height:10%;
+    cursor: pointer;
   }
   .title {
     font-size: 50px;
     weight: bold;
   }
 `
-
-
-
 
 const Login = () => {
   const navigate = useNavigate(); // 라우터 이동을 하기위해서

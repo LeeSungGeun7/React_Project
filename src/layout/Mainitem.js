@@ -1,30 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 
-
 const Mainitems = styled.div`
 .Centeritem {
     margin-top: 20px;
     /* border: solid 1px; */
     width: 100%;
-    height: 100vh;
+    height: 105vh;
     font-size: 800%;
-    background-color: #363636;
+    background-color: whitesmoke;
     position: relative;
 }
 
-
-b{ 
+b { 
     opacity: 50%;
     position: absolute;
     left: 1px;
     /* justify-content: flex-end; */
     display: flex;
     align-items: center;
-    margin-left: 1000px;
-    margin-top: 250px;
+    margin-left: 1100px;
+    margin-top: 280px;
     color: royalblue;
+    font-style: oblique;
 }
+
 .Centeritem2 {
     /* border: solid 1px; */
     position: relative;
@@ -36,8 +36,8 @@ b{
     font-size: 150px;
     font-weight: 500;
     color: #A1FF98;
-    
 }
+
 .type{
     /* border: solid 1px; */
     font-size: 25px;
@@ -54,20 +54,20 @@ b{
     margin-top: 10px;
     line-height: 40px;
     font-weight: bold;
-    color: #FFFFE9;
+    color: black;
 }
 .type2 {
     /* border: solid 1px; */
-    font-size: 25px;
+    font-size: 20px;
     position: relative;
-    left: 50px;
-    top: 100px;
+    left: 90px;
+    top: 150px;
     width: 900px;
     height: 400px;
     line-height: 70px;
     font-style: oblique;
     font-weight: bold;
-    color: white;
+    color: #363636;
 }
 `;
 

@@ -25,6 +25,7 @@ const Footerst = styled.footer`
     margin-right: 20px;
     text-align: center;
     justify-content: center;
+    cursor: pointer;
    }
 
    .div2 h2 {
@@ -51,14 +52,13 @@ const Footerst = styled.footer`
     position: relative;
     text-align: center;
    }
-`;
+   `;
 
       const Footer = () => {
         const [isModalOpen, setIsModalOpen] = useState(false);
         const [modalContents, setModalContents] = useState("");
         const [modalTitle, setModalTitle] = useState("");
 
-      
         const handleOpenModal = (index) => {
           setIsModalOpen(true);
           if (index === 0) {
@@ -70,7 +70,6 @@ const Footerst = styled.footer`
           } else if (index === 2) {
             setModalContents("전기차 충전소 찾기 에코프렌즈에서 제공하는 모든 콘텐츠 즉, 웹 문서,첨부파일,DB정보 등은 저작권법에 의하여 보호받는 저작물로써, 별도의 저작권 표시 또는 다른 출처를 명시한 경우를 제외하고는 원칙적으로 에코프렌즈공사에 저작권이 있습니다.");
             setModalTitle("저작권정책");
-
           }
         };
       
