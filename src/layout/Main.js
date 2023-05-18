@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import styled from "styled-components";
 import vd from "../images/video-src-pc (1).mp4";
 import vd2 from "../images/KakaoTalk_Video_2023-05-03-16-40-25.mp4";
-import KakaoMap from "../Components/KakaoMap";
+
 import CardSlider from "../Components/CardSlider";
 import { FaSearch } from 'react-icons/fa';
 import CarSerach from "../pages/CarSearch";
 import { useEffect } from "react";
 import AxiosApi from "../api/AxiosApi";
-import { cookie } from 'react-cookie';
+import cookie from 'react-cookies';
+import axios from "axios";
+import AuthContext from "../context/AuthContext";
+
 
 
 const Mainst = styled.main`
@@ -96,9 +99,9 @@ const Mainst = styled.main`
     left: 37%;
     width: 25%;
 
-  width: 400px;
-  height: 30px;
-  margin: 10px auto;
+    width: 400px;
+    height: 30px;
+    margin: 10px auto;
     font-size: 15px;
     color: #222222;
     border: none;
@@ -135,6 +138,7 @@ const Mainst = styled.main`
 `;
 
 const Main = () => {
+  const { loginUser } = useContext(AuthContext);
   const [vdValue, setVdValue] = useState(vd2);
   const vdClick = () => {
     setVdValue(vd2);
@@ -143,9 +147,18 @@ const Main = () => {
     }
   };
 
-  useEffect(() => { 
+  // useEffect(() => { 
+  //   const getMyInfo = async() => {
+  //     const rsp = await AxiosApi.getSession(cookie.load("sessionId"));
+  //     if (rsp.status === 200) {
+  //       console.log(rsp.data);
+  //       loginUser(rsp.data);
+  //     }
+  //   }
+  //   getMyInfo();
+
     
-  })
+  // })
   return (
     <Mainst>
       <div className="top">

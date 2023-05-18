@@ -7,8 +7,10 @@ import { BsFillFilePersonFill } from "react-icons/bs";
 import { Link , useNavigate} from "react-router-dom"; 
 import AuthContext, { AuthProvider } from "../context/AuthContext";
 import MyPageBtn from "../Components/MyPageBtn";
+import { useEffect } from "react";
 // import LoginBtn from "../Components/LoginBtn";
 // import Login from "../pages/Login";
+import cookies from 'react-cookies'
 
 
 
@@ -36,6 +38,7 @@ const Headerst = styled.header`
         display : flex;
         flex-direction: row;
         justify-content: space-evenly;
+        z-index: 100000;
     }
     .logo {
         width : 200px;
@@ -78,6 +81,7 @@ const Headerst = styled.header`
         justify-content:center;
     }
     .header-customer{
+        z-index:100000;
         display:flex;
         flex-direction:row;
         flex-wrap:wrap;
@@ -113,6 +117,10 @@ const Header = (props) => {
     const { isLoggedIn, logoutUser, username} = useContext(AuthContext);
     const navigate = useNavigate();
         
+    // useEffect(()=> {
+    //     console.log(cookies.load("sessionId"));
+    // },[]);
+
     const handleHome = () => {
         navigate('/');
     }    
@@ -130,17 +138,18 @@ const Header = (props) => {
             </div>
             <div className="menu-group" >
             <nav className="menu">
-                <Link to="/Service">고객센터</Link> 
+                 
                 <Link to="/car">전기차충전소</Link> 
+                <Link to="/Service">고객센터</Link>
                 {/* <Link to="/Mypage">마이페이지</Link> */}
-                <Link to="/">회원가입</Link>
+               {!isLoggedIn && <Link to="/">회원가입</Link>}
 
             </nav>
             </div>
             <div className="header-customer" >
                 {isLoggedIn ? (
                 <div className="customer-items">
-                    <div className="customer-item1" style={{fontSize:"15px" , color:"lightskyblue"}}>{username} 님 환영합니다</div>
+                    <div className="customer-item1" style={{fontSize:"15px" , color:"black"}}>{username} 님 환영합니다</div>
                     <MyPageBtn className="customer-item2" name={username}/> 
                     <button className="logout-btn" onClick={logoutUser}>로그아웃</button>
                 </div>

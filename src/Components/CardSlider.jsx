@@ -66,20 +66,24 @@ const Card = ({ content }) => (
 //     <div className="card-content">{content}</div>
 //     <div className="card-content">{content}</div>
 //   </div>
+
     content === 'Card 1' ? 
 
       <div className="card">
         <div className="card-content1" ></div>
          <div className="card-content2">{"카드2"}</div>
          <div className="card-content3">{"카드3"}</div>
-         <div className="card-content4">{"카드4"}</div>
+         {/* <div className="card-content4">{"카드4"}</div> */}
        </div> 
-
        : 
         <div className="card">
-            <div className="card-content">{content}</div>
-             <div className="card-content">{content}</div>
+            <div className="card-content">{4}</div>
+             <div className="card-content">{5}</div>
+             <div className="card-content">{6}</div>
            </div>
+           
+
+
 );
 
 const CardSlider = () => {
@@ -94,9 +98,7 @@ const CardSlider = () => {
   const cardsData = [
     { id: 1, content: 'Card 1' },
     { id: 2, content: 'Card 2' },
-    { id: 3, content: 'Card 3' },
-    { id: 4, content: 'Card 4' },
-    { id: 5, content: 'Card 5' },
+   
   ];
 
   return (

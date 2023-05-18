@@ -59,9 +59,10 @@
 //   return <div id="map" ref={mapContainer} style={{ width: '100%', height: '100%' }} />;
 // }
 
-// export default KakaoMap;
+//export default KakaoMap;
 
 import React, { useEffect, useRef } from 'react';
+import $ from 'jquery';
 
 function KakaoMap({ chargerInfo , Lat , Lng }) {
   const mapContainer = useRef(null);
@@ -106,10 +107,80 @@ function KakaoMap({ chargerInfo , Lat , Lng }) {
       const moveLatLon = new window.kakao.maps.LatLng(Lat, Lng);
       map.current.setCenter(moveLatLon);
     }
+
   }, [Lat, Lng]);
+
   
   return <div id="map" ref={mapContainer} style={{ width: '100%', height: '100%' }} />;
 }
 
 export default KakaoMap;
+
+
+
+
+
+
+// import React, { useEffect, useRef } from 'react';
+
+// function KakaoMap({ chargerInfo , Lat , Lng }) {
+//   const mapContainer = useRef(null);
+//   const map = useRef(null);
+//   const clusterer = useRef(null); // 마커 클러스터러를 저장할 ref를 추가
+  
+//   useEffect(() => {
+//     if (mapContainer.current) {
+//       const mapOption = {
+//         center: new window.kakao.maps.LatLng(Lat , Lng),
+//         level: 4,
+//       };
+//       map.current = new window.kakao.maps.Map(mapContainer.current, mapOption)
+
+//       clusterer.current = new window.kakao.maps.MarkerClusterer({
+//         map: map.current, 
+//         averageCenter: true, 
+//         minLevel: 10 
+//       });
+
+//       const createMarkers = () => {
+//         const positions = chargerInfo.map((data) => ({
+//           title: data.title,
+//           latlng: new window.kakao.maps.LatLng(data.lat, data.lng),
+//         }));
+
+//         const imageSrc = "https://cdn-icons-png.flaticon.com/128/2962/2962317.png";
+
+//         const markers = positions.map((position) => {
+//           const imageSize = new window.kakao.maps.Size(45, 64);
+//           const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
+//           return new window.kakao.maps.Marker({
+//             position: position.latlng,
+//             title: position.title,
+//             image: markerImage,
+//           });
+//         });
+
+//         // 클러스터러에 마커들을 추가합니다
+//         clusterer.current.addMarkers(markers);
+//       };
+
+//       if (chargerInfo.length > 0) {
+//         createMarkers();
+//       }
+//     }
+//   }, [chargerInfo, Lat, Lng]);
+
+//   useEffect(() => {
+//     if (map.current) {
+//       const moveLatLon = new window.kakao.maps.LatLng(Lat, Lng);
+//       map.current.setCenter(moveLatLon);
+//     }
+
+//   }, [Lat, Lng]);
+
+  
+//   return <div id="map" ref={mapContainer} style={{ width: '100%', height: '100%' }} />;
+// }
+
+// export default KakaoMap;
 

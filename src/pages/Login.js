@@ -7,6 +7,8 @@ import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
 import AuthContext from "../context/AuthContext";
 import cookies from 'react-cookies';
+import cookie from 'react-cookies';
+
 
 const Container = styled.div`
   
@@ -72,7 +74,7 @@ const Container = styled.div`
 
 
 const Login = () => {
-  // const { loginUser } = useContext(AuthContext);
+   const { loginUser } = useContext(AuthContext);
 
     const navigate = useNavigate(); // 라우터 이동을 하기위해서
     // 키보드 입력
@@ -112,7 +114,8 @@ const Login = () => {
       //  response.config.data.map(data=> data)
         
         if(response.status === 200) {
-            // loginUser(response.data);
+          const rsp = await AxiosApi.getSession(cookie.load("sessionId"));
+            loginUser(rsp.data);
             setSessionId(uuid);
             navigate("/");
         } else {         

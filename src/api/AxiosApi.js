@@ -27,13 +27,42 @@ const AxiosApi = {
     }, 
     // 세션조회
     getSession : async(value) => {
-        return await axios.post(EF_DOMAIN + `/member/session?uuid=${value}`);
+        return await axios.get(EF_DOMAIN + `/member/session?uuid=${value}`);
     },
     // 로그아웃
     logout : async(value) => {
         return await axios.delete(EF_DOMAIN + `/member/logout?uuid=${value}`);
-    }
+    },
 
+
+    // 관심 충전소 등록 대강 만듬 
+    setWishStation : async(email,csId) => {
+        const request = {
+            email : email ,
+            csId : csId +""
+        };
+        console.log(csId);
+        return await axios.post(EF_DOMAIN + "/charger/wish/add", request);
+
+    } , 
+
+    // 관심 충전소 데이터 호출
+    getWishStation : async (email) => {
+        const response = await axios.get(EF_DOMAIN+ "/charger/wish/find", { 
+            params: { email: email }
+        });
+        return response;
+    },
+    // 관심 충전소 제거
+    deleteWishStation : async(email, csId) => {
+        const request = {
+            email : email,
+            csId : csId+""
+        }
+        console.log(csId);
+        return await axios.delete(EF_DOMAIN + "/charger/wish/delete", request);
+    }
+    
 };
 
 export default AxiosApi;

@@ -1,11 +1,12 @@
-import React ,{useState , useEffect, useRef}from "react";
+import React ,{useState , useEffect, useRef , useContext}from "react";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import styled from "styled-components";
 import KaKao from "../Components/KakaoMap";
 import AxiosApi from "../api/AxiosApi";
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch,FaStar } from 'react-icons/fa';
 import { HiOutlineEmojiHappy } from "react-icons/hi";
+import AuthContext from "../context/AuthContext";
 
 
 
@@ -65,6 +66,8 @@ const CarSerachst = styled.body`
     .rst2 {
         justify-content: center;
         align-items:center;
+       // background-color: #FFFFF0 ;
+      //border-left : 1px solid white;
     }
     
     .SearchInput {
@@ -216,14 +219,51 @@ const CarSerachst = styled.body`
 
 
 const CarSerach = () => {
-    const inputEl = useRef(null);
-    const handleKeyDown = (event) => {
+  const { email , isLoggedIn } = useContext(AuthContext);
+
+  const addWishStationData = async (email,csId) => {
+     try {
+        const response = await AxiosApi.setWishStation(email,csId);
+        console.log(response); // 로그를 통해 응답 내용 확인
+    } catch (error) {
+        console.error(error);
+    }
+    }
+  
+
+  const deleteWishStation = async (email,csId) => {
+    try {
+       const response = await AxiosApi.deleteWishStation(csId,email);
+       console.log(response); // 로그를 통해 응답 내용 확인
+   } catch (error) {
+       console.error(error);
+   }
+  }
+
+  const toggleSwitch = async (email, csId) => {
+    const isWishStation = wishList.some(item => item.csId === csId);
+    
+    if (isWishStation) {
+      // wishList에 있으므로 삭제
+      await deleteWishStation(email, csId);
+      setWishList(prev => prev.filter(item => item.csId !== csId));
+    } else {
+      // wishList에 없으므로 추가
+      await addWishStationData(email, csId);
+      const newWishStation = { csId };
+      setWishList(prev => [...prev, newWishStation]);
+    }
+}
+
+  const inputEl = useRef(null);
+  const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
           handleSearchClick();
         }
       }
 
-    const [DropisVisible, setDropIsVisible] = useState(false);
+
+  const [DropisVisible, setDropIsVisible] = useState(false);
   const [selectedCharge, setSelectedCharge] = useState('');
 
   const DroptoggleVisibility = () => {
@@ -262,7 +302,6 @@ const CarSerach = () => {
     const filteredChargerInfo = chargerInfo.filter(charger => {
         const matchesChargeMethod = chargeMethod ? charger.cpTp === chargeMethod : true;
         const matchesService = service ? charger.chargeTp === service : true;
-        
         return matchesChargeMethod && matchesService;
       });
 
@@ -276,6 +315,7 @@ const CarSerach = () => {
     const [cpNm , setCpNm] = useState("");
     const [lat,setLat] = useState(37.224);
     const [lng , setLng] = useState(127.11);
+    const [csId , setCsId] = useState("");
 
 
 
@@ -291,7 +331,40 @@ const CarSerach = () => {
         setInput(e.target.value);
       };
       
+   
+      const [wishList, setWishList] = useState([]);
 
+      // useEffect(() => {
+      //   const fetchWishList = async () => {
+      //     try {
+      //       const response = await AxiosApi.getWishStation(email); // 이 API는 현재 로그인한 사용자의 이메일을 인자로 받아야 합니다.
+      //       if (response.status === 200) {
+      //         setWishList(response.data);
+
+      //       }
+      //     } catch (error) {
+      //       console.error(error);
+      //     }
+      //   };
+       
+      //   fetchWishList();
+      // }, );   
+      useEffect(() => {
+        (async () => {
+          try {
+            const response = await AxiosApi.getWishStation(email);
+            if (response.status === 200) {
+              setWishList(response.data);
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        })();
+
+        console.log(wishList);
+      }, [name]);
+      
+      
 
  
 
@@ -300,7 +373,7 @@ const CarSerach = () => {
       const rsp = await AxiosApi.chargerData(name);
       if (rsp.status === 200) setChargerInfo(rsp.data);
     };
-
+  
     fetchChargerInfo();
   }, [name]);
 
@@ -311,16 +384,16 @@ const CarSerach = () => {
     
     
 
-    const toggleVisibility = () => {
-        setIsVisible(!isVisible);
-      };
+    // const toggleVisibility = () => {
+    //     setIsVisible(!isVisible);
+    //   };
     
-      let [isVisible2 , setIsVisible2] = useState(false);
+    //   let [isVisible2 , setIsVisible2] = useState(false);
     
 
-      const toggleVisibility2 = () => {
-          setIsVisible2(!isVisible2);
-        };  
+    //   const toggleVisibility2 = () => {
+    //       setIsVisible2(!isVisible2);
+    //     };  
 
 
     return (
@@ -374,10 +447,12 @@ const CarSerach = () => {
                     <ul>
                         <p style={{textAlign:"left"}}> {filteredChargerInfo.length}개의 검색결과</p>
                         {filteredChargerInfo.map((charger, index) => (
-                        <li onClick={()=> {setAddr(charger.csNm); setChargeTp(charger.cpTp); setCpStat(charger.cpStat); setTime(charger.statUpdateDatetime); setCpNm(charger.cpNm); setLat(parseFloat(charger.lat)); setLng(parseFloat(charger.lng)); }} 
+                        <li onClick={()=> {setAddr(charger.csNm); setChargeTp(charger.cpTp); setCpStat(charger.cpStat); setTime(charger.statUpdateDatetime); setCpNm(charger.cpNm); setLat(parseFloat(charger.lat)); setLng(parseFloat(charger.lng)); setCsId(charger.csId) }} 
                             key={index}>
-                            <h4 style={{color:"#0F2121"}}> {charger.csNm} </h4> 
+                              
+                            <h4 style={{color:"#0F2121"}}> {charger.csNm} {isLoggedIn && <FaStar onClick={() => toggleSwitch(email, charger.csId)} style={{color: wishList.some(item => item.csId === charger.csId) ? "yellow" : "pink"}}/>}</h4> 
                             <p style={{fontSize:"20px" , color:"#0F2121"}}> {charger.addr}</p>
+                  
                             <HiOutlineEmojiHappy className="HP" style={{color:statusColors[charger.cpStat], fontSize:"50px"}}/>
                         </li>
                         ))}
@@ -393,17 +468,28 @@ const CarSerach = () => {
                           <p><b >충전기 명칭 :</b> {cpNm} </p>
                           <p> <b>충전기 상태 :</b>  {cpStats[cpStat]} </p>   
                           <p> <b>충전방식 :</b> {chargeMethods[chargeTp]}</p>
-                          <p><b>갱신시간 :</b> {times} </p>   
-                
+                          <p><b>갱신시간 :</b> {times} </p> 
+                          {/* <button onClick={async()=> {
+                            try {
+                              const response = await AxiosApi.setWishStation(email,csId);
+                              console.log(response); // 로그를 통해 응답 내용 확인
+                          } catch (error) {
+                              console.error(error);
+                          }
+
+
+
+                          }}>관심충전소 등록</button>
+                          <button onClick={()=>{console.log(wishList)}}>관심충전소 호출</button>
+                 */}
                  </div>
             </div>
         </div>
+        
         <Footer/>
         </CarSerachst>
+        
     );    
-
-
-
-}
+                        };
 
 export default CarSerach;

@@ -66,10 +66,10 @@ export const AuthProvider = ({ children }) => {
     const savedUserInfo = JSON.parse(sessionStorage.getItem('userInfo'));
     if (savedUserInfo) {
       setIsLoggedIn(true);
-      setUsername(savedUserInfo.username);
-      setNickname(savedUserInfo.nickname);
-      setGender(savedUserInfo.gender);
-      setAddress(savedUserInfo.address);
+      setUsername(savedUserInfo.custNm);
+      setNickname(savedUserInfo.custNnm);
+      setGender(savedUserInfo.custGend);
+      setAddress(savedUserInfo.custAddr);
       setJoinDate(savedUserInfo.custJoinDate);
       setPhoneNum(savedUserInfo.custPhone);
       setEmail(savedUserInfo.custEmail);
@@ -94,6 +94,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logoutUser = () => {
+    
     setIsLoggedIn(false);
     setUsername("");
     setNickname("");
