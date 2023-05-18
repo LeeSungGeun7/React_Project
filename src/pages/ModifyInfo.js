@@ -40,6 +40,10 @@ const Container = styled.div`
 
     .top {
         width: 100%;
+        height: 60px;
+        background-color: #202632;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
 
     }
 
@@ -54,6 +58,7 @@ const Container = styled.div`
         font-size: 22px;
         width: 100%;
         height: 7vh;
+        min-height: 50px;
         background-color: #202632;
         margin: 0;
         padding: 0;
@@ -90,13 +95,13 @@ const Container = styled.div`
     .InfoTable {
         justify-content: center;
         align-items: center;
-        width: 80%;
-        height: 200px;
+        width: 100%;
+        height: 100%;
         border-top: 1px solid #444444;
         border-bottom: 1px solid #444444;
         border-collapse: collapse;
         background-color: white;
-        margin: 30px auto;
+        margin-bottom: 30px;
     }
 
     .tr {
@@ -234,11 +239,10 @@ const ModifyInfo = () => {
                         <Link to="/MyPage"><li className="menu1"><a className="mypage" href="/">마이페이지</a></li></Link>
                         <Link to="/ModifyInfo"><li className="menu2"><a className="modifyInfo" href="/ModifyInfo">내 정보 수정</a></li></Link>
                         <Link to="/InterestStation"><li className="menu3"><a className="interestStation" href="/">관심 충전소</a></li></Link>
-                        <Link to="/InquriyCost"><li className="menu4"><a className="inquriyCost" href="/">주유비 조회</a></li></Link>
+                        <Link to="/InquriyCost"><li className="menu4"><a className="inquriyCost" href="/">결제 내역</a></li></Link>
                         </ul>
                         <br></br>
 
-                        <h1 className="text">내 정보 수정</h1>
                         <h4 className="text">*모든 항목은 필수입력 사항입니다.</h4>
 
                     </div>

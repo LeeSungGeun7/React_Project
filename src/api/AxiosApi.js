@@ -26,6 +26,10 @@ const AxiosApi = {
     // 회원조회
     getMyInfo : async(id) => {
         return await axios.get(EF_DOMAIN + "/member/list");
+    },
+    // 관심 충전소 조회
+    getMyWish : async(id) => {
+        return await axios.get(EF_DOMAIN + "/charger/wish/find");
     }
 
 };
