@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
-import { Link } from "react-router-dom";
-
+import { Link, useParams } from "react-router-dom";
+import AxiosApi from "../api/AxiosApi";
 
 const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    background-color: #99FFDA;
+    background-color: #FFF;
     padding: 100px;
     align-items: center;
     justify-content: center;
@@ -34,11 +34,17 @@ const Container = styled.div`
         max-width: 1200px;
         min-width: 720px;
         background-color: #FFF;
-        border-radius: 20px;
+        border-radius: 20px 20px 0 0;
+        border: 1px solid #202632;
+        
     }
 
     .top {
         width: 100%;
+        height: 60px;   
+        background-color: #202632;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
 
     }
 
@@ -53,6 +59,7 @@ const Container = styled.div`
         font-size: 22px;
         width: 100%;
         height: 7vh;
+        min-height: 50px;
         background-color: #202632;
         margin: 0;
         padding: 0;
@@ -89,35 +96,41 @@ const Container = styled.div`
     .InfoTable {
         justify-content: center;
         align-items: center;
-        width: 80%;
-        height: 200px;
+        width: 100%;
+        height: 100%;
         border-top: 1px solid #444444;
         border-bottom: 1px solid #444444;
         border-collapse: collapse;
         background-color: white;
-        margin: 30px auto;
+        /* margin: 30px auto; */
     }
 
-    .tr {
+    .myInfo {
+        width: auto;
+        height: auto;
         
     }
 
-    .name, .id, .phone, .email {
+    th {
         /* float: left; */
         height: 60px;
         width: 140px;
         border-right: 1px solid gray;
         border-bottom: 1px solid gray;
-        background-color: #DDDDDD;
+        background-color: #72DEFF;
         
     }
 
-    .payment {
-        /* float: left; */
+    /* .payment {
+        float: left;
         height: 60px;
         width: 140px;
         border-right: 1px solid gray;
         background-color: #FFFFFF;
+    } */
+
+    .myPayment {
+        border-bottom-right-radius: 20px;
     }
 
     .loginName, .loginId, .loginPhone, .loginEmail {
@@ -167,7 +180,25 @@ const Container = styled.div`
 
 
 const Mypage = () => {
-    // const { user } = useUserState();
+
+    const [myInfo, setMyInfo] = useState("");
+    const { id } = useParams();
+
+    const data = {
+        name : "신형환",
+        email : "example@example.com",
+        nicName : "kh",
+        phone : "010-1234-5678",
+        pay : "empty"
+    }
+
+    useEffect(() => {
+        // const myInfo = async(id) => {
+        //     const rsp = AxiosApi.getMyInfo(id);
+        //     if(rsp.status === 200)setMyInfo(rsp.data);
+        //     console.log(rsp.data);
+        // }
+    }, []);
 
     return(
 
@@ -181,57 +212,44 @@ const Mypage = () => {
                             <Link to="/Mypage"><li className="menu1"><a className="mypage" href="/">마이페이지</a></li></Link>
                             <Link to="/ModifyInfo"><li className="menu2"><a className="modifyInfo" href="/ModifyInfo">내 정보 수정</a></li></Link>
                             <Link to="/InterestStation"><li className="menu3"><a className="interestStation" href="/">관심 충전소</a></li></Link>
-                            <li className="menu4"><a className="inquriyCost" href="/">주유비 조회</a></li>
+                            <Link to="/InquriyCost"><li className="menu4"><a className="inquriyCost" href="/">결제 내역</a></li></Link>
                         </ul>
                         <br></br>
-
-                        <h1 className="text">마이페이지</h1>
-                        {/* <h4 className="text">모든 항목은 필수입력 사항입니다.</h4> */}
 
                     </div>
                     <div className="table">
                         <table className="InfoTable"> 
-                            <tr>
+                            <tr className="myInfo">
                                 <th className="name">이름</th>
-                                <td className="loginName">신형환</td>
+                                <td className="loginName">{data.name}</td>
                             </tr>
                             <tr>
-                                <th className="id">아이디</th>
-                                <td className="loginId">somebodyhelpme</td>
+                                <th className="id">닉네임</th>
+                                <td className="loginId">{data.nicName}</td>
                             </tr>
                             <tr>
                                 <th className="phone">휴대전화번호</th>
-                                <td className="loginPhone">010-2397-9934</td>
+                                <td className="loginPhone">{data.phone}</td>
                             </tr>
                             <tr>
                                 <th className="email">이메일</th>
-                                <td className="loginEmail">pooh9609@naver.com</td>
+                                <td className="loginEmail">{data.email}</td>
                             </tr>
                             <tr>
                                 <th className="payment">결제 수단</th>
-                                <td>
+                                <td className="myPayment">
                                     <button className="cardRegister"><a className="card" href="/">카드 등록</a></button>
                                     <button className="naverPay"><a className="card2" href="/">NAVER PAY</a></button>
                                     <button className="kakaoPay"><a className="card3" href="/">KaKao PAY</a></button>
                                 </td>
                             </tr>
+
                         </table>
 
-                        {/* <div className="Cotainer">
-                                전체    
-                                <div className="Mypage">
-                                    마이페이지바
-                                    <div className="top">
-                                        상단메뉴
-                                    </div>
-                                    <div className="table">
-                                        테이블
-                                    </div>
-                                </div>
-
-                        </div> */}
                     </div>
+
                 </div>
+
             </div>    
         </Container>
         <Footer />

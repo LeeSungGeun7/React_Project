@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 
 
+
 const Headerst = styled.header`
 
     position: ${props => props.overlap ? `absolute` : 'static'};
@@ -85,7 +86,7 @@ const Header = (props) => {
             <nav className="menu">
               <Link to="/">Home</Link> 
                <Link to="car">전기차충전소</Link> 
-                <Link to="/">마이페이지</Link>
+                <Link to="/MyPage">마이페이지</Link>
                 <Link to="/">회원가입</Link>
                 <Link to="/login">로그인</Link>
             </nav>

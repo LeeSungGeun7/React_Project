@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import AxiosApi from "../api/AxiosApi";
 
 const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    background-color: #c8ff7a;
+    background-color: #FFF;
     padding: 100px;
     align-items: center;
     justify-content: center;
@@ -34,10 +35,15 @@ const Container = styled.div`
         min-width: 720px;
         background-color: #FFF;
         border-radius: 20px;
+        border: 1px solid #202632;  
     }
 
     .top {
         width: 100%;
+        height: 60px;
+        background-color: #202632;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
 
     }
 
@@ -52,6 +58,7 @@ const Container = styled.div`
         font-size: 22px;
         width: 100%;
         height: 7vh;
+        min-height: 50px;
         background-color: #202632;
         margin: 0;
         padding: 0;
@@ -88,13 +95,13 @@ const Container = styled.div`
     .InfoTable {
         justify-content: center;
         align-items: center;
-        width: 80%;
-        height: 200px;
+        width: 100%;
+        height: 100%;
         border-top: 1px solid #444444;
         border-bottom: 1px solid #444444;
         border-collapse: collapse;
         background-color: white;
-        margin: 30px auto;
+        margin-bottom: 30px;
     }
 
     .tr {
@@ -107,8 +114,7 @@ const Container = styled.div`
         width: 140px;
         border-right: 1px solid gray;
         border-bottom: 1px solid gray;
-        background-color: #DDDDDD;
-        
+        background-color: #72DEFF;
     }
 
     .payment {
@@ -132,6 +138,8 @@ const Container = styled.div`
 
     .info {
         margin: 0 5px;
+        font-size: 14px;
+        color: red;
     }
 
     .card, .card2, .card3 {
@@ -174,7 +182,7 @@ const Container = styled.div`
         margin-bottom: 20px;
         
     }
-    .saveInfo {
+    .saveInfoBtn {
         display: block;
         margin: auto;
         width: 150px;
@@ -182,12 +190,15 @@ const Container = styled.div`
         border-radius: 10px;
         border: none;
         background-color: #5EBBFF;
-        color: white;
         font-size: 16px;
         font-weight: bold;
         align-items: center;
         justify-content: center;
-        
+    }
+
+    .saveInfo {
+        text-decoration: none;
+        color: #FFF;
     }
 
     .modifyInfo {
@@ -197,7 +208,24 @@ const Container = styled.div`
 
 
 const ModifyInfo = () => {
-    // const { user } = useUserState();
+
+    const [myInfo, setMyInfo] = useState("");
+    const { id } = useParams();
+
+    const data = {
+        name : "신형환",
+        nicName : "kh"
+    }
+
+    useEffect(() => {
+        const myInfo = async(id) => {
+            const rsp = AxiosApi.getMyInfo(id);
+            if(rsp.status === 200)setMyInfo(rsp.data);
+            console.log(rsp.data);
+        }
+    }, []);
+
+
 
     return(
 
@@ -208,14 +236,13 @@ const ModifyInfo = () => {
                 <div className="Mypage">
                     <div className="top">
                         <ul className="topMenu">
-                            <Link to="MyPage"><li className="menu1"><a className="mypage" href="/">마이페이지</a></li></Link>
-                            <li className="menu2"><a className="modifyInfo" href="/">내 정보 수정</a></li>
-                            <li className="menu3"><a className="interestStation" href="/">관심 충전소</a></li>
-                            <li className="menu4"><a className="inquriyCost" href="/">주유비 조회</a></li>
+                        <Link to="/MyPage"><li className="menu1"><a className="mypage" href="/">마이페이지</a></li></Link>
+                        <Link to="/ModifyInfo"><li className="menu2"><a className="modifyInfo" href="/ModifyInfo">내 정보 수정</a></li></Link>
+                        <Link to="/InterestStation"><li className="menu3"><a className="interestStation" href="/">관심 충전소</a></li></Link>
+                        <Link to="/InquriyCost"><li className="menu4"><a className="inquriyCost" href="/">결제 내역</a></li></Link>
                         </ul>
                         <br></br>
 
-                        <h1 className="text">내 정보 수정</h1>
                         <h4 className="text">*모든 항목은 필수입력 사항입니다.</h4>
 
                     </div>
@@ -223,11 +250,11 @@ const ModifyInfo = () => {
                         <table className="InfoTable"> 
                             <tr>
                                 <th className="name">이름</th>
-                                <td className="loginName">신형환</td>
+                                <td className="loginName">{data.name}</td>
                             </tr>
                             <tr>
-                                <th className="id">아이디</th>
-                                <td className="loginId">somebodyhelpme</td>
+                                <th className="id">닉네임</th>
+                                <td className="loginId">{data.nicName}</td>
                             </tr>
                             <tr>
                                 <th className="phone">휴대전화번호</th>
@@ -252,7 +279,7 @@ const ModifyInfo = () => {
                         </table>
                         
                         <div className="saveButton">
-                            <button className="saveInfo">수정하기</button>
+                            <button className="saveInfoBtn"><a className="saveInfo" href="/">수정하기</a></button>
                         </div>
 
                     </div>
