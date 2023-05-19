@@ -1,9 +1,17 @@
-import React from "react";
+import React , {useContext} from "react";
 import styled ,{css} from "styled-components";
 
-import { Link } from "react-router-dom"; 
+import LoginBtn from "../Components/LoginBtn";
+
+import { BsFillFilePersonFill } from "react-icons/bs";
+import { Link , useNavigate} from "react-router-dom"; 
+import AuthContext, { AuthProvider } from "../context/AuthContext";
+import MyPageBtn from "../Components/MyPageBtn";
+import { useEffect } from "react";
 // import LoginBtn from "../Components/LoginBtn";
 // import Login from "../pages/Login";
+import cookies from 'react-cookies'
+
 
 
 
@@ -25,44 +33,82 @@ const Headerst = styled.header`
     font-size: 50px;
    // border: 1px solid black;
     display : grid;
-    grid-columns: 1 / 2;
+    grid-template-columns: 1 / 2;
     header{
+        background-color: rgb(255,255,255,0.4);
         height: 80px;
         display : flex;
         flex-direction: row;
         justify-content: space-evenly;
+        z-index: 100000;
     }
     .logo {
         width : 200px;
-       // background-image : url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3VHDuYYdNPDsW9nqOJQQAfQCI7dfHtFojHA&usqp=CAU');
+        
         background-repeat: no-repeat;
         background-size: contain;
         display:flex;
         align-items:center;
+        justify-content: center;
+        
+        color : #41D3BD;
+        font-family: 'Do Hyeon', sans-serif;
 
-        color : white;
-        font-family: 'Yeon Sung', cursive;
         font-size: 35px;
-        weight : bold;
+        //font-weight : bold;
     }
     .menu{
         display:flex;
+       
         width:100%;
         height:100%;
         justify-content:center;
         align-items:center;
     }
     nav a {
-        color: white;
+        font-family: 'Do Hyeon', sans-serif;
+        min-width: 100px;
+        color: black;
         margin: 50px;
         z-index:100;
-        font-size: 15px;
+        font-size: 17px;
         text-decoration: none;
-
-      
-       
-
     }
+    .btns {
+        width: 100%;
+        height:100%;
+        display: flex;
+        
+        align-items: center;
+        justify-content:center;
+    }
+    .header-customer{
+        z-index:100000;
+        display:flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:space-evenly;
+        align-items:center;
+        margin:15px;
+    }
+   .logout-btn {
+        border:none;
+        border-radius:15px;
+        color : white;
+        <background-color:grey></background-color:grey>;
+        font-family:'Do Hyeon', sans-serif;
+        &:hover{
+            color:#333333;
+        }
+   }
+   .customer-items {
+     display:flex;
+     align-items:center;
+     justify-content:center;   
+   }
+   .customer-item1 , .customer-item2 , .logout-btn{
+    margin:10px;
+   }
 `   
 ;
 
@@ -70,6 +116,16 @@ const Headerst = styled.header`
 
 
 const Header = (props) => {
+    const { isLoggedIn, logoutUser, username} = useContext(AuthContext);
+    const navigate = useNavigate();
+        
+    // useEffect(()=> {
+    //     console.log(cookies.load("sessionId"));
+    // },[]);
+
+    const handleHome = () => {
+        navigate('/');
+    }    
 
     return(
         <Headerst overlap={props.overlap} >
@@ -78,21 +134,38 @@ const Header = (props) => {
 
           
         </style>
-        <div className="logo">
-            ECO FRIENDS
+        <div className="logo" onClick={handleHome}>
+            에코 프렌즈 
 
             </div>
             <div className="menu-group" >
             <nav className="menu">
-              <Link to="/">Home</Link> 
-               <Link to="car">전기차충전소</Link> 
-                <Link to="/MyPage">마이페이지</Link>
-                <Link to="/">회원가입</Link>
-                <Link to="/login">로그인</Link>
+
+
+                 
+                <Link to="/car">전기차충전소</Link> 
+                <Link to="/Service">고객센터</Link>
+                {/* <Link to="/Mypage">마이페이지</Link> */}
+               {!isLoggedIn && <Link to="/">회원가입</Link>}
+
+
+
             </nav>
             </div>
-            <div>
-                클릭버튼
+            <div className="header-customer" >
+                {isLoggedIn ? (
+                <div className="customer-items">
+                    <div className="customer-item1" style={{fontSize:"15px" , color:"black"}}>{username} 님 환영합니다</div>
+                    <MyPageBtn className="customer-item2" name={username}/> 
+                    <button className="logout-btn" onClick={logoutUser}>로그아웃</button>
+                </div>
+                ) : (
+                    <div className="btns">
+                    <Link to="/login"> <LoginBtn name="로그인"/> </Link> 
+                    <LoginBtn name="회원가입" addr="/Mypage"/>
+                    </div>
+                     
+                )}
             </div>
 
           

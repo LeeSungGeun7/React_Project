@@ -88,10 +88,12 @@ const CardStyle = styled.div`
 
 const Card = ({ content }) => (
 
+
     content === 'Card 1' ? 
 
       <div className="card">
         <div className="card-content1" ></div>
+
          <div className="card-content2">{""}</div>
          <div className="card-content3">{""}</div>
          <div className="card-content4">{""}</div>
@@ -102,7 +104,11 @@ const Card = ({ content }) => (
              <div className="card-content6">{""}</div>
              <div className="card-content7">{""}</div>
              <div className="card-content8">{""}</div>
+
            </div>
+           
+
+
 );
 
 const CardSlider = () => {
@@ -117,9 +123,7 @@ const CardSlider = () => {
   const cardsData = [
     { id: 1, content: 'Card 1' },
     { id: 2, content: 'Card 2' },
-    // { id: 3, content: 'Card 3' },
-    // { id: 4, content: 'Card 4' },
-    // { id: 5, content: 'Card 5' },
+
   ];
 
   return (

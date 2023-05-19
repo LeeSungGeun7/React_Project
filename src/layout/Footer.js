@@ -8,6 +8,7 @@ const Footerst = styled.footer`
     justify-content : center;
     font-size: 10px;
     border: solid 1px black;
+
     background-color: black;
     color : white;
 
@@ -45,6 +46,7 @@ const Footerst = styled.footer`
     margin-left: 32px;
     justify-content: center;
    }
+
 
    h3 {
     font-size: 5px;

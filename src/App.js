@@ -5,10 +5,17 @@ import SignUp from './pages/SignUp';
 import {BrowserRouter as Router , Route , Routes} from 'react-router-dom';
 import Layout from './layout/Layout';
 import CarSerach from './pages/CarSearch';
-import Mypage from './pages/MyPage';
+
 import ModifyInfo from './pages/ModifyInfo';
 import InterestStation from "./pages/InterestStation"
 import InquriyCost from './pages/InquriyCost';
+import ServiceCenter from './pages/ServiceCenter';
+import MyPage from './pages/MyPage';
+
+
+
+
+
 
 
 function App() {
@@ -20,10 +27,18 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/" element={<Layout />} />
-        <Route path="/MyPage" element={<Mypage />} />
+
+
+        <Route path="/Mypage" element={<MyPage />} />
+        <Route path="/Service" element={<ServiceCenter />} />
+        
+
+
         <Route path="/ModifyInfo" element={<ModifyInfo />} />
         <Route path="/InterestStation" element={<InterestStation />} />
         <Route path="/InquriyCost" element={<InquriyCost />} />
+
+
       </Routes>
     </Router>
     

@@ -77,3 +77,4 @@ const Modal = ({ isOpen, onClose , contents, title1 }) => {
 };
 
 export default Modal;
+

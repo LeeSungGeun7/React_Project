@@ -1,11 +1,16 @@
-import { useState } from "react";
+
+import {useState , useContext} from "react";
+
 import { useNavigate } from "react-router-dom";
 import Modal from "../utils/Modal";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
-
 import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
+import AuthContext from "../context/AuthContext";
+import cookies from 'react-cookies';
+import cookie from 'react-cookies';
+
 
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -16,7 +21,7 @@ import { async } from "q";
 const Container = styled.div`
 
   .Container {
-    background-color: black ;
+    background-color: #EAF6F7 ;
     height: 100vh;
     display: flex;
     flex-wrap: wrap;
@@ -27,7 +32,7 @@ const Container = styled.div`
   .loginbar {
     
     color: white;
-    background-color: #333333;
+    background-color: #31393C;
     display: flex;
     flex-direction: column;
     align-items:center;
@@ -42,14 +47,16 @@ const Container = styled.div`
   input {
     width: 50%;
     height: 20%;
-    font-size: 15px;
+    
+    font-size: 25px;
     border: 0;
     border-radius: 15px;
     outline: none;
-    padding-left: 10px;
+    padding-left: 20px;
     background-color: rgb(233, 233, 233);
   }
   button {
+
     border-top-left-radius: 20%;
     border-bottom-right-radius: 20%;
     //border-radius: 30%;
@@ -63,60 +70,65 @@ const Container = styled.div`
     font-size: 50px;
     weight: bold;
   }
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  
 `
 
 const Login = () => {
-  const navigate = useNavigate(); // 라우터 이동을 하기위해서
-  // 키보드 입력
-  const [inputId, setInputId] = useState("");
-  const [inputPw, setInputPw] = useState("");
 
-  // 오류메시지 
-  const [idMsg, setIdMsg] = useState("");
-  const [pwMsg, setPwMsg] = useState("");
+   const { loginUser } = useContext(AuthContext);
+   const clientId = "157067894615-cai8h2gq8gatlmoqpkfe08os9rhq92vp.apps.googleusercontent.com";
+    const navigate = useNavigate(); // 라우터 이동을 하기위해서
+    // 키보드 입력
+    const [inputId , setInputId] = useState("");
+    const [inputPw , setInputPw] = useState("");
+    
+    // 오류메시지 
+    const [idMsg , setIdMsg] = useState("");
+    const [pwMsg , setPwMsg] = useState("");
+    
+    // 유효성 검사 
+    const [isId , setIsId] = useState("");
+    const [isPw , setIsPw] = useState("");
+    
 
-  // 유효성 검사 
-  const [isId, setIsId] = useState("");
-  const [isPw, setIsPw] = useState("");
+    const onChangeId = (e) => {
+       setInputId(String(e.target.value));
+    } 
 
-  const clientId = "157067894615-cai8h2gq8gatlmoqpkfe08os9rhq92vp.apps.googleusercontent.com";
+    const onChangePw = (e) => {
+      setInputPw(String(e.target.value))
+    }
 
-  const onChangeId = (e) => {
-    const regexId = /^\w{5,20}$/;
-    setInputId(e.target.value);
-    if (!regexId.test(e.target.value)) {
-      setIdMsg("5자리 이상 20자리 미만으로 입력해주세욧");
-      setIsId(false);
-    } else {
-      setIdMsg("올바른 형식 입니다.");
-      setIsId(true);
+    const setSessionId = (uuid) => {
+      const expires = new Date()
+      expires.setMinutes(expires.getMinutes() + 60);
+      cookies.save("sessionId", uuid, {
+        path : "/",
+        expires,
+      });
+    }
+
+    const onClickLogin = async() => {
+        // 로그인을 위한 axios 호출 
+        const response = await AxiosApi.memberLogin(inputId,inputPw);
+        console.log(response.config.data);
+        const uuid = response.data;
+      //  response.config.data.map(data=> data)
+        
+        if(response.status === 200) {
+          const rsp = await AxiosApi.getSession(cookie.load("sessionId"));
+            loginUser(rsp.data);
+            setSessionId(uuid);
+            navigate("/");
+        } else {         
+            alert("로그인 에러 !!!")
     }
   }
 
-  const onChangePw = (e) => {
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
-    const passwordCurrent = e.target.value;
-    setInputPw(passwordCurrent)
-    if (!passwordRegex.test(passwordCurrent)) {
-      setPwMsg('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!')
-      setIsPw(false)
-    } else {
-      setPwMsg('안전한 비밀번호에요 : )');
-      setIsPw(true);
-    }
-
-  }
-  const onClickLogin = async () => {
-    // 로그인을 위한 axios 호출 
-    const response = await AxiosApi.memberLogin(inputId, inputPw);
-    console.log(response.data);
-    if (response.data === true) {
-      navigate("/home");
-    } else {
-      console.log("로그인 에러 !!!")
-        ;
-    }
-  }
 
   return (
     <Container>
@@ -140,14 +152,14 @@ const Login = () => {
               onFailure={(err) => {
                 console.log(err);
               }}
-            />
+/>
           </GoogleOAuthProvider>
+
         </div>
       </div>
       <Footer />
     </Container>
   );
-
-};
+            };
 
 export default Login;
