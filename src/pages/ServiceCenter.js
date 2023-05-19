@@ -5,7 +5,7 @@ import Footer from "../layout/Footer";
 import styled from "styled-components";
 import { SlEarphonesAlt } from "react-icons/sl";
 import { FaSearch } from 'react-icons/fa';
- import AuthContext, { AuthProvider } from "../context/AuthContext";
+
 import { useContext } from "react";
 
 
@@ -148,7 +148,7 @@ const Contain = styled.div`
   
 
 const ServiceCenter = () => {
-    const { isLoggedIn, logoutUser } = useContext(AuthContext);
+    const isLoggedIn = "true";
     const navigate = useNavigate();
 
 

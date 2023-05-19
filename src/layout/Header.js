@@ -116,7 +116,7 @@ const Headerst = styled.header`
 
 
 const Header = (props) => {
-    const { isLoggedIn, logoutUser, username} = useContext(AuthContext);
+    const isLoggedIn = "true";
     const navigate = useNavigate();
         
     // useEffect(()=> {
@@ -155,9 +155,9 @@ const Header = (props) => {
             <div className="header-customer" >
                 {isLoggedIn ? (
                 <div className="customer-items">
-                    <div className="customer-item1" style={{fontSize:"15px" , color:"black"}}>{username} 님 환영합니다</div>
-                    <MyPageBtn className="customer-item2" name={username}/> 
-                    <button className="logout-btn" onClick={logoutUser}>로그아웃</button>
+                    <div className="customer-item1" style={{fontSize:"15px" , color:"black"}}> 님 환영합니다</div>
+                    <MyPageBtn className="customer-item2" /> 
+                    <button className="logout-btn" >로그아웃</button>
                 </div>
                 ) : (
                     <div className="btns">

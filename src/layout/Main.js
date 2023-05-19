@@ -11,7 +11,7 @@ import CarSerach from "../pages/CarSearch";
 import AxiosApi from "../api/AxiosApi";
 import cookie from 'react-cookies';
 import axios from "axios";
-import AuthContext from "../context/AuthContext";
+
 
 
 
@@ -150,7 +150,7 @@ const Mainst = styled.main`
 `;
 
 const Main = () => {
-  const { loginUser } = useContext(AuthContext);
+
   const [vdValue, setVdValue] = useState(vd2);
   const vdClick = () => {
     setVdValue(vd2);

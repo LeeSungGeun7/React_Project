@@ -1,8 +1,8 @@
-
+import React from 'react';
 import {useState , useContext} from "react";
 
 import { useNavigate } from "react-router-dom";
-import Modal from "../utils/Modal";
+
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import styled from "styled-components";
@@ -15,7 +15,7 @@ import cookie from 'react-cookies';
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
-import { async } from "q";
+
 
 
 const Container = styled.div`
