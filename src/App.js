@@ -9,6 +9,8 @@ import Mypage from './pages/MyPage';
 import ModifyInfo from './pages/ModifyInfo';
 import InterestStation from "./pages/InterestStation"
 import InquriyCost from './pages/InquriyCost';
+import Payment from './pages/Payment';
+
 
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
         <Route path="/ModifyInfo" element={<ModifyInfo />} />
         <Route path="/InterestStation" element={<InterestStation />} />
         <Route path="/InquriyCost" element={<InquriyCost />} />
+        <Route path="/pay" element={<Payment />} />
       </Routes>
     </Router>
     

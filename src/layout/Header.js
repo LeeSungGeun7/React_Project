@@ -6,15 +6,11 @@ import { Link } from "react-router-dom";
 // import Login from "../pages/Login";
 
 
-
-
-
-
 const Headerst = styled.header`
 
     position: ${props => props.overlap ? `absolute` : 'static'};
 
-      background-color: none; /* 헤더의 배경색을 투명하게 설정 (투명도 조절 가능) */
+      background-color: #484848; /* 헤더의 배경색을 투명하게 설정 (투명도 조절 가능) */
 
    // background-color: rgba(255, 255, 255, 0.5); /* 헤더의 배경색을 투명하게 설정 (투명도 조절 가능) */
 
@@ -39,7 +35,6 @@ const Headerst = styled.header`
         background-size: contain;
         display:flex;
         align-items:center;
-
         color : white;
         font-family: 'Yeon Sung', cursive;
         font-size: 35px;
@@ -89,6 +84,7 @@ const Header = (props) => {
                 <Link to="/MyPage">마이페이지</Link>
                 <Link to="/">회원가입</Link>
                 <Link to="/login">로그인</Link>
+                <Link to="/pay">결제</Link>
             </nav>
             </div>
             <div>
