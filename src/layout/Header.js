@@ -84,10 +84,10 @@ const Header = (props) => {
             </div>
             <div className="menu-group" >
             <nav className="menu">
-              <Link to="/">Home</Link> 
-               <Link to="car">전기차충전소</Link> 
+                <Link to="/">Home</Link> 
+                <Link to="car">전기차충전소</Link> 
                 <Link to="/MyPage">마이페이지</Link>
-                <Link to="/">회원가입</Link>
+                <Link to="/SignUp">회원가입</Link>
                 <Link to="/login">로그인</Link>
             </nav>
             </div>
