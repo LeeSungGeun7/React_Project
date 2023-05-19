@@ -12,7 +12,7 @@ import AuthContext from "../context/AuthContext";
 
 
 
-const CarSerachst = styled.body`
+const CarSerachst = styled.div`
     color : #333333;
     font-family: 'Do Hyeon', sans-serif;
     font-size: 25px;
@@ -64,8 +64,9 @@ const CarSerachst = styled.body`
         overflow: scroll;
     }
     .rst2 {
-        justify-content: center;
+        justify-content: space-evenly;
         align-items:center;
+        overflow: scroll;
        // background-color: #FFFFF0 ;
       //border-left : 1px solid white;
     }
@@ -213,13 +214,33 @@ const CarSerachst = styled.body`
     opacity: 1;
   }
 }
+.rst2-item{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items:center;
+  font-size: 20px;
+  width:80%;
+  height: 40%;
+  background-color: white;
+  margin:10px;
+}
    
 `;
 
 
 
 const CarSerach = () => {
+  const statusColors = {
+    1: "#52F911", // 충전 가능
+    2: "#FFF94E", // 충전 중
+    3: "red", // 고장/점검
+    4: "red", // 통신장애
+    5: "red" // 통신미연결
+};
   const { email , isLoggedIn } = useContext(AuthContext);
+
+  const [chargers, setChargers] = useState([]);
 
   const addWishStationData = async (email,csId) => {
      try {
@@ -244,16 +265,41 @@ const CarSerach = () => {
     const isWishStation = wishList.some(item => item.csId === csId);
     
     if (isWishStation) {
-      // wishList에 있으므로 삭제
-      await deleteWishStation(email, csId);
+      // wishList에서 먼저 제거하고, 그 다음에 서버에 변경 사항을 보냅니다.
       setWishList(prev => prev.filter(item => item.csId !== csId));
+      await deleteWishStation(email, csId);
     } else {
-      // wishList에 없으므로 추가
-      await addWishStationData(email, csId);
+      // wishList에 먼저 추가하고, 그 다음에 서버에 변경 사항을 보냅니다.
       const newWishStation = { csId };
       setWishList(prev => [...prev, newWishStation]);
+      await addWishStationData(email, csId);
     }
-}
+  }
+
+//-----------------------------------------------
+  function getChargersByStationId(stationId) {
+    const filteredChargerInfo = allCharger.filter(charger => {
+      const matchesChargeMethod = chargeMethod ? charger.cpTp === chargeMethod : true;
+      const matchesService = service ? charger.chargeTp === service : true;
+      return matchesChargeMethod && matchesService;
+    });
+    return filteredChargerInfo.filter(charger => charger.csId === stationId);
+  }
+
+  // 중복 제거 함수 추가
+  const filterDuplicateStations = (stations) => {
+    const uniqueStations = stations.reduce((acc, current) => {
+      const isDuplicate = acc.find(station => station.csId === current.csId);
+      if (!isDuplicate) {
+        return acc.concat([current]);
+      } else {
+        return acc;
+      }
+    }, []);
+    return uniqueStations;
+  }
+//------------------------------------------------
+
 
   const inputEl = useRef(null);
   const handleKeyDown = (event) => {
@@ -277,13 +323,7 @@ const CarSerach = () => {
   }
 
 
-    const statusColors = {
-        1: "#52F911", // 충전 가능
-        2: "FFF94E", // 충전 중
-        3: "red", // 고장/점검
-        4: "red", // 통신장애
-        5: "red" // 통신미연결
-    };
+    
 
     const [chargerInfo, setChargerInfo] = useState([]);
     const [name,setName] = useState("서울시");
@@ -291,9 +331,7 @@ const CarSerach = () => {
     const [chargeMethod, setChargeMethod] = useState(null);
     const [service, setService] = useState(null);
 
-    // const handleChargeMethodChange = (event) => {
-    // setChargeMethod(parseInt(event.target.value));
-    // };
+   
 
     const handleServiceChange = (event) => {
     setService(parseInt(event.target.value));
@@ -334,21 +372,7 @@ const CarSerach = () => {
    
       const [wishList, setWishList] = useState([]);
 
-      // useEffect(() => {
-      //   const fetchWishList = async () => {
-      //     try {
-      //       const response = await AxiosApi.getWishStation(email); // 이 API는 현재 로그인한 사용자의 이메일을 인자로 받아야 합니다.
-      //       if (response.status === 200) {
-      //         setWishList(response.data);
-
-      //       }
-      //     } catch (error) {
-      //       console.error(error);
-      //     }
-      //   };
-       
-      //   fetchWishList();
-      // }, );   
+     
       useEffect(() => {
         (async () => {
           try {
@@ -362,38 +386,30 @@ const CarSerach = () => {
         })();
 
         console.log(wishList);
-      }, [name]);
+      }, []);
       
       
-
+    const [allCharger,setAllCharger] = useState([]);
  
 
     useEffect(() => {
     const fetchChargerInfo = async () => {
       const rsp = await AxiosApi.chargerData(name);
-      if (rsp.status === 200) setChargerInfo(rsp.data);
+      if (rsp.status === 200){ 
+        setChargerInfo(filterDuplicateStations(rsp.data)); 
+        setAllCharger(rsp.data);
+      }
     };
+    
   
     fetchChargerInfo();
   }, [name]);
 
 
 
-   
-    let [isVisible , setIsVisible] = useState(true);
-    
+  
     
 
-    // const toggleVisibility = () => {
-    //     setIsVisible(!isVisible);
-    //   };
-    
-    //   let [isVisible2 , setIsVisible2] = useState(false);
-    
-
-    //   const toggleVisibility2 = () => {
-    //       setIsVisible2(!isVisible2);
-    //     };  
 
 
     return (
@@ -447,10 +463,21 @@ const CarSerach = () => {
                     <ul>
                         <p style={{textAlign:"left"}}> {filteredChargerInfo.length}개의 검색결과</p>
                         {filteredChargerInfo.map((charger, index) => (
-                        <li onClick={()=> {setAddr(charger.csNm); setChargeTp(charger.cpTp); setCpStat(charger.cpStat); setTime(charger.statUpdateDatetime); setCpNm(charger.cpNm); setLat(parseFloat(charger.lat)); setLng(parseFloat(charger.lng)); setCsId(charger.csId) }} 
+                        <li onClick={()=> {
+                          setAddr(charger.csNm); 
+                          setChargeTp(charger.cpTp); 
+                          setCpStat(charger.cpStat); 
+                          setTime(charger.statUpdateDatetime); 
+                          setCpNm(charger.cpNm); 
+                          setLat(parseFloat(charger.lat));
+                           setLng(parseFloat(charger.lng)); 
+                           setCsId(charger.csId);
+                           const chargers = getChargersByStationId(charger.csId);
+                           setChargers(chargers);
+                          }} 
                             key={index}>
                               
-                            <h4 style={{color:"#0F2121"}}> {charger.csNm} {isLoggedIn && <FaStar onClick={() => toggleSwitch(email, charger.csId)} style={{color: wishList.some(item => item.csId === charger.csId) ? "yellow" : "pink"}}/>}</h4> 
+                            <h4 style={{color:"#0F2121"}}> {charger.csNm} {isLoggedIn && <FaStar onClick={(e)=> {e.stopPropagation();toggleSwitch(email, charger.csId)}} style={{color: wishList.some(item => item.csId === charger.csId) ? "yellow" : "pink"}}/>}</h4> 
                             <p style={{fontSize:"20px" , color:"#0F2121"}}> {charger.addr}</p>
                   
                             <HiOutlineEmojiHappy className="HP" style={{color:statusColors[charger.cpStat], fontSize:"50px"}}/>
@@ -464,11 +491,23 @@ const CarSerach = () => {
                 </div>
                 <div className="rst2" >
 
-                          <h3 style={{color: "#0C4A60"}}> {addr}</h3>    
+
+                                        { 
+                            chargers.map((charger,idx) => (
+
+                              <div className="rst2-item" key={idx}>
+                                <div>{charger.cpNm} </div>
+                                <div style={{color:statusColors[charger.cpStat]}}>{cpStats[charger.cpStat]}</div>
+                                <div>{chargeMethods[charger.chargeTp]}</div>
+                                <div style={{fontSize:"15px"}}>{charger.statUpdateDatetime}</div>
+                              </div>
+                            ))
+                          }
+                          {/* <h3 style={{color: "#0C4A60"}}> {addr}</h3>    
                           <p><b >충전기 명칭 :</b> {cpNm} </p>
                           <p> <b>충전기 상태 :</b>  {cpStats[cpStat]} </p>   
                           <p> <b>충전방식 :</b> {chargeMethods[chargeTp]}</p>
-                          <p><b>갱신시간 :</b> {times} </p> 
+                          <p><b>갱신시간 :</b> {times} </p>  */}
                           {/* <button onClick={async()=> {
                             try {
                               const response = await AxiosApi.setWishStation(email,csId);

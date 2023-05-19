@@ -54,10 +54,12 @@ const AxiosApi = {
         return response;
     },
     // 관심 충전소 제거
-    deleteWishStation : async(email, csId) => {
+    deleteWishStation : async( csId,email) => {
         const request = {
+           data:{ 
             email : email,
             csId : csId+""
+           }
         }
         console.log(csId);
         return await axios.delete(EF_DOMAIN + "/charger/wish/delete", request);
