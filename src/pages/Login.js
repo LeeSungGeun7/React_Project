@@ -87,12 +87,12 @@ const Login = () => {
     const [inputPw , setInputPw] = useState("");
     
     // 오류메시지 
-    const [idMsg , setIdMsg] = useState("");
-    const [pwMsg , setPwMsg] = useState("");
+    // const [idMsg , setIdMsg] = useState("");
+    // const [pwMsg , setPwMsg] = useState("");
     
-    // 유효성 검사 
-    const [isId , setIsId] = useState("");
-    const [isPw , setIsPw] = useState("");
+    // // 유효성 검사 
+    // const [isId , setIsId] = useState("");
+    // const [isPw , setIsPw] = useState("");
     
 
     const onChangeId = (e) => {

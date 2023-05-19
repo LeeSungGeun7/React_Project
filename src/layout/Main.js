@@ -1,6 +1,6 @@
 import React, { useState,useContext,useEffect } from "react";
 import styled from "styled-components";
-import vd from "../images/video-src-pc (1).mp4";
+
 import vd2 from "../images/KakaoTalk_Video_2023-05-03-16-40-25.mp4";
 
 import CardSlider from "../Components/CardSlider";
@@ -9,7 +9,7 @@ import { FaSearch } from 'react-icons/fa';
 import CarSerach from "../pages/CarSearch";
 
 import AxiosApi from "../api/AxiosApi";
-import cookie from 'react-cookies';
+import cookie from 'react-cookies'; 
 import axios from "axios";
 
 
@@ -152,12 +152,7 @@ const Mainst = styled.main`
 const Main = () => {
 
   const [vdValue, setVdValue] = useState(vd2);
-  const vdClick = () => {
-    setVdValue(vd2);
-    if (vdValue === vd2) {
-      setVdValue(vd);
-    }
-  };
+  
 
   // useEffect(() => { 
   //   const getMyInfo = async() => {
