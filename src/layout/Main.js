@@ -144,8 +144,7 @@ const Mainst = styled.main`
   .mainitem {
     border: solid 1px;
     width: 200%;
-    height: 200%;
-
+    height: 100vh;
   }
 `;
 
@@ -193,11 +192,11 @@ const Main = () => {
       <div className="mainitem">
       <Mainitem/>
       </div>
-      <div className="bottom">
+      {/* <div className="bottom">
         <MainBottom/>
-      </div>
+      </div> */}
       <div className="card-container">
-        카드컨테이너
+
         <CardSlider />
       </div>
     </Mainst>
