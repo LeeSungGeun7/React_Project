@@ -5,7 +5,7 @@ import LoginBtn from "../Components/LoginBtn";
 
 import { BsFillFilePersonFill } from "react-icons/bs";
 import { Link , useNavigate} from "react-router-dom"; 
-import AuthContext, { AuthProvider } from "../context/AuthContext";
+
 import MyPageBtn from "../Components/MyPageBtn";
 import { useEffect } from "react";
 // import LoginBtn from "../Components/LoginBtn";

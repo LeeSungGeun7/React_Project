@@ -7,7 +7,7 @@ import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
-import AuthContext from "../context/AuthContext";
+
 import cookies from 'react-cookies';
 import cookie from 'react-cookies';
 
@@ -79,7 +79,7 @@ const Container = styled.div`
 
 const Login = () => {
 
-   const { loginUser } = useContext(AuthContext);
+  //  const { loginUser } = useContext(AuthContext);
    const clientId = "157067894615-cai8h2gq8gatlmoqpkfe08os9rhq92vp.apps.googleusercontent.com";
     const navigate = useNavigate(); // 라우터 이동을 하기위해서
     // 키보드 입력
@@ -121,7 +121,7 @@ const Login = () => {
         
         if(response.status === 200) {
           const rsp = await AxiosApi.getSession(cookie.load("sessionId"));
-            loginUser(rsp.data);
+           
             setSessionId(uuid);
             navigate("/");
         } else {         
