@@ -121,7 +121,7 @@ const Login = () => {
         
         if(response.status === 200) {
           const rsp = await AxiosApi.getSession(cookie.load("sessionId"));
-           
+            
             setSessionId(uuid);
             navigate("/");
         } else {         

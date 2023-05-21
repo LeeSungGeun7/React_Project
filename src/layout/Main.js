@@ -2,7 +2,7 @@ import React, { useState,useContext,useEffect } from "react";
 import styled from "styled-components";
 import vd from "../images/video-src-pc (1).mp4";
 import vd2 from "../images/KakaoTalk_Video_2023-05-03-16-40-25.mp4";
-
+import vd3 from "../images/original-087fcdef6dd7e801b337d6dbdc8c0ba9.mp4";  
 import CardSlider from "../Components/CardSlider";
 
 import { FaSearch } from 'react-icons/fa';
@@ -20,21 +20,22 @@ import Mainitem from "./Mainitem";
 
 
 const Mainst = styled.main`
-  display: grid;
-
+  width: 100%;
   // 메인 그리드로 수정
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+ // grid-template-columns: repeat(2, 1fr);
+ // grid-template-rows: repeat(2, 1fr);
 
   .top {
+    padding: 50px;
     display: flex;
-
-    grid-column: 1 / 3;
+    justify-content:center;
+    align-items:center;
+   // grid-column: 1 / 3;
     background-color: none;
     background-repeat: no-repeat;
     background-size: contain;
-
-    width: 100%;
+    border-radius: 15px;
+    width: 92.5%;
     height: 100vh;
 
     // border: solid 1px black;
@@ -42,65 +43,31 @@ const Mainst = styled.main`
   .top video {
     object-fit: cover;
     width: 100%;
-
-    border: solid 1px black;
+    border-radius: 15px;
+    //border: solid 1px black;
   }
-  .maps {
-    margin: 15px;
-    justify-content: space-evenly;
-    display: flex;
-    flex-direction: column;
-
-    grid-column: 1 / 2;
-    grid-row: 2/3;
-    width: 95%;
-    height: 100%;
-     border: solid 1px black;
-  }
-   /* .map1 {
-
-    grid-column: 2 / 3;
-    grid-row: 2/3;
-  }  */
-  .mapInfo {
-    margin: 15px;
-    grid-column: 2 / 3;
-    grid-row: 2/3;
-    width: 95%;
-    height: 100%;
-    border : solid 1px black;
-  }
+  
 
   .card-container {
     padding-top:10px;
-    grid-column: 1 / 3;
-    grid-row: 3/4;
-    width: 100%;
+    /* grid-column: 1 / 3;
+    grid-row: 3/4; */
+    width: 90%;
     height:100%;
   }
   
-  .map {
-    width: 100%;
-    height: 50%;
-    align-items:center;
-  }
-
-  .map1{
-    width:100%;
-    height:50%;
-  }
-
+  
   .bottom,
    {
     
    // margin: 20px;
-    width: 100%;
+    width: 92.5%;
     height: 100%;
      border: solid 1px black;
   }
   .Homeinput {
     position: absolute;
-    top: 25%;
+    top: 15%;
     left: 37%;
     width: 25%;
 
@@ -130,6 +97,15 @@ const Mainst = styled.main`
     border-radius: 50px;
     width: 100%;
     height: 100%;
+    right:10%;
+  }
+  .content {
+    position: absolute;
+    color: white;
+    font-size: 50px;
+    font-family:'Do Hyeon', sans-serif;
+    top : 50vh;
+    left: 40vw;
   }
   .fa {
     color: #808080;
@@ -139,18 +115,26 @@ const Mainst = styled.main`
   position: absolute;
 
   bottom: 5px;  
-  left: 380px;
+  left: 100%;
   }
   .mainitem {
+    border-radius: 15px;
     border: solid 1px;
-    width: 200%;
+    width: 92.5%;
     height: 100vh;
+  }
+  .item-group {
+    display:flex;
+    flex-direction:column;
+    justify-content:space-evenly;
+    align-items:center;
+
   }
 `;
 
 const Main = () => {
 
-  const [vdValue, setVdValue] = useState(vd2);
+  const [vdValue, setVdValue] = useState(vd3);
   const vdClick = () => {
     setVdValue(vd2);
     if (vdValue === vd2) {
@@ -163,13 +147,12 @@ const Main = () => {
   //     const rsp = await AxiosApi.getSession(cookie.load("sessionId"));
   //     if (rsp.status === 200) {
   //       console.log(rsp.data);
-  //       loginUser(rsp.data);
   //     }
   //   }
   //   getMyInfo();
-
-    
   // })
+    
+
   return (
     <Mainst>
       <div className="top">
@@ -179,25 +162,27 @@ const Main = () => {
           autoPlay
           muted
           loop
-          width="100%"
+          width="80%"
           height="100%"
           controls={false}
         />
+        <div className="content">Find your<b style={{color:"#333333"}}>#Charge</b> </div>
         <div className="Homeinput">
           <input type="text" className="input" import /><FaSearch className="fa"/>
           
         </div>
       </div>
-
-      <div className="mainitem">
-      <Mainitem/>
-      </div>
-      {/* <div className="bottom">
-        <MainBottom/>
-      </div> */}
-      <div className="card-container">
-
+    <div className="item-group">
+        <div className="mainitem">
+        {/* <Mainitem/> */}
+        </div>
+        {/* <div className="bottom">
+          <MainBottom/>
+        </div> */}
+        <div className="card-container">
         <CardSlider />
+        </div>
+        
       </div>
     </Mainst>
   );

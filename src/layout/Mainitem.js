@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Mainitems = styled.div`
+
 .Centeritem {
     /* margin-top: 20px; */
     /* border: solid 1px; */
@@ -22,7 +23,7 @@ b {
     margin-left: 500px;
     margin-top: 280px;
     color: royalblue;
-    font-style: oblique;
+   font-style: oblique;
 }
 
 .Centeritem2 {

@@ -6,6 +6,7 @@ import KaKao from "../Components/KakaoMap";
 import AxiosApi from "../api/AxiosApi";
 import { FaSearch,FaStar } from 'react-icons/fa';
 import { HiOutlineEmojiHappy } from "react-icons/hi";
+import { useAuth } from "../context/AuthContextProvider";
 
 
 
@@ -13,12 +14,14 @@ import { HiOutlineEmojiHappy } from "react-icons/hi";
 
 
 const CarSerachst = styled.div`
+    height:150vh;
     color : #333333;
     font-family: 'Do Hyeon', sans-serif;
     font-size: 25px;
-    display: grid;
-    grid-template-columns: 1fr  ;
-    grid-template-rows: repeat(2,minmax(80px,auto));
+    /* display: flex;
+    flex-direction:column;
+    grid-template-columns: 1fr  ; */
+   // grid-template-rows: repeat(1,minmax(80px,auto));
     
     .Container {
         margin: 50px;
@@ -30,7 +33,7 @@ const CarSerachst = styled.div`
 
        // border: solid 1px black;
 
-        height:150vh;
+        height:100%;
     }
     
     .map , .line , .result {
@@ -40,6 +43,7 @@ const CarSerachst = styled.div`
         
     }
     .line {
+        flex:1;
         display: flex;
         align-items:center;
         flex-direction: row;
@@ -47,11 +51,12 @@ const CarSerachst = styled.div`
         background-color : #F4ED6E;
     }
     .map {
-        height: 100%;
+        flex:4;
         background-size: cover ;
         background-image: url("https://t1.daumcdn.net/cfile/tistory/9968D2465E832E5A34") ;
     }
     .result {
+        flex:8;
         display: flex;
         flex-direction: row;
         height: 50%;
@@ -222,8 +227,11 @@ const CarSerachst = styled.div`
   font-size: 20px;
   width:80%;
   height: 40%;
-  background-color: white;
+  background-color: silver;
+  color: #333333;
   margin:10px;
+
+  border-radius: 15px;
 }
    
 `;
@@ -231,6 +239,7 @@ const CarSerachst = styled.div`
 
 
 const CarSerach = () => {
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
   const statusColors = {
     1: "#52F911", // 충전 가능
     2: "#FFF94E", // 충전 중
@@ -238,7 +247,7 @@ const CarSerach = () => {
     4: "red", // 통신장애
     5: "red" // 통신미연결
 };
-  const isLoggedIn = "true";
+
   const email = "sungkeno3o@gmail.com";
 
   const [chargers, setChargers] = useState([]);
@@ -414,10 +423,9 @@ const CarSerach = () => {
 
 
     return (
-        <CarSerachst>
-        <>
-        <Header overlap={false}/>
-        </>
+      <>
+    <Header overlap={false}/>
+        <CarSerachst>   
         <div className="Container">
             <div className="map">
             <KaKao chargerInfo={chargerInfo} Lat={lat} Lng={lng}/>
@@ -528,7 +536,7 @@ const CarSerach = () => {
         
         <Footer/>
         </CarSerachst>
-        
+        </>
     );    
                         };
 
