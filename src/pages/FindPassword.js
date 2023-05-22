@@ -11,7 +11,7 @@ const Container = styled.div`
     .Container {
         background-color: mintcream;
         display: flex;
-        /* flex-wrap: wrap; */
+        flex-wrap: wrap;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
@@ -36,9 +36,6 @@ const Container = styled.div`
         color: #FFF;
         font-size: 20px;
         margin: 0 30px;
-
-
-
     }
 
     .top_findId:hover  {
@@ -56,7 +53,7 @@ const Container = styled.div`
         margin-top: 80px;
     }
 
-    .FindID {
+    .FindPw {
         display: inline-block;
         width: auto;
         height: auto;
@@ -66,6 +63,7 @@ const Container = styled.div`
         padding: 50px 30px;
         border: 1px solid gray;
         border-radius: 3px;
+        background-color: #FFF;
     }
 
     //p
@@ -146,7 +144,7 @@ const FindPassword = () => {
                 </div>
 
                 <h2 className="title">비밀번호 찾기</h2>
-                <div className="FindID">
+                <div className="FindPw">
                     <p className="text">본인확인 이메일 주소와 입력한 이메일 주소가 같아야 인증번호를 받을 수 있습니다.</p>
                     <dt className="label_dt">
                         <label className="label">이름</label>
@@ -170,7 +168,7 @@ const FindPassword = () => {
                         <Input type="text" className="inputBox" placeholder="인증번호 6자리 숫자 입력"></Input>
                         </dd>
                     </div>
-                    <a href="/" className="nextBtn"><span className="nextBotton">다음</span></a>
+                    <a href="/ChangePassword" className="nextBtn"><span className="nextButton">다음</span></a>
                 </div>
             <Footer/>
         </Container>

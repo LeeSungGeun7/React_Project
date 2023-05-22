@@ -9,7 +9,7 @@ const Container = styled.div`
 	* {
 		box-sizing: border-box;
 	}
-    
+
     .Container {
         background-color: mintcream;
         display: flex;
@@ -50,6 +50,78 @@ const Container = styled.div`
     .top_findPw:hover {
         color: yellow;
     }
+
+    .wrap {
+        /* display: flex; */
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        width: auto;
+        height: 100%;
+    }
+    
+    .logo_area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo2 {
+        font-size: 50px;
+        color: rgb(0, 199, 60);
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .input_area {
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .inputBox {
+        width: 100%;
+        height: 50px;
+        margin: 10px 0;
+    }
+
+    .nextBtn {
+        display: flex;
+        width: 100%;
+        height: 50px;
+        background-color: rgb(0, 199, 60);
+        text-decoration: none;
+        color: white;
+        font-size: 20px;
+        border-radius: 5px;
+        justify-content: center;
+        align-items: center;
+        margin: 10px 0;
+    }
+
+    .link_area {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: 30px;
+        margin-bottom: 150px;
+
+    }
+    
+    .text {
+        margin-right: 10px;
+    }
+
+    .link_findID {
+        text-decoration: none;
+        color: rgb(0, 199, 60);
+        font-weight: bold;
+    }
+
 `
 
 const TypedID = () => {
@@ -63,12 +135,20 @@ const TypedID = () => {
                     <a href="/FindID" className="top_findId"><li>아이디 찾기</li></a>
                     <a href="/TypedID" className="top_findPw"><li>비밀번호 찾기</li></a>
                 </div>
-                <div>
-                    <p>비밀번호를 찾고자 하는 아이디를 입력해주세요.</p>
-                    <input></input>
-                    <Link to="/FindPassword"><button>다음</button></Link>
-                    <p>아이디가 기억나지 않는다면?</p>
-                    <a href="/FindID">아이디 찾기</a>
+                <div className="wrap">
+                    <div className="logo_area">
+                        <h1 className="logo2">Eco Friends</h1>
+                        <h2 className="title">비밀번호를 찾고자 하는 아이디를 입력해주세요.</h2>
+                    </div>
+                    <div className="input_area">
+                        <input className="inputBox"></input>
+                        <br></br>
+                        <a href="/FindPassword" className="nextBtn"><span className="nextButton">다음</span></a>
+                    </div>
+                    <div className="link_area">
+                        <p className="text">아이디가 기억나지 않는다면?</p>
+                        <a href="/FindID" className="link_findID">아이디 찾기</a>
+                    </div>
                 </div>
             </div>
             <Footer />

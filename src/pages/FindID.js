@@ -63,6 +63,7 @@ const Container = styled.div`
         padding: 50px 30px;
         border: 1px solid gray;
         border-radius: 3px;
+        background-color: #FFF;
     }
 
     //p
