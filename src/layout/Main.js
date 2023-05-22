@@ -1,12 +1,14 @@
-import React, { useState,useContext,useEffect } from "react";
+import React, { useState,useContext,useEffect, useRef,useAuth } from "react";
 import styled from "styled-components";
 import vd from "../images/video-src-pc (1).mp4";
 import vd2 from "../images/KakaoTalk_Video_2023-05-03-16-40-25.mp4";
 import vd3 from "../images/original-087fcdef6dd7e801b337d6dbdc8c0ba9.mp4";  
 import CardSlider from "../Components/CardSlider";
 
+import {  useNavigate} from "react-router-dom"; 
+
 import { FaSearch } from 'react-icons/fa';
-import CarSerach from "../pages/CarSearch";
+import CarSearch from "../pages/CarSearch";
 
 import AxiosApi from "../api/AxiosApi";
 import cookie from 'react-cookies';
@@ -104,8 +106,8 @@ const Mainst = styled.main`
     color: white;
     font-size: 50px;
     font-family:'Do Hyeon', sans-serif;
-    top : 50vh;
-    left: 40vw;
+    top : 90%;
+    left: 0;
   }
   .fa {
     color: #808080;
@@ -115,11 +117,11 @@ const Mainst = styled.main`
   position: absolute;
 
   bottom: 5px;  
-  left: 100%;
+  left: 90%;
   }
   .mainitem {
     border-radius: 15px;
-    border: solid 1px;
+   // border: solid 1px;
     width: 92.5%;
     height: 100vh;
   }
@@ -133,6 +135,21 @@ const Mainst = styled.main`
 `;
 
 const Main = () => {
+  const navigate = useNavigate();
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleSubmit = () => {
+    navigate(`/Car/${searchValue}`);
+  };
+
+  const inputEl = useRef(null);
+  const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleSubmit();
+        }
+      }
+  
+
 
   const [vdValue, setVdValue] = useState(vd3);
   const vdClick = () => {
@@ -166,10 +183,10 @@ const Main = () => {
           height="100%"
           controls={false}
         />
-        <div className="content">Find your<b style={{color:"#333333"}}>#Charge</b> </div>
+        {/* <div className="content">Find your<b style={{color:"#333333"}}>#Charge</b> </div> */}
         <div className="Homeinput">
-          <input type="text" className="input" import /><FaSearch className="fa"/>
-          
+          <input type="text" className="input" ref={inputEl} value={searchValue} onChange={(e)=>setSearchValue(e.target.value)} onKeyDown={handleKeyDown}/><FaSearch onClick={handleSubmit} className="fa"/>
+          <div className="content">Find your<b style={{color:"#333333"}}>#Charge</b> </div>
         </div>
       </div>
     <div className="item-group">

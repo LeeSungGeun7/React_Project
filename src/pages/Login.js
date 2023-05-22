@@ -131,8 +131,10 @@ const Login = () => {
 
 
   return (
+    <>
+    <Header />
     <Container>
-      <Header />
+      
       <div className="Container">
 
         <div className="loginbar">
@@ -159,6 +161,7 @@ const Login = () => {
       </div>
       <Footer />
     </Container>
+    </>
   );
             };
 

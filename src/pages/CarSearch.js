@@ -7,6 +7,7 @@ import AxiosApi from "../api/AxiosApi";
 import { FaSearch,FaStar } from 'react-icons/fa';
 import { HiOutlineEmojiHappy } from "react-icons/hi";
 import { useAuth } from "../context/AuthContextProvider";
+import { useParams } from "react-router-dom";
 
 
 
@@ -239,6 +240,8 @@ const CarSerachst = styled.div`
 
 
 const CarSerach = () => {
+  const { searchValue } = useParams();
+
   const { isLoggedIn, setIsLoggedIn } = useAuth();
   const statusColors = {
     1: "#52F911", // 충전 가능
@@ -336,7 +339,7 @@ const CarSerach = () => {
     
 
     const [chargerInfo, setChargerInfo] = useState([]);
-    const [name,setName] = useState("서울시");
+    const [name,setName] = useState(searchValue);
 
     const [chargeMethod, setChargeMethod] = useState(null);
     const [service, setService] = useState(null);

@@ -26,12 +26,17 @@ import { useAuth } from "../context/AuthContextProvider";
 
 const Headerst = styled.div`
 
-    /* display:flex;
+
+        font-family: 'Do Hyeon', sans-serif;
+
+
+
+     /* display:flex;
     align-items:center;
     justify-content:center;
     position: ${props => props.overlap ? `absolute` : 'static'};
 
-      background-color: none; 헤더의 배경색을 투명하게 설정 (투명도 조절 가능) */
+      background-color: none; 헤더의 배경색을 투명하게 설정 (투명도 조절 가능)  */
 
    // background-color: rgba(255, 255, 255, 0.5); /* 헤더의 배경색을 투명하게 설정 (투명도 조절 가능) */
 
@@ -58,11 +63,8 @@ const Headerst = styled.div`
         /* display:flex;
         align-items:center;
         justify-content: center; */
+        font-size: 40px;
         
-        color : black;
-        font-family: 'Do Hyeon', sans-serif;
-
-        font-size: 35px;
         //font-weight : bold;
     }
     .logo-item{
@@ -78,17 +80,17 @@ const Headerst = styled.div`
         justify-content:center;
         align-items:center;
     } */
-    nav a {
+    /* nav a {
         width:22%;
         font-family: 'Do Hyeon', sans-serif;
         min-width: 230px;
         color: black;
-        
+         */
       //  margin: 50px;
-        z-index:100;
+        /* z-index:100;
         font-size: 17px;
         text-decoration: none;
-    }
+    } */
     
    .logout-btn {
         border:none;
@@ -116,8 +118,55 @@ const Headerst = styled.div`
    } */
    .Container {
     display:flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items:center;
+    flex-direction: row;
+
+    height: 80px;
+    width: 100vw;
+    // border: 1px solid black;
+   }
+
+   .logo , .btns , .menu{
+    //width: 33%;
+    flex:1;
+  //  border:1px solid;
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+   }
+
+   .menu-item , .menu-item2 , {
+    width: 25%;
+   }
+   .btns-signup , .btns-login {
+        margin:10px;
+        display:flex;
+        justify-content: center;
+        text-align:center;
+        height: 100%;
+        border-radius: 10px;
+        width: 15%;
+        border: 1px solid;
+   }
+   .btns {
+        display:flex;
+        justify-content: center;
+   }
+   .btns2 {
+
+        width: 50%;
+        display:flex;
+        justify-content: space-evenly;
+        align-items:center;
+   }
+   .mypage {
+    display: none;
+   }
+   .customer-item2:hover {
+        .mypage{
+            display:block;
+        }
    }
 `   
 ;
@@ -162,9 +211,7 @@ const Header = (props) => {
 
    
 
-    const handleHome = () => {
-        navigate('/');
-    }    
+     
 
     return(
         <Headerst overlap={props.overlap} >
@@ -221,12 +268,50 @@ const Header = (props) => {
           
           <nav className="Container">
 
-             <div>
-                에코프렌즈
+          <div className="menu">
+                    <div className="menu-item" onClick={()=> {navigate("/car")}}>
+                        전기차충전소
+                    </div>
+                    <div onClick={()=> {navigate("/service")}} className="menu-item2">
+                        고객센터
+                    </div>
+                     
+            </div>
+             <div className="logo" onClick={()=> {navigate("/")}}>
+                Eco Friend
              </div>
-             <div>
-                로그인
+
+            
+             <div className="btns">
+                {!isLoggedIn && 
+                  <><div onClick={()=> {navigate("/signUp")}} className="btns-signup">회원가입</div>
+                    <div className="btns-login" onClick={()=> {navigate("/login")}}>
+                        로그인
+                    </div> 
+                </>}
+                {isLoggedIn && 
+                <div className="btns2"><MyPageBtn className="customer-item2" />
+                <div className="mypage">마이페이지 호버</div> 
+                    <div>
+                        {userName} 님 안녕하세요
+                    </div>
+                    <button onClick={async () => {
+                                console.log('Logout button clicked');
+                                try {
+                                    const response = await AxiosApi.logout(cookie);
+                                    console.log('Logout request sent');
+                                    if(response.status === 200) {
+                                    cookies.remove("sessionId");
+                                    setIsLoggedIn(false);
+                                    setUserName(response.data.custNm);
+                                    }
+                                } catch (error) {
+                                    alert("로그아웃중에 문제가 발생하였습니다.");
+                                }}}  className="logout-btn" >로그아웃</button>
+               </div>}
+              
              </div>
+
           </nav>
 
 

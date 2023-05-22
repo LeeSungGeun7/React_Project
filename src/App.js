@@ -12,6 +12,7 @@ import InterestStation from "./pages/InterestStation"
 import InquriyCost from './pages/InquriyCost';
 import ServiceCenter from './pages/ServiceCenter';
 import MyPage from './pages/MyPage';
+import Main from './layout/Main';
 
 
 
@@ -24,15 +25,17 @@ function App() {
    <>
    <Router>
       <Routes>
-        <Route path="/Car" element={<CarSerach/>} />
+      <Route path="/Car" element={<CarSerach/>} />
+        <Route path="/Car/:searchValue" element={<CarSerach/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/" element={<Layout />} />
 
 
+
         <Route path="/Mypage" element={<MyPage />} />
         <Route path="/Service" element={<ServiceCenter />} />
-        
+
 
 
         <Route path="/ModifyInfo" element={<ModifyInfo />} />

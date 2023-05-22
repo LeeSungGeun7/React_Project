@@ -13,24 +13,27 @@ import cd7 from '../images/카드8.png';
 const CardStyle = styled.div`
  .card-slider-container {
     width: 100%;
-    margin: 0 auto;
+    //margin: 0 auto;
     }
 
 .card {
+    width:100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    height: 250px;
+    height: 200px;
     background-color: white;
     /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
     border-radius: 4px;    
     /* border: 1px solid #e9e9e9; */
-    margin: 16px;
-    padding: 16px;
+   // margin: 16px;
+ //   padding: 16px;
 }
 .card div {
-  margin-left:30px;
+ // margin-left:30px;
   width : 25%;
+ // border: 1px solid;
+ margin: 15px;
   height: 100%;
   display : flex;
   align-items: center;
@@ -38,6 +41,7 @@ const CardStyle = styled.div`
 }
 .card div:hover {
   width : 35%;
+  height: 120%;
 }
 
     .card-content {
@@ -45,7 +49,7 @@ const CardStyle = styled.div`
     }
 
     .card-content1 {
-      background-size: contain;
+      background-size: cover;
       background-repeat: no-repeat;
       background-image : url(${cd});
     }
@@ -92,9 +96,12 @@ const Card = ({ content }) => (
     content === 'Card 1' ? 
 
       <div className="card">
-        <div className="card-content1" ></div>
+        <div className="card-content1" >
+        </div>
 
-         <div className="card-content2">{""}</div>
+         <div className="card-content2">{""}
+        
+         </div>
          <div className="card-content3">{""}</div>
          <div className="card-content4">{""}</div>
        </div> 

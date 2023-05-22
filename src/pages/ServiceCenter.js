@@ -18,7 +18,7 @@ const Contain = styled.div`
         align-items: center;
         justify-content: center;
         height: 150vh;
-        border-top : solid 10px #333333;
+       // border-top : solid 1px #333333;
         font-family: 'Do Hyeon', sans-serif;
     }
 
@@ -153,8 +153,10 @@ const ServiceCenter = () => {
 
 
     return(
+        <>
+        <Header/>
         <Contain>
-            <Header/>
+            
             <div className="Container">
 
 
@@ -200,7 +202,7 @@ const ServiceCenter = () => {
                                                 (로그인이안되요!)
                                             </div>
                                             <div className="question">
-                                                (그냥안되요!)
+                                                (!)
                                             </div>
                                             <div className="question">
                                                 (구글회원가입은어떻게해야되나요!)
@@ -288,6 +290,7 @@ const ServiceCenter = () => {
         <Footer/>
 
         </Contain>
+        </>
     );
 }
 

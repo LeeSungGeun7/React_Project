@@ -35,9 +35,12 @@ const Container = styled.div`
 const Layout = () => {
 
     return(
+        <>
+        <Header overlap={false}/>
         <Container>
+            {/* <Header overlap={false}/> */}
             <div className="Container">
-            <Header overlap={false}/>
+            {/* <Header overlap={false}/> */}
                 
                 <Main>
                 
@@ -46,6 +49,7 @@ const Layout = () => {
             <Footer/>
             </div>
         </Container>
+        </>
     );
 }
 
