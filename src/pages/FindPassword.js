@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import AxiosApi from "../api/AxiosApi";
-import { Link } from "react-router-dom";
 
 const Container = styled.div`
 	* {
@@ -42,7 +41,11 @@ const Container = styled.div`
 
     }
 
-    .top_findId, .top_findPw :hover  {
+    .top_findId:hover  {
+        color: yellow;
+    }
+
+    .top_findPw:hover {
         color: yellow;
     }
 
@@ -106,16 +109,21 @@ const Container = styled.div`
 
     }
 
-    .nextBotton {
+    .nextBtn {
+        display: flex;
         width: 80px;
         height: 50px;
         margin: 30px;
         border-radius: 5px;
         border: 1px solid gray;
         background-color: #FFF;
+        margin-bottom: 265px;
+        font-size: 20px; 
         font-weight: bold;
-        margin-bottom: 234px;
-        font-size: 20px;
+        text-decoration: none;
+        align-items: center;
+        justify-content: center;
+        color: black;
     }
 `
 
@@ -126,7 +134,6 @@ const Input = styled.input`
 
 
 const FindPassword = () => {
-
 
     return(
         <>
@@ -163,7 +170,7 @@ const FindPassword = () => {
                         <Input type="text" className="inputBox" placeholder="인증번호 6자리 숫자 입력"></Input>
                         </dd>
                     </div>
-                    <Link to="/ShowID"><button className="nextBotton">다음</button></Link>
+                    <a href="/" className="nextBtn"><span className="nextBotton">다음</span></a>
                 </div>
             <Footer/>
         </Container>
