@@ -75,7 +75,7 @@ const Container = styled.div`
         height: 40px;
         margin: 30px;
         border: 1px;
-        background-color: rgb(0, 199, 60);
+        background-color: black;
         align-items: center;
         justify-content: center;
         color: #FFF;
@@ -99,30 +99,46 @@ const Input = styled.input`
     width: 90%;
     height: 40px;
     border-radius: solid 5px;
+    margin: 10px;
 `
 
 const ChangePassword = () => {
 
     // 입력란
     const [pwd, setPwd] = useState("");
+    const [pwdConfirm, setPwdConfirm] = useState("");
 
     // 정규식 유효성 검사
     const [pwdReg, setPwdReg] = useState(false);
+    const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
 
     // 오류 메세지
     const [pwMessage, setPwMessage] = useState("");
+    const [pwConfirmMessage, setPwConfirmMessage] = useState("");
 
     const onChangePwd = (e) => {
 		const passwordRegEx = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/
 		setPwd(e.target.value);
 		if (!passwordRegEx.test(e.target.value)) {
-			setPwMessage('올바른 형식이 아닙니다')
+			setPwMessage('올바른 형식이 아닙니다.')
 			setPwdReg(false);
 		} else {
 			setPwMessage('사용가능한 비밀번호 입니다.')
 			setPwdReg(true);
 		}
 	}
+
+    const onChangePwdConfirm = (e) => {
+        const passwordConfirm = e.target.value
+        setPwdConfirm(passwordConfirm);
+        if(pwd === passwordConfirm) {
+            setPwConfirmMessage('비밀번호가 일치합니다.')
+            setIsPasswordConfirm(true);
+        } else {
+            setPwConfirmMessage('비밀번호가 일치하지 않습니다.')
+            setIsPasswordConfirm(false);
+        }
+    }
 
     const onClickChangePassword = async () => {
 		const data = {
@@ -158,8 +174,9 @@ const ChangePassword = () => {
                     <Input 
                         placeholder="새 비밀번호 확인" 
                         type="password"
+                        onChange={onChangePwdConfirm}
                         />
-
+                        {pwdConfirm.length > 0 && <span className={`${isPasswordConfirm ? "success" : "error"}`}>{pwConfirmMessage}</span>}
                         
 
                     <a href="/" className="checkBtn" onClick={onClickChangePassword}><sapn className="checkButton">확인</sapn></a>

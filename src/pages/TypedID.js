@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import AxiosApi from "../api/AxiosApi";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const Container = styled.div`
 	* {
@@ -69,7 +69,7 @@ const Container = styled.div`
 
     .logo2 {
         font-size: 50px;
-        color: rgb(0, 199, 60);
+        color: black;
     }
 
     .title {
@@ -82,17 +82,11 @@ const Container = styled.div`
         justify-content: center;
     }
 
-    .inputBox {
-        width: 100%;
-        height: 50px;
-        margin: 10px 0;
-    }
-
     .nextBtn {
         display: flex;
         width: 100%;
         height: 50px;
-        background-color: rgb(0, 199, 60);
+        background-color: black;
         text-decoration: none;
         color: white;
         font-size: 20px;
@@ -118,13 +112,34 @@ const Container = styled.div`
 
     .link_findID {
         text-decoration: none;
-        color: rgb(0, 199, 60);
+        color: royalblue;
         font-weight: bold;
     }
 
+    .inputBox {
+    width: 100%;
+    height: 50px;
+    margin: 10px 0;
+    }
 `
 
 const TypedID = () => {
+
+    // const [email, setEmail] = useState("");
+
+    // const onClickFindPassword = async () => {
+    //     const data = {
+    //         id : email
+    //     }
+    //     console.log(data);
+    //     const response = await AxiosApi.signUp(data);
+    //     if(response.data === true) {
+    //         Navigate("/Login");
+    //     } else {
+    //         console.log("로그인 에러 !!!");
+    //     }
+
+    // }
 
     return(
         <>
@@ -141,9 +156,9 @@ const TypedID = () => {
                         <h2 className="title">비밀번호를 찾고자 하는 아이디를 입력해주세요.</h2>
                     </div>
                     <div className="input_area">
-                        <input className="inputBox"></input>
+                        <input className="inputBox" ></input>
                         <br></br>
-                        <a href="/FindPassword" className="nextBtn"><span className="nextButton">다음</span></a>
+                        <a href="/FindPassword" className="nextBtn" ><span className="nextButton">다음</span></a>
                     </div>
                     <div className="link_area">
                         <p className="text">아이디가 기억나지 않는다면?</p>
