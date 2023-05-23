@@ -13,6 +13,9 @@ import InquriyCost from './pages/InquriyCost';
 import ServiceCenter from './pages/ServiceCenter';
 import MyPage from './pages/MyPage';
 import Main from './layout/Main';
+import Quest from './pages/Quest';
+import Answer from './pages/Answer';
+import InquireCheck from './pages/InquireCheck'
 
 
 
@@ -35,8 +38,9 @@ function App() {
 
         <Route path="/Mypage" element={<MyPage />} />
         <Route path="/Service" element={<ServiceCenter />} />
-
-
+        <Route path="/quest" element={<Quest />} />
+        <Route path="/answer" element={<Answer />} />
+        <Route path="/check" element={<InquireCheck />} />
 
         <Route path="/ModifyInfo" element={<ModifyInfo />} />
         <Route path="/InterestStation" element={<InterestStation />} />

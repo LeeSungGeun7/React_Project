@@ -229,13 +229,13 @@ const ServiceCenter = () => {
                  {isLoggedIn ? (
                       <div className="custom-box">
                                    
-                      <div onClick={()=> {navigate("/login")}} style={{backgroundColor: "#FFE83C"}} className="custom-item1">
+                      <div onClick={()=> {navigate("/quest")}} style={{backgroundColor: "#FFE83C"}} className="custom-item1">
 
                           1:1문의하기
                           <p style={{fontSize:"10px" , backgroundColor: "#FFE83C"}}>궁금한 점이 있으시면 1:1문의를 남겨주세요</p>
                           <p style={{fontSize:"5px" , fontWeight: "100"}}>^&^</p>
                       </div>
-                      <div className="custom-item2" style={{backgroundColor: "#C2FF30"}}>
+                      <div onClick={()=> {navigate("/check")}} className="custom-item2" style={{backgroundColor: "#C2FF30"}}>
                           문의내역 조회
                       </div>
                   </div>

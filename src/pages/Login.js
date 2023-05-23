@@ -74,9 +74,7 @@ const Container = styled.div`
     text-decoration: none;
     color: white;
   }
-  
 `
-
 const Login = () => {
 
   //  const { loginUser } = useContext(AuthContext);
@@ -149,7 +147,7 @@ const Login = () => {
                 const result = await AxiosApi.googlelogin(res.credential);
                 console.log(jwtDecode(res.credential));
                 console.log(result);
-                // navigate("/signUp", {state : { data : jwtDecode(res.credential)}});
+                navigate("/signUp", {state : { data : jwtDecode(res.credential)}});
               }}
               onFailure={(err) => {
                 console.log(err);

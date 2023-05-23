@@ -87,8 +87,63 @@ const AxiosApi = {
         }
         console.log(csId);
         return await axios.delete(EF_DOMAIN + "/charger/wish/delete", request);
-    }
+    },
+    inQuire : async(inqNum,email,title,content) => {
+        const request = {
+           
+            inqNo : inqNum,
+            email : email,
+            inqTitle : title,
+            inqContent : content
+           
+        }
+
+        return await axios.post(EF_DOMAIN + "/inquires", request);
+    } ,
+
     
+    getInQuire : async(email) => {
+        try {
+            const response = await axios.get(`${EF_DOMAIN}/inquires/${email}`);
+            console.log(response.data);
+            return response.data;
+           
+          } catch (error) {
+            console.error('Failed to get inquires by email', error);
+            return null;
+          }
+        },
+
+        // 미답변 조회
+        getUnAnswered : async() => {
+            try {
+                const response = await axios.get(EF_DOMAIN+"/inquires/unanswered");
+                console.log(response.data);
+                return response.data;
+            } catch (error) {
+                console.error('Failed to get inquires by email', error.message);
+                return null;
+            }
+        },
+
+        postAnswer : async(inqNo,answerContent) => {
+            const request = {
+                inqNo : inqNo,
+                answerContent : answerContent,
+            }
+
+            try {
+                const response = await axios.post(EF_DOMAIN+"/inquires/inquire/update",request);
+                console.log(response.data);
+                return response.data;
+            } catch (error) {
+                console.error('Failed to get inquires by email', error.message);
+                return null;
+            }
+        }
+
 };
+
+
 
 export default AxiosApi;

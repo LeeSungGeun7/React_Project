@@ -202,7 +202,6 @@ const Header = (props) => {
             setCookie(String(cookies.load("sessionId")));
             setUserName(rsp.data.custNm);
            }
-           
       }
     }
     getMyInfo();
