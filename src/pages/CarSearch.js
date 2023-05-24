@@ -30,7 +30,7 @@ const CarSerachst = styled.div`
         flex-direction: column;
 
         //border: solid 1px black;
-        background-color:#ABDFF1;
+        background-color: #ABDFF1;
 
        // border: solid 1px black;
 
@@ -49,7 +49,7 @@ const CarSerachst = styled.div`
         align-items:center;
         flex-direction: row;
         height: 20%;
-        background-color : #F4ED6E;
+        background-color :  #F5F278;
     }
     .map {
         flex:4;
@@ -234,8 +234,41 @@ const CarSerachst = styled.div`
 
   border-radius: 15px;
 }
-   
-`;
+      @media (max-width: 1000px) {
+                * {
+                    font-size: 0.9em;
+                }
+                .SearchInput {
+                  width: 100%;
+                }
+                .service , .charge-method , .local{
+                  display:none;
+                  flex-direction:row;
+
+                }
+                .line {
+                    flex:1;
+                    display: flex;
+                    align-items:center;
+                    flex-direction: row;
+                    justify-content: space-evenly;
+                    height: 10%;
+                }
+                .map {
+                    flex:5;
+                    background-size: cover ;
+                    background-image: url("https://t1.daumcdn.net/cfile/tistory/9968D2465E832E5A34") ;
+                }
+                .result {
+                    flex:2;
+                    display: flex;
+                    flex-direction: row;
+                    height: 50%;
+                }
+        }   
+      
+`
+;
 
 
 

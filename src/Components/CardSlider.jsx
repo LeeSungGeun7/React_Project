@@ -1,5 +1,6 @@
-import React from 'react';
-import Slider from 'react-slick';
+import React, { useState } from 'react';
+ import Slider from 'react-slick';
+
 import styled from 'styled-components';
 import cd from '../images/카드1.png';
 import cd1 from '../images/카드2.png';
@@ -9,6 +10,9 @@ import cd4 from '../images/카드5.png';
 import cd5 from '../images/카드6.png';
 import cd6 from '../images/카드7.png';
 import cd7 from '../images/카드8.png';
+
+
+
 
 const CardStyle = styled.div`
  .card-slider-container {
@@ -44,11 +48,21 @@ const CardStyle = styled.div`
   height: 120%;
 }
 
+    .card{
+      
+      width:100%;
+    }
+    .item1 {
+      display:flex;
+      width:100px;
+      flex-direction:column;
+    }
     .card-content {
     font-size: 24px;
     }
 
     .card-content1 {
+      width:100%;
       background-size: cover;
       background-repeat: no-repeat;
       background-image : url(${cd});
@@ -92,11 +106,17 @@ const CardStyle = styled.div`
 
 const Card = ({ content }) => (
 
+ 
+
+
+
 
     content === 'Card 1' ? 
 
       <div className="card">
-        <div className="card-content1" >
+        <div className="item1">
+          <div className="card-content1">배경색</div>
+          <div>신한카드</div>
         </div>
 
          <div className="card-content2">{""}
@@ -113,10 +133,9 @@ const Card = ({ content }) => (
              <div className="card-content8">{""}</div>
 
            </div>
-           
-
-
+  
 );
+
 
 const CardSlider = () => {
   const settings = {
@@ -143,7 +162,8 @@ const CardSlider = () => {
       </Slider>
     </div>
     </CardStyle>
-  );
+);
 };
 
 export default CardSlider;
+

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
@@ -10,7 +10,7 @@ import { useContext } from "react";
 
 
 const Contain = styled.div`
-   
+    background-color:#EFF2F3;
     .Container {
 
         display : flex;
@@ -141,14 +141,24 @@ const Contain = styled.div`
         overflow : scroll;
         height:60%;
     }
-    
+    @media (max-width: 1000px) {
+        * {
+            font-size: 0.8em;
+        }
+    }
+    @media (max-width: 480px) {
+            * {
+                font-size: 0.4em;
+            }
+    }
+ 
 `
 
 
   
 
 const ServiceCenter = () => {
-    const isLoggedIn = "true";
+    const [isLoggedIn,setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
 
 
@@ -169,7 +179,7 @@ const ServiceCenter = () => {
                 
                     <div className="mid">
 
-                        <div style={{fontSize:"50px"}}>24시간 연중무휴 채팅상담</div>
+                        <div style={{minWidth:"10%",fontSize:"2.5em"}}>24시간 연중무휴 채팅상담</div>
                         <div style={{color: "white",marginLeft: "120px" , fontSize: "100px"}}>< SlEarphonesAlt/></div>
                     </div>
 

@@ -21,7 +21,7 @@ import jwtDecode from "jwt-decode";
 const Container = styled.div`
 
   .Container {
-    background-color: #EAF6F7 ;
+    background-color: white ;
     height: 100vh;
     display: flex;
     flex-wrap: wrap;
@@ -31,16 +31,16 @@ const Container = styled.div`
   }
   .loginbar {
     
-    color: white;
+    color: #30A7FE;
     background-color: #EFF2F3;
-    box-shadow : 
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25);
     display: flex;
     flex-direction: column;
     align-items:center;
     justify-content: space-evenly;
     //border: solid 1px black;
-    width: 50%;
-    height: 50%;
+    width: 35%;
+    height: 65%;
     border-radius: 5%;
     border-width: 30%;
 
@@ -48,20 +48,19 @@ const Container = styled.div`
   input {
     width: 50%;
     height: 10%;
-    
-    font-size: 25px;
+    box-shadow: 1px ;
+    font-size: 15px;
     border: 0;
     border-radius: 15px;
     outline: none;
     padding-left: 20px;
-    background-color: rgb(233, 233, 233);
+    background-color: white;
   }
   button {
-
-    border-top-left-radius: 20%;
-    border-bottom-right-radius: 20%;
-    //border-radius: 30%;
-    background-color: #30A7FE;
+    //#30A7FE;
+   
+    border-radius: 10%;
+    background-color:  #F5F278;
     border : none;
     width: 15%;
     height:10%;
@@ -73,7 +72,7 @@ const Container = styled.div`
   }
   a {
     text-decoration: none;
-    color: white;
+    color: #333333;
   }
 `
 const Login = () => {

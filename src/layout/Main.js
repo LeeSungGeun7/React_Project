@@ -4,7 +4,7 @@ import vd from "../images/video-src-pc (1).mp4";
 import vd2 from "../images/KakaoTalk_Video_2023-05-03-16-40-25.mp4";
 import vd3 from "../images/original-087fcdef6dd7e801b337d6dbdc8c0ba9.mp4";  
 import CardSlider from "../Components/CardSlider";
-
+import News from "../Components/News";
 import {  useNavigate} from "react-router-dom"; 
 
 import { FaSearch } from 'react-icons/fa';
@@ -121,7 +121,7 @@ const Mainst = styled.main`
   }
   .mainitem {
     border-radius: 15px;
-   // border: solid 1px;
+    border: solid 1px;
     width: 92.5%;
     height: 100vh;
   }
@@ -186,12 +186,12 @@ const Main = () => {
         {/* <div className="content">Find your<b style={{color:"#333333"}}>#Charge</b> </div> */}
         <div className="Homeinput">
           <input type="text" className="input" ref={inputEl} value={searchValue} onChange={(e)=>setSearchValue(e.target.value)} onKeyDown={handleKeyDown}/><FaSearch onClick={handleSubmit} className="fa"/>
-          <div className="content">Find your<b style={{color:"#333333"}}>#Charge</b> </div>
+          <div className="content">Find your<b style={{color:"#F5F278"}}>#Charge</b> </div>
         </div>
       </div>
     <div className="item-group">
         <div className="mainitem">
-        {/* <Mainitem/> */}
+            <News/>
         </div>
         {/* <div className="bottom">
           <MainBottom/>

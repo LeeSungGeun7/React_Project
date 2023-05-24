@@ -93,13 +93,17 @@ const Headerst = styled.div`
     } */
     
    .logout-btn {
+        width:45%;
         border:none;
         border-radius:15px;
         color : white;
+        background-color: black;
       //  <background-color:grey></background-color:grey>;
         font-family:'Do Hyeon', sans-serif;
         &:hover{
-            color:#333333;
+            border:1px solid;
+            color:black;
+            background-color: white;
         }
    }
    /* .customer-items , .logo-items, .menu{
@@ -126,7 +130,6 @@ const Headerst = styled.div`
     width: 100vw;
     // border: 1px solid black;
    }
-
    .logo , .btns , .menu{
     //width: 33%;
     flex:1;
@@ -146,10 +149,22 @@ const Headerst = styled.div`
         text-align:center;
         height: 100%;
         border-radius: 10px;
-        width: 15%;
+        width: 19%;
         border: 1px solid;
+        background-color: #333333;
+            color: white;
+        &:hover {
+            background-color: white;
+            color: black;
+        }
    }
+   .logo{
+    color:#333333;
+   }
+
+
    .btns {
+
         display:flex;
         justify-content: center;
    }
@@ -157,9 +172,11 @@ const Headerst = styled.div`
 
         width: 50%;
         display:flex;
-        justify-content: space-evenly;
+        justify-content: space-between;
         align-items:center;
    }
+   
+
    .mypage {
     display: none;
    }
@@ -168,6 +185,30 @@ const Headerst = styled.div`
             display:block;
         }
    }
+
+   @media (max-width: 600px) {
+        * {
+            font-size: 0.5em;
+        }
+        .logo {
+            font-size: 20px;
+        }
+        button {
+            width: 60%;
+        }
+}   
+        @media (max-width: 1000px) {
+                * {
+                    font-size: 0.9em;
+                }
+                .logo {
+                    font-size: 30px;
+                }
+                .btns-signup , .btns-logout , .btns-login , {
+                    width: 50px;
+                }
+        }     
+
 `   
 ;
 
@@ -289,10 +330,11 @@ const Header = (props) => {
                     </div> 
                 </>}
                 {isLoggedIn && 
-                <div className="btns2"><MyPageBtn className="customer-item2" />
+             <div className="btns2">
+                <MyPageBtn className="customer-item2" />
                 <div className="mypage">마이페이지 호버</div> 
                     <div>
-                        {userName} 님 안녕하세요
+                        {userName} 님 
                     </div>
                     <button onClick={async () => {
                                 console.log('Logout button clicked');
