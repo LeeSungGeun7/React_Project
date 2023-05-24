@@ -91,10 +91,6 @@ const Header = (props) => {
                 클릭버튼
             </div>
 
-          
-          
-
-
         </header>
         </Headerst>
     );

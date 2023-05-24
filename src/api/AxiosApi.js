@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const KH_DOMAIN = "http://localhost:8111";
-const EF_DOMAIN = "http://192.168.110.69:3737";
+const EF_DOMAIN = "http://localhost:3737";
 
 
 const AxiosApi = {
@@ -44,8 +44,21 @@ const AxiosApi = {
     },
     signUp : async(data) => {
         return await axios.post(EF_DOMAIN + "/member/signup", data);
-    }
+    },
+    // 금액충전
+    insertCard : async( name, email, credit, cardNum, endDate, cvc, price) => {
+        const payment = {
+            payname: name,
+            email: email,
+            credit: credit,
+            cardNum: cardNum,
+            endDate: endDate,
+            cvc: cvc,
+            price: price
+        };
+        return await axios.post(EF_DOMAIN + "/payment", payment);
+    },
+    
 
-};
-
+}
 export default AxiosApi;

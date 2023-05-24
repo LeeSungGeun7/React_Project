@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
+import AxiosApi from "../api/AxiosApi";
 
 const Container = styled.div`
     display: flex;
@@ -64,33 +65,45 @@ const Container = styled.div`
     }
 `;
 const PaymentPage  = () => {
+
+
+    const [email, setEmail] = useState('wert@naver.com');
     const [cardNumber, setCardNumber] = useState('');
     const [expirationDate, setExpirationDate] = useState('');
-    const [cvv, setCvv] = useState('');
+    const [cvc, setCvc] = useState('');
     const [name, setName] = useState('');
-    const [charge, setCharge] = useState('');
     const [price, setPrice] = useState('');
+    const [credit, setCredit] = useState('');
   
     const handleFormSubmit = (event) => {
       event.preventDefault();
   
       // 입력된 결제 정보 유효성 검사
-      if (cardNumber.trim() === '' || expirationDate.trim() === '' || cvv.trim() === '' || name.trim() === '' || charge.trim() === '' ||  price.trim() === '') {
+      if (cardNumber.trim() === '' || expirationDate.trim() === '' || cvc.trim() === '' || name.trim() === '' || price.trim() === '' ||  credit.trim() === '') {
         alert('결제 정보를 모두 입력해주세요.');
         return;
       }
   
       // 실제 결제 처리 로직을 추가
       //  결제가 완료되었다는 메시지를 출력
-      alert('결제가 완료되었습니다!');
+      // alert('결제가 완료되었습니다!');
     };
+
+    const payOnclick = async () => {
+    const rsp = await AxiosApi.insertCard(name, email, credit, cardNumber, expirationDate, cvc, price);
+    if(rsp.data === true) {console.log(rsp.data); alert('결제가 완료되었습니다!');}
+    else console.log(rsp.data);
+    };
+
+    // 카카오페이 모듈 추가하고 카카오페이에 보내는 데이터가 post로 성공했을 경우 콜백함수로 payOnclikc 함수 불러올 예정.
+   
   
     return (
         
       <Container>
         <Header/>
         <div className="total">
-        <h1 style={{textAlign:"center"}}>결제 정보 입력</h1>
+        <h1 style={{textAlign:"center"}}>충전 정보 입력</h1>
         <form onSubmit={handleFormSubmit}>
             <label htmlFor="name">이름</label>
             <input
@@ -102,6 +115,18 @@ const PaymentPage  = () => {
               onChange={(event) => setName(event.target.value)}
               required
             />
+            <div>
+            <label htmlFor="price">카드사</label>
+            <input
+              type="text"
+              id="credit"
+              name="credit"
+              placeholder=" CREDIT"
+              value={credit}
+              onChange={(event) => setCredit(event.target.value)}
+              required
+            />
+          </div>
             <label htmlFor="card-number">카드 번호</label>
             <input
               type="text"
@@ -125,31 +150,19 @@ const PaymentPage  = () => {
             />
           </div>
           <div>
-            <label htmlFor="cvv">CVV</label>
+            <label htmlFor="cvc">CVC</label>
             <input
               type="text"
-              id="cvv"
-              name="cvv"
-              placeholder="CVV"
-              value={cvv}
-              onChange={(event) => setCvv(event.target.value)}
+              id="cvc"
+              name="cvc"
+              placeholder="CVC"
+              value={cvc}
+              onChange={(event) => setCvc(event.target.value)}
               required
             />
           </div>
           <div>
-            <label htmlFor="charge">충전량</label>
-            <input
-              type="text"
-              id="charge"
-              name="charge"
-              placeholder="CHARGE"
-              value={charge}
-              onChange={(event) => setCharge(event.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="price">가격</label>
+            <label htmlFor="chargeprice">충전가격</label>
             <input
               type="text"
               id="price"
@@ -160,7 +173,8 @@ const PaymentPage  = () => {
               required
             />
           </div>
-          <button type="submit">결제</button>
+          
+          <button onClick = {payOnclick} type="submit">충전</button>
         </form>
         </div>
       <Footer/>
