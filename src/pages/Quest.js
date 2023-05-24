@@ -30,16 +30,26 @@ const Questst = styled.div`
         font-size: 1.5em;  
     }
     .title input {
-        border:none;
+
+        font-size: 15px;
+        color: #222222;
+        width: 300px;
+        border: none;
+        border-bottom: solid #aaaaaa 1px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        position: relative;
+        background: none;
+        z-index: 5;
         margin:10px;
         display:flex;
         text-align: center;
         justify-content: center;
         align-items:center;
         height:30px;
-       border-bottom: 1px solid;
+        
        
-        width: 90%;
+        width: 100%;
     }
 
   
@@ -79,7 +89,7 @@ const Quest = () => {
             <button onClick={()=>  {AxiosApi.inQuire("2",email,title,content)}}>  
             문의하기 </button> 
         </div>
-       <button onClick={()=>{AxiosApi.getInQuire(email)}}>문의내역조회</button>
+
 
         </Questst>
         <Footer/>

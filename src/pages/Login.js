@@ -32,7 +32,8 @@ const Container = styled.div`
   .loginbar {
     
     color: white;
-    background-color: #31393C;
+    background-color: #EFF2F3;
+    box-shadow : 
     display: flex;
     flex-direction: column;
     align-items:center;
@@ -40,13 +41,13 @@ const Container = styled.div`
     //border: solid 1px black;
     width: 50%;
     height: 50%;
-    border-radius: 30%;
+    border-radius: 5%;
     border-width: 30%;
 
   }
   input {
     width: 50%;
-    height: 20%;
+    height: 10%;
     
     font-size: 25px;
     border: 0;
@@ -67,7 +68,7 @@ const Container = styled.div`
     cursor: pointer;
   }
   .title {
-    font-size: 50px;
+    font-size: 20px;
     weight: bold;
   }
   a {

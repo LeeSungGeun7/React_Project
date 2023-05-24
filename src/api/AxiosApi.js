@@ -88,10 +88,8 @@ const AxiosApi = {
         console.log(csId);
         return await axios.delete(EF_DOMAIN + "/charger/wish/delete", request);
     },
-    inQuire : async(inqNum,email,title,content) => {
+    inQuire : async(email,title,content) => {
         const request = {
-           
-            inqNo : inqNum,
             email : email,
             inqTitle : title,
             inqContent : content
