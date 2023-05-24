@@ -6,7 +6,7 @@ import Footer from "../layout/Footer";
 
 import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
-
+import React from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";

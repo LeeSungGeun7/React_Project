@@ -91,7 +91,7 @@ const Card = ({ content }) => (
     content === 'Card 1' ? 
 
       <div className="card">
-        <div className="card-content1" ></div>
+        <div className="card-content1" >{""}</div>
          <div className="card-content2">{""}</div>
          <div className="card-content3">{""}</div>
          <div className="card-content4">{""}</div>
@@ -103,9 +103,14 @@ const Card = ({ content }) => (
              <div className="card-content7">{""}</div>
              <div className="card-content8">{""}</div>
            </div>
+           
 );
 
 const CardSlider = () => {
+
+
+
+
   const settings = {
     dots: false,
     infinite: false,

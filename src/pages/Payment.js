@@ -7,21 +7,22 @@ import AxiosApi from "../api/AxiosApi";
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    border: solid 1px blue;
+    /* border: solid 1px blue; */
     align-items: center;
     height: 100vh;
     width: 100%;
+    background-color: white;
     
     h1{
-        color: white;
+        color: black;
     }
 
     .total{
-        border: solid 1px red;
+        /* border: solid 1px red; */
         align-items: center;
         justify-content: center;
-        width: 1024px;
-        background-color: #484848;
+        width: 1000px;
+        background-color: #FCFCFC;
         margin-top: 100px;
         margin-bottom: 100px;
         border-radius: 5%;
@@ -39,7 +40,7 @@ const Container = styled.div`
         padding: 10px;
         font-size: 11px;
         /* text-align: center; */
-        border-radius: 5%;
+        border-radius: 10%;
     }
 
     label {
@@ -51,8 +52,10 @@ const Container = styled.div`
         margin: 20px;
         /* border: solid 1px; */
         justify-content: center;
-        background-color: royalblue;
-        border-radius: 5%;
+        background-color: white;
+        color: black;
+        border-radius: 10%;
+        font-weight: bold;
     }
 
     button[type="submit"] {
@@ -61,7 +64,8 @@ const Container = styled.div`
         margin-top: 30px;
         margin-bottom: 10px;
         text-align: center;
-        background-color: blue;
+        background-color: #3b5998;
+        color : white
     }
 `;
 const PaymentPage  = () => {
