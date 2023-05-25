@@ -184,16 +184,16 @@ const Container = styled.div`
 
 const InquriyCost = () => {
 
-    const [payLog, setPayLog] = useState();
+    // const [payLog, setPayLog] = useState();
     
-    useEffect(() => {
-        const payLog = async() => {
-            const rsp = await AxiosApi.payLog();
-            if(rsp.status === 200)setPayLog(rsp.data);
-            console.log(rsp.data);
-        }
-        payLog("결제 내역");
-    }, []);
+    // useEffect(() => {
+    //     const payLog = async() => {
+    //         const rsp = await AxiosApi.payLog();
+    //         if(rsp.status === 200)setPayLog(rsp.data);
+    //         console.log(rsp.data);
+    //     }
+    //     payLog("결제 내역");
+    // }, []);
 
     
     //테스트용 데이터
@@ -244,7 +244,7 @@ const InquriyCost = () => {
                     <div className="top">
                         <ul className="topMenu">
                         <Link to="/MyPage"><li className="menu1"><a className="mypage" href="/">마이페이지</a></li></Link>
-                        <Link to="/ModifyInfo"><li className="menu2"><a className="modifyInfo" href="/ModifyInfo">내 정보 수정</a></li></Link>
+                        {/* <Link to="/ModifyInfo"><li className="menu2"><a className="modifyInfo" href="/ModifyInfo">내 정보 수정</a></li></Link> */}
                         <Link to="/InterestStation"><li className="menu3"><a className="interestStation" href="/">관심 충전소</a></li></Link>
                         <Link to="/InquriyCost"><li className="menu4"><a className="inquriyCost" href="/">결제 내역</a></li></Link>
                         </ul>
