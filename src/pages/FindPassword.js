@@ -133,11 +133,11 @@ const Input = styled.input`
 
 const FindPassword = () => {
 
-    // const onClickGetKey = async () => {
-	// 	const key = (await AxiosApi.getKeyCode(email));
-	// 	console.log(key.data);
-	// 	if (key.status === 200) setKeyCode(key.data);
-	// }
+    const onClickGetKey = async () => {
+		const key = (await AxiosApi.getKeyCode(email));
+		console.log(key.data);
+		if (key.status === 200) setKeyCode(key.data);
+	}
 
     return(
         <>
