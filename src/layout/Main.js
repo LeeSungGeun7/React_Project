@@ -1,6 +1,6 @@
 import React, { useState,useContext,useEffect, useRef,useAuth } from "react";
 import styled from "styled-components";
-
+import vd from "../images/KakaoTalk_Video_2023-05-03-16-40-25.mp4";
 import vd2 from "../images/KakaoTalk_Video_2023-05-03-16-40-25.mp4";
 import vd3 from "../images/original-087fcdef6dd7e801b337d6dbdc8c0ba9.mp4";  
 import CardSlider from "../Components/CardSlider";
