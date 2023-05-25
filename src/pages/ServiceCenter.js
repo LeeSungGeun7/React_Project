@@ -236,7 +236,7 @@ const ServiceCenter = () => {
                         
 
 
-                 {isLoggedIn ? (
+                 {!isLoggedIn ? (
                       <div className="custom-box">
                                    
                       <div onClick={()=> {navigate("/quest")}} style={{backgroundColor: "#FFE83C"}} className="custom-item1">
