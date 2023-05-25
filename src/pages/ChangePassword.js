@@ -156,8 +156,8 @@ const ChangePassword = () => {
 
     return(
         <>
+        <Header />
         <Container>
-            <Header />
             <div className="Container">
                 <div className="TopMenu">
                     <a href="/FindID" className="top_findId"><li>아이디 찾기</li></a>

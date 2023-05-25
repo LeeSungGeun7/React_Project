@@ -123,28 +123,48 @@ const Container = styled.div`
     }
 `
 
+// const Modal = styled.modal`
+//     width: 300px;
+//     height: 300px;
+//  `
+
 const TypedID = () => {
 
-    // const [email, setEmail] = useState("");
+    const [inputEmail, setInputEmail] = useState("");
 
-    // const onClickFindPassword = async () => {
-    //     const data = {
-    //         id : email
-    //     }
-    //     console.log(data);
-    //     const response = await AxiosApi.getCustomerInfo(id);
-    //     if(response.id === true) {
-    //         Navigate("/FindPassword");
-    //     } else {
-    //         console.log("존재하지 않는 이메일 !!!");
-    //     }
+    const onChangeEmail = (e) => {
+        setInputEmail(e.target.value);
+    }
 
-    // }
+    const onClickFindPassword = async () => {
+        const response = await AxiosApi.getCustomerInfo();
+        if(response.id === 200) {
+            console.log(response.data[0]);
+            if(response.data[0] === undefined) {
+                setModalOpen(true);
+                setModalText("존재하지 않는 아이디입니다.");
+            } else {
+                Navigate("/FindPassword");
+            }
+        }
+    }
+
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalText, setModalText] = useState("");
+
+    const confirmBtn = () => {
+        setModalOpen(false);
+        console.log("확인 버튼이 눌러졌습니다.");
+    }
+    const closeModal= () => {
+        setModalOpen(false);
+    }
 
     return(
         <>
+        <Header />
         <Container>
-            <Header />
+            
             <div className="Container">
                 <div className="TopMenu">
                     <a href="/FindID" className="top_findId"><li>아이디 찾기</li></a>
@@ -156,9 +176,12 @@ const TypedID = () => {
                         <h2 className="title">비밀번호를 찾고자 하는 아이디를 입력해주세요.</h2>
                     </div>
                     <div className="input_area">
-                        <input className="inputBox" ></input>
+                        <input className="inputBox" type="email" value={inputEmail} onChange={onChangeEmail}></input>
                         <br></br>
-                        <a href="/FindPassword" className="nextBtn" ><span className="nextButton">다음</span></a>
+                        <a href="/FindPassword" className="nextBtn" onClick={onClickFindPassword}>
+                            <span className="nextButton">다음</span>
+                        </a>
+                        <modal Open={modalOpen} type={true} confirm={confirmBtn} close={closeModal}>{modalText}</modal>
                     </div>
                     <div className="link_area">
                         <p className="text">아이디가 기억나지 않는다면?</p>

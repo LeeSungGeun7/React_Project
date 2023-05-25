@@ -17,7 +17,13 @@ import MyPage from './pages/MyPage';
 import Main from './layout/Main';
 import Quest from './pages/Quest';
 import Answer from './pages/Answer';
-import InquireCheck from './pages/InquireCheck'
+import InquireCheck from './pages/InquireCheck';
+
+import FindID from './pages/FindID';
+import ShowID from './pages/ShowID';
+import FindPassword from './pages/FindPassword';
+import TypedID from './pages/TypedID';
+import ChangePassword from './pages/ChangePassword';
 
 
 
@@ -48,6 +54,12 @@ function App() {
         <Route path="/ModifyInfo" element={<ModifyInfo />} />
         <Route path="/InterestStation" element={<InterestStation />} />
         <Route path="/InquriyCost" element={<InquriyCost />} />
+
+        <Route path="/FindID" element={<FindID />} />
+        <Route path="/ShowID" element={<ShowID />} />
+        <Route path="/TypedID" element={<TypedID />} />
+        <Route path="/FindPassword" element={<FindPassword />} />
+        <Route path={"/ChangePassword"} element={<ChangePassword />} />
 
         <Route path="/pay" element={<Payment />} />
 

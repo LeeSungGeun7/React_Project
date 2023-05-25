@@ -133,10 +133,17 @@ const Input = styled.input`
 
 const FindPassword = () => {
 
+    // const onClickGetKey = async () => {
+	// 	const key = (await AxiosApi.getKeyCode(email));
+	// 	console.log(key.data);
+	// 	if (key.status === 200) setKeyCode(key.data);
+	// }
+
     return(
         <>
+        <Header/>
         <Container>
-            <Header/>
+        
             <div className="Container">
                 <div className="TopMenu">
                     <a href="/FindID" className="top_findId"><li>아이디 찾기</li></a>
@@ -158,7 +165,7 @@ const FindPassword = () => {
                     </dt>
                     <dd className="input_dd">
                         <Input type="text" className="inputBox"></Input>
-                        <button className="sendCode">인증번호 받기</button>
+                        <button className="sendCode" >인증번호 받기</button>
                     </dd>
                     {/* <br></br> */}
                     <dt className="label_dt">
@@ -168,7 +175,9 @@ const FindPassword = () => {
                         <Input type="text" className="inputBox" placeholder="인증번호 6자리 숫자 입력"></Input>
                         </dd>
                     </div>
-                    <a href="/ChangePassword" className="nextBtn"><span className="nextButton">다음</span></a>
+                    <a href="/ChangePassword" className="nextBtn" >
+                        <span className="nextButton">다음</span>
+                    </a>
                 </div>
             <Footer/>
         </Container>
