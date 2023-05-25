@@ -62,8 +62,8 @@ const CardStyle = styled.div`
     }
 
     .card-content1 {
-      width:100%;
-      background-size: cover;
+      /* width:100%; */
+      background-size: contain;
       background-repeat: no-repeat;
       background-image : url(${cd});
     }
