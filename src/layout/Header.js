@@ -324,6 +324,11 @@ const Header = (props) => {
                     <div onClick={()=> {navigate("/service")}} className="menu-item2">
                         고객센터
                     </div>
+                    {isLoggedIn &&
+                     <div onClick={()=> {navigate("/pay")}} className="menu-item3">
+                     충전결제
+                     </div>
+                    }
                      
             </div>
              <div className="logo" onClick={()=> {navigate("/")}}>

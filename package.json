@@ -1,6 +1,7 @@
 {
   "name": "kh-react-mini-project",
   "version": "0.1.0",
+  "proxy": "https://kapi.kakao.com",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
@@ -54,4 +55,6 @@
       "last 1 safari version"
     ]
   }
+  
+  
 }
