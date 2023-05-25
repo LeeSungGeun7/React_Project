@@ -142,7 +142,7 @@ const Headerst = styled.div`
     justify-content:space-evenly;
    }
 
-   .menu-item , .menu-item2 , {
+   .menu-item , .menu-item2  {
     width: 25%;
    }
    .btns-signup , .btns-login {
@@ -207,11 +207,11 @@ const Headerst = styled.div`
                 .logo {
                     font-size: 30px;
                 }
-                .btns-signup , .btns-logout , .btns-login , {
+                .btns-signup , .btns-logout , .btns-login  {
                     width: 50px;
                 }
-        }     
-
+            }    
+    
 `   
 ;
 
@@ -303,6 +303,7 @@ const Header = (props) => {
                         
                     )}
                 </div>
+
 
             </nav>
 
