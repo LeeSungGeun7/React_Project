@@ -4,6 +4,7 @@ import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import { Link, useParams } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
+import cookies from 'react-cookies';
 
 const Container = styled.div`
     display: flex;
@@ -183,24 +184,44 @@ const Mypage = () => {
 
     const [myInfo, setMyInfo] = useState("");
     const { id } = useParams();
+
     const [money, setMoney] = useState("");
+    
+    const [email,setEmail] = useState("");
+    const [name,setName] = useState(""); 
+    const [nickName,setNickName] = useState(""); 
+    const [tel,setTel] = useState(""); 
 
 
     const data = {
-        name : "신형환",
-        email : "example@example.com",
-        nicName : "kh",
-        phone : "010-1234-5678",
-        pay : "empty"
+        name : name,
+        email : email,
+        nicName : nickName,
+        phone : tel,
+        pay : money
     }
 
     useEffect(() => {
+        const getMyInfo = async() => {
+            const rsp = await AxiosApi.getSession(cookies.load("sessionId"));
+            if (rsp.status === 200) {
+
+              console.log(rsp.data);
+                 if(rsp.data){    
+                  setName(rsp.data.custNm);
+                  setNickName(rsp.data.custNnm);
+                  setEmail(rsp.data.custEmail);
+                  setTel(rsp.data.custPhone);
+                 } 
+                }}
+
         const getInfo = async() => {
-            const rsp = await AxiosApi.getMoney("wert@naver.com");
+            const rsp = await AxiosApi.getMoney(email);
             if(rsp.status === 200)
                 setMoney(rsp.data);
             console.log(rsp.data);
         }
+        getMyInfo();
         getInfo();
     }, []);
 
@@ -240,11 +261,9 @@ const Mypage = () => {
                                 <td className="loginEmail">{data.email}</td>
                             </tr>
                             <tr>
-                                <th className="payment">결제 수단</th>
-                                <td className="myPayment">
-                                    <button className="cardRegister"><a className="card" href="/">카드 등록</a></button>
-                                    <button className="naverPay"><a className="card2" href="/">NAVER PAY</a></button>
-                                    <button className="kakaoPay"><a className="card3" href="/">KaKao PAY</a></button>
+                                <th className="payment">충전금액</th>
+                                <td style={{padding:"10px"}} className="myPayment">
+                                   {data.pay}원
                                 </td>
                             </tr>
 
