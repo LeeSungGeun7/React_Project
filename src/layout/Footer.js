@@ -87,13 +87,13 @@ const Footerst = styled.footer`
             <nav>
               <ul>
                 <li>
-                  <div onClick={() => handleOpenModal(0)}>개인정보처리방침</div>
+                  <a onClick={() => handleOpenModal(0)}>개인정보처리방침</a>
                 </li>
                 <li>
-                  <div onClick={() => handleOpenModal(1)}>이메일무단수집거부</div>
+                  <a onClick={() => handleOpenModal(1)}>이메일무단수집거부</a>
                 </li>
                 <li>
-                  <div onClick={() => handleOpenModal(2)}>저작권정책</div>
+                  <a onClick={() => handleOpenModal(2)}>저작권정책</a>
                 </li>
               </ul>
             </nav>
