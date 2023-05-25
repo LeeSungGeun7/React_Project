@@ -5,7 +5,6 @@ const EF_DOMAIN = "http://localhost:3737";
 
 
 
-
 const AxiosApi = {
 
     // 로그인 
@@ -57,6 +56,24 @@ const AxiosApi = {
     signUp : async(data) => {
         return await axios.post(EF_DOMAIN + "/member/signup", data);
     },
+
+    // 금액충전
+    insertCard : async( name, email, credit, cardNum, endDate, cvc, price) => {
+        const payment = {
+            payname: name,
+            email: email,
+            credit: credit,
+            cardNum: cardNum,
+            endDate: endDate,
+            cvc: cvc,
+            price: price
+        };
+        return await axios.post(EF_DOMAIN + "/payment", payment);
+    },
+    
+
+}
+
 
 
     // 관심 충전소 등록 대강 만듬 
@@ -141,6 +158,7 @@ const AxiosApi = {
         }
 
 };
+
 
 
 

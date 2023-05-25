@@ -9,12 +9,16 @@ import CarSerach from './pages/CarSearch';
 import ModifyInfo from './pages/ModifyInfo';
 import InterestStation from "./pages/InterestStation"
 import InquriyCost from './pages/InquriyCost';
+
+import Payment from './pages/Payment';
+
 import ServiceCenter from './pages/ServiceCenter';
 import MyPage from './pages/MyPage';
 import Main from './layout/Main';
 import Quest from './pages/Quest';
 import Answer from './pages/Answer';
 import InquireCheck from './pages/InquireCheck'
+
 
 
 
@@ -45,6 +49,7 @@ function App() {
         <Route path="/InterestStation" element={<InterestStation />} />
         <Route path="/InquriyCost" element={<InquriyCost />} />
 
+        <Route path="/pay" element={<Payment />} />
 
       </Routes>
     </Router>

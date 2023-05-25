@@ -23,9 +23,6 @@ import { useAuth } from "../context/AuthContextProvider";
 
 
 
-
-
-
 const Headerst = styled.div`
 
 
@@ -38,7 +35,9 @@ const Headerst = styled.div`
     justify-content:center;
     position: ${props => props.overlap ? `absolute` : 'static'};
 
+
       background-color: none; 헤더의 배경색을 투명하게 설정 (투명도 조절 가능)  */
+
 
    // background-color: rgba(255, 255, 255, 0.5); /* 헤더의 배경색을 투명하게 설정 (투명도 조절 가능) */
 
@@ -64,6 +63,7 @@ const Headerst = styled.div`
      //   width : 200px;
         /* display:flex;
         align-items:center;
+
         justify-content: center; */
         font-size: 40px;
         
@@ -73,6 +73,7 @@ const Headerst = styled.div`
         /* display:flex;
         justify-content:space-evenly;
         align-items:space-evenly; */
+
     }
     /* .logo-items{
         display:flex;
@@ -275,6 +276,7 @@ const Header = (props) => {
                     {!isLoggedIn && <Link to="/">회원가입</Link>}
                     </div>
 
+
                 <div className="header-customer" >
                     {isLoggedIn ? (
                     <div className="customer-items">
@@ -301,7 +303,9 @@ const Header = (props) => {
                         
                     )}
                 </div>
+
             </nav>
+
 
 
           
@@ -362,6 +366,7 @@ const Header = (props) => {
 
 
         </>
+
         </Headerst>
     );
 };

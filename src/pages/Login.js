@@ -5,8 +5,10 @@ import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
+
 import cookies from 'react-cookies';
 import cookie from 'react-cookies';
+
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";

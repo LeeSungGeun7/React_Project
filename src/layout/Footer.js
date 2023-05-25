@@ -4,6 +4,7 @@ import Modal from "../utils/Modal";
 
 const Footerst = styled.footer`
     display : flex;
+    width: 100%;
     align-items: center;
     justify-content : center;
     font-size: 10px;

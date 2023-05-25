@@ -114,14 +114,10 @@ const Card = ({ content }) => (
     content === 'Card 1' ? 
 
       <div className="card">
-        <div className="item1">
-          <div className="card-content1">배경색</div>
-          <div>신한카드</div>
-        </div>
 
-         <div className="card-content2">{""}
-        
-         </div>
+        <div className="card-content1" >{""}</div>
+         <div className="card-content2">{""}</div>
+
          <div className="card-content3">{""}</div>
          <div className="card-content4">{""}</div>
        </div> 
@@ -133,11 +129,15 @@ const Card = ({ content }) => (
              <div className="card-content8">{""}</div>
 
            </div>
-  
+
 );
 
 
 const CardSlider = () => {
+
+
+
+
   const settings = {
     dots: false,
     infinite: false,
