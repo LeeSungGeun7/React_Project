@@ -22,6 +22,7 @@
 import React, { useEffect, useRef } from 'react';
 import $ from 'jquery';
 
+
 function KakaoMap({ chargerInfo , Lat , Lng }) {
   const mapContainer = useRef(null);
   const map = useRef(null); // map 객체를 저장할 ref를 추가
@@ -39,9 +40,10 @@ function KakaoMap({ chargerInfo , Lat , Lng }) {
           title: data.title,
           latlng: new window.kakao.maps.LatLng(data.lat, data.lng),
         }));
+        
+        const imageSrc = "https://cdn-icons-png.flaticon.com/128/8608/8608084.png";
 
-        const imageSrc = "https://cdn-icons-png.flaticon.com/128/2962/2962317.png";
-
+        // "https://cdn-icons-png.flaticon.com/128/2962/2962317.png";
         positions.forEach((position) => {
           const imageSize = new window.kakao.maps.Size(45, 64);
           const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
@@ -53,6 +55,7 @@ function KakaoMap({ chargerInfo , Lat , Lng }) {
           });
         });
       };
+
 
       if (chargerInfo.length > 0) {
         createMarkers();
@@ -74,4 +77,3 @@ function KakaoMap({ chargerInfo , Lat , Lng }) {
 
 export default KakaoMap;
 
-// App.js

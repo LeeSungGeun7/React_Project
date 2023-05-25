@@ -6,6 +6,8 @@ import KaKao from "../Components/KakaoMap";
 import AxiosApi from "../api/AxiosApi";
 import { FaSearch,FaStar } from 'react-icons/fa';
 import { HiOutlineEmojiHappy } from "react-icons/hi";
+import { useAuth } from "../context/AuthContextProvider";
+import { useParams } from "react-router-dom";
 
 
 
@@ -13,12 +15,14 @@ import { HiOutlineEmojiHappy } from "react-icons/hi";
 
 
 const CarSerachst = styled.div`
+    height:150vh;
     color : #333333;
     font-family: 'Do Hyeon', sans-serif;
     font-size: 25px;
-    display: grid;
-    grid-template-columns: 1fr  ;
-    grid-template-rows: repeat(2,minmax(80px,auto));
+    /* display: flex;
+    flex-direction:column;
+    grid-template-columns: 1fr  ; */
+   // grid-template-rows: repeat(1,minmax(80px,auto));
     
     .Container {
         margin: 50px;
@@ -26,11 +30,11 @@ const CarSerachst = styled.div`
         flex-direction: column;
 
         //border: solid 1px black;
-        background-color:#ABDFF1;
+        background-color: #ABDFF1;
 
        // border: solid 1px black;
 
-        height:150vh;
+        height:100%;
     }
     
     .map , .line , .result {
@@ -40,18 +44,20 @@ const CarSerachst = styled.div`
         
     }
     .line {
+        flex:1;
         display: flex;
         align-items:center;
         flex-direction: row;
         height: 20%;
-        background-color : #F4ED6E;
+        background-color :  #F5F278;
     }
     .map {
-        height: 100%;
+        flex:4;
         background-size: cover ;
         background-image: url("https://t1.daumcdn.net/cfile/tistory/9968D2465E832E5A34") ;
     }
     .result {
+        flex:8;
         display: flex;
         flex-direction: row;
         height: 50%;
@@ -222,15 +228,54 @@ const CarSerachst = styled.div`
   font-size: 20px;
   width:80%;
   height: 40%;
-  background-color: white;
+  background-color:  #EFF2F3;
+  color: #333333;
   margin:10px;
+
+  border-radius: 15px;
 }
-   
-`;
+      @media (max-width: 1000px) {
+                * {
+                    font-size: 0.9em;
+                }
+                .SearchInput {
+                  width: 100%;
+                }
+                .service , .charge-method , .local{
+                  display:none;
+                  flex-direction:row;
+
+                }
+                .line {
+                    flex:1;
+                    display: flex;
+                    align-items:center;
+                    flex-direction: row;
+                    justify-content: space-evenly;
+                    height: 10%;
+                }
+                .map {
+                    flex:5;
+                    background-size: cover ;
+                    background-image: url("https://t1.daumcdn.net/cfile/tistory/9968D2465E832E5A34") ;
+                }
+                .result {
+                    flex:2;
+                    display: flex;
+                    flex-direction: row;
+                    height: 50%;
+                }
+        }   
+      
+`
+;
 
 
 
 const CarSerach = () => {
+  const { searchValue } = useParams();
+
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
   const statusColors = {
     1: "#52F911", // 충전 가능
     2: "#FFF94E", // 충전 중
@@ -238,7 +283,7 @@ const CarSerach = () => {
     4: "red", // 통신장애
     5: "red" // 통신미연결
 };
-  const isLoggedIn = "true";
+
   const email = "sungkeno3o@gmail.com";
 
   const [chargers, setChargers] = useState([]);
@@ -327,7 +372,7 @@ const CarSerach = () => {
     
 
     const [chargerInfo, setChargerInfo] = useState([]);
-    const [name,setName] = useState("서울시");
+    const [name,setName] = useState(searchValue);
 
     const [chargeMethod, setChargeMethod] = useState(null);
     const [service, setService] = useState(null);
@@ -414,10 +459,9 @@ const CarSerach = () => {
 
 
     return (
-        <CarSerachst>
-        <>
-        <Header overlap={false}/>
-        </>
+      <>
+    <Header overlap={false}/>
+        <CarSerachst>   
         <div className="Container">
             <div className="map">
             <KaKao chargerInfo={chargerInfo} Lat={lat} Lng={lng}/>
@@ -528,7 +572,7 @@ const CarSerach = () => {
         
         <Footer/>
         </CarSerachst>
-        
+        </>
     );    
                         };
 

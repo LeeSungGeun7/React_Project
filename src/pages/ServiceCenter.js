@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
@@ -10,7 +10,7 @@ import { useContext } from "react";
 
 
 const Contain = styled.div`
-   
+    background-color:#EFF2F3;
     .Container {
 
         display : flex;
@@ -18,7 +18,7 @@ const Contain = styled.div`
         align-items: center;
         justify-content: center;
         height: 150vh;
-        border-top : solid 10px #333333;
+       // border-top : solid 1px #333333;
         font-family: 'Do Hyeon', sans-serif;
     }
 
@@ -141,20 +141,32 @@ const Contain = styled.div`
         overflow : scroll;
         height:60%;
     }
-    
+    @media (max-width: 1000px) {
+        * {
+            font-size: 0.8em;
+        }
+    }
+    @media (max-width: 480px) {
+            * {
+                font-size: 0.4em;
+            }
+    }
+ 
 `
 
 
   
 
 const ServiceCenter = () => {
-    const isLoggedIn = "true";
+    const [isLoggedIn,setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
 
 
     return(
+        <>
+        <Header/>
         <Contain>
-            <Header/>
+            
             <div className="Container">
 
 
@@ -167,7 +179,7 @@ const ServiceCenter = () => {
                 
                     <div className="mid">
 
-                        <div style={{fontSize:"50px"}}>24시간 연중무휴 채팅상담</div>
+                        <div style={{minWidth:"10%",fontSize:"2.5em"}}>24시간 연중무휴 채팅상담</div>
                         <div style={{color: "white",marginLeft: "120px" , fontSize: "100px"}}>< SlEarphonesAlt/></div>
                     </div>
 
@@ -200,7 +212,7 @@ const ServiceCenter = () => {
                                                 (로그인이안되요!)
                                             </div>
                                             <div className="question">
-                                                (그냥안되요!)
+                                                (!)
                                             </div>
                                             <div className="question">
                                                 (구글회원가입은어떻게해야되나요!)
@@ -227,13 +239,13 @@ const ServiceCenter = () => {
                  {isLoggedIn ? (
                       <div className="custom-box">
                                    
-                      <div onClick={()=> {navigate("/login")}} style={{backgroundColor: "#FFE83C"}} className="custom-item1">
+                      <div onClick={()=> {navigate("/quest")}} style={{backgroundColor: "#FFE83C"}} className="custom-item1">
 
                           1:1문의하기
                           <p style={{fontSize:"10px" , backgroundColor: "#FFE83C"}}>궁금한 점이 있으시면 1:1문의를 남겨주세요</p>
                           <p style={{fontSize:"5px" , fontWeight: "100"}}>^&^</p>
                       </div>
-                      <div className="custom-item2" style={{backgroundColor: "#C2FF30"}}>
+                      <div onClick={()=> {navigate("/check")}} className="custom-item2" style={{backgroundColor: "#C2FF30"}}>
                           문의내역 조회
                       </div>
                   </div>
@@ -288,6 +300,7 @@ const ServiceCenter = () => {
         <Footer/>
 
         </Contain>
+        </>
     );
 }
 
