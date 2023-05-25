@@ -183,6 +183,8 @@ const Mypage = () => {
 
     const [myInfo, setMyInfo] = useState("");
     const { id } = useParams();
+    const [money, setMoney] = useState("");
+
 
     const data = {
         name : "신형환",
@@ -193,11 +195,13 @@ const Mypage = () => {
     }
 
     useEffect(() => {
-        // const myInfo = async(id) => {
-        //     const rsp = AxiosApi.getMyInfo(id);
-        //     if(rsp.status === 200)setMyInfo(rsp.data);
-        //     console.log(rsp.data);
-        // }
+        const getInfo = async() => {
+            const rsp = await AxiosApi.getMoney("wert@naver.com");
+            if(rsp.status === 200)
+                setMoney(rsp.data);
+            console.log(rsp.data);
+        }
+        getInfo();
     }, []);
 
     return(
