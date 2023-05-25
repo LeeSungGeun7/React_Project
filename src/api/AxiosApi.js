@@ -70,6 +70,10 @@ const AxiosApi = {
         };
         return await axios.post(EF_DOMAIN + "/payment", payment);
     },
+    // 충전금액조회
+    getMoney : async(email) => {
+        return await axios.get(EF_DOMAIN + `/user/${email}/charge`);
+    },
     
 
 

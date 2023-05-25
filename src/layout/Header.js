@@ -16,7 +16,7 @@ import cookie from 'react-cookie';
 import cookies from 'react-cookies';
 import AxiosApi from "../api/AxiosApi";
 import { useAuth } from "../context/AuthContextProvider";
-
+import Mypage from "../pages/MyPage";
 
 
 

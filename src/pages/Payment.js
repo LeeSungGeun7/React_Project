@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import AxiosApi from "../api/AxiosApi";
+import { useAuth } from "../context/AuthContextProvider";
+import cookies from 'react-cookies';
 
 const Container = styled.div`
     display: flex;
@@ -68,10 +70,8 @@ const Container = styled.div`
         color : white
     }
 `;
-const PaymentPage  = () => {
-
-
-    const [email, setEmail] = useState('wert@naver.com');
+const PaymentPage  = () => {    
+    const [email,setEmail] = useState("");
     const [cardNumber, setCardNumber] = useState('');
     const [expirationDate, setExpirationDate] = useState('');
     const [cvc, setCvc] = useState('');
@@ -100,7 +100,19 @@ const PaymentPage  = () => {
     };
 
     // 카카오페이 모듈 추가하고 카카오페이에 보내는 데이터가 post로 성공했을 경우 콜백함수로 payOnclikc 함수 불러올 예정.
-   
+    useEffect(() => {
+      const getMyInfo = async() => {
+          const rsp = await AxiosApi.getSession(cookies.load("sessionId"));
+          if (rsp.status === 200) {
+            console.log(rsp.data);
+               if(rsp.data){    
+                setEmail(rsp.data.custEmail);
+               } 
+              }}
+      getMyInfo();
+  }, []);
+
+
   
     return (
         
