@@ -1,6 +1,6 @@
 import React, { useState,useContext,useEffect, useRef,useAuth } from "react";
 import styled from "styled-components";
-import vd from "../images/video-src-pc (1).mp4";
+
 import vd2 from "../images/KakaoTalk_Video_2023-05-03-16-40-25.mp4";
 import vd3 from "../images/original-087fcdef6dd7e801b337d6dbdc8c0ba9.mp4";  
 import CardSlider from "../Components/CardSlider";
@@ -11,7 +11,7 @@ import { FaSearch } from 'react-icons/fa';
 import CarSearch from "../pages/CarSearch";
 
 import AxiosApi from "../api/AxiosApi";
-import cookie from 'react-cookies';
+import cookie from 'react-cookies'; 
 import axios from "axios";
 
 
@@ -140,6 +140,7 @@ const Main = () => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
 
+
   const handleSubmit = () => {
     navigate(`/Car/${searchValue}`);
   };
@@ -167,6 +168,7 @@ const Main = () => {
       setVdValue(vd);
     }
   };
+
 
   // useEffect(() => { 
   //   const getMyInfo = async() => {

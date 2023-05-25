@@ -1,17 +1,12 @@
 import React from 'react';
 import {useState , useContext} from "react";
-
 import { useNavigate } from "react-router-dom";
-
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
-
 import cookies from 'react-cookies';
 import cookie from 'react-cookies';
-
-
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
@@ -85,12 +80,12 @@ const Login = () => {
     const [inputPw , setInputPw] = useState("");
     
     // 오류메시지 
-    const [idMsg , setIdMsg] = useState("");
-    const [pwMsg , setPwMsg] = useState("");
+    // const [idMsg , setIdMsg] = useState("");
+    // const [pwMsg , setPwMsg] = useState("");
     
-    // 유효성 검사 
-    const [isId , setIsId] = useState("");
-    const [isPw , setIsPw] = useState("");
+    // // 유효성 검사 
+    // const [isId , setIsId] = useState("");
+    // const [isPw , setIsPw] = useState("");
     
 
     const onChangeId = (e) => {

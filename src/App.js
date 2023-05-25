@@ -6,7 +6,6 @@ import SignUp from './pages/SignUp';
 import {BrowserRouter as Router , Route , Routes} from 'react-router-dom';
 import Layout from './layout/Layout';
 import CarSerach from './pages/CarSearch';
-
 import ModifyInfo from './pages/ModifyInfo';
 import InterestStation from "./pages/InterestStation"
 import InquriyCost from './pages/InquriyCost';
