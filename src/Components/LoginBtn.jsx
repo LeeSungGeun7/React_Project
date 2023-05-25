@@ -1,12 +1,33 @@
 import React from "react";
+
+
+import styled , {css}from "styled-components";
+
 import {Link, Route } from "react-router-dom";
-import styled from "styled-components";
+
+
 
 
 
 
 
 const Loginst = styled.div`
+
+display: flex;
+align-items:center;
+justify-content:center;
+button {
+min-width: 100% ;
+
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 70%;
+  font-size: 12px;
+  cursor: pointer;
+  
+
     #btn1 {
         font-size : 0.5rem;
         color : white;
@@ -45,9 +66,15 @@ const Loginst = styled.div`
         transition : 0.25s;
     }
 
+
+}
+  button:hover {
+    background-color: #0069d9;
+  }
 `;
 
 const LoginBtn = (props) => {
+
 
     return(
         <Loginst>
@@ -59,6 +86,7 @@ const LoginBtn = (props) => {
             </div>  
         </Loginst>
     
+
     );
 
 

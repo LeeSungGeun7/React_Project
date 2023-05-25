@@ -5,11 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
+import { AuthContextProvider } from './context/AuthContextProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+
+    <AuthContextProvider>
     <App />
+    </AuthContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
