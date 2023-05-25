@@ -110,22 +110,46 @@ const Login = () => {
       });
     }
 
-    const onClickLogin = async() => {
-        // 로그인을 위한 axios 호출 
-        const response = await AxiosApi.memberLogin(inputId,inputPw);
-        console.log(response.config.data);
-        const uuid = response.data;
-      //  response.config.data.map(data=> data)
+  //   const onClickLogin = async() => {
+  //       // 로그인을 위한 axios 호출 
+  //       const response = await AxiosApi.memberLogin(inputId,inputPw);
+  //       console.log(response.config.data);
+  //       const uuid = response.data;
+  //     //  response.config.data.map(data=> data)
         
-        if(response.status === 200) {
-          const rsp = await AxiosApi.getSession(cookie.load("sessionId"));
+  //       if(response.status === 200) {
+  //         const rsp = await AxiosApi.getSession(cookie.load("sessionId"));
             
-            setSessionId(uuid);
-            navigate("/");
-        } else {         
-            alert("로그인 에러 !!!")
+  //           setSessionId(uuid);
+  //           navigate("/");
+  //       } else {         
+  //           alert("로그인 에러 !!!")
+  //   }
+   
+  // }
+  const onClickLogin = async() => {
+    // 로그인을 위한 axios 호출 
+    const response = await AxiosApi.memberLogin(inputId,inputPw);
+    console.log(response.config.data);
+    const uuid = response.data;
+  
+    if(response.status === 200) {
+      // Here we're now waiting for getSession to return before redirecting.
+      const rsp = await AxiosApi.getSession(cookie.load("sessionId"));
+        
+      // Check if rsp.status is 200, meaning the session data is ready.
+      if (rsp.status === 200) {
+        setSessionId(uuid);
+        navigate("/");
+      } else {
+        // Handle the case where the session data isn't ready yet.
+        // Perhaps show an error message, or redirect to a different page.
+      }
+    } else {         
+      alert("로그인 에러 !!!")
     }
-  }
+}
+
 
 
   return (

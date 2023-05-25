@@ -242,6 +242,9 @@ const Header = (props) => {
             setIsLoggedIn(true);
             setCookie(String(cookies.load("sessionId")));
             setUserName(rsp.data.custNm);
+           } else {
+            cookies.remove("sessionId");
+            setIsLoggedIn(false);
            }
       }
     }
@@ -344,7 +347,7 @@ const Header = (props) => {
                                     if(response.status === 200) {
                                     cookies.remove("sessionId");
                                     setIsLoggedIn(false);
-                                    setUserName(response.data.custNm);
+                                    //setUserName(response.data.custNm);
                                     }
                                 } catch (error) {
                                     alert("로그아웃중에 문제가 발생하였습니다.");

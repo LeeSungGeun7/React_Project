@@ -6,7 +6,7 @@ import vd3 from "../images/original-087fcdef6dd7e801b337d6dbdc8c0ba9.mp4";
 import CardSlider from "../Components/CardSlider";
 import News from "../Components/News";
 import {  useNavigate} from "react-router-dom"; 
-
+import ImageSlider from "../Components/ImageSlider";
 import { FaSearch } from 'react-icons/fa';
 import CarSearch from "../pages/CarSearch";
 
@@ -121,9 +121,11 @@ const Mainst = styled.main`
   }
   .mainitem {
     border-radius: 15px;
-    border: solid 1px;
+
+   // border: solid 1px;
     width: 92.5%;
     height: 100vh;
+    overflow: hidden;
   }
   .item-group {
     display:flex;
@@ -149,6 +151,13 @@ const Main = () => {
         }
       }
   
+      const images = [
+        { image: "https://i.pinimg.com/474x/d4/a4/46/d4a44668707dcd5e14dffff6d5436a44.jpg", text: '충전이 어려우시다구요?' },
+        { image: "https://ifh.cc/g/nnFLP3.jpg", text: '' },
+        { image: 'https://res.cloudinary.com/demo/image/upload/kitten_fighting.gif', text: '찾으세요' },
+        // ...
+      ];
+     
 
 
   const [vdValue, setVdValue] = useState(vd3);
@@ -191,7 +200,7 @@ const Main = () => {
       </div>
     <div className="item-group">
         <div className="mainitem">
-            <News/>
+             <ImageSlider images={images} />
         </div>
         {/* <div className="bottom">
           <MainBottom/>

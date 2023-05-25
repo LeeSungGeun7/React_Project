@@ -123,7 +123,7 @@ const AxiosApi = {
                 return null;
             }
         },
-
+        //답변보내기
         postAnswer : async(inqNo,answerContent) => {
             const request = {
                 inqNo : inqNo,

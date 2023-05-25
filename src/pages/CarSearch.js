@@ -228,7 +228,7 @@ const CarSerachst = styled.div`
   font-size: 20px;
   width:80%;
   height: 40%;
-  background-color: silver;
+  background-color:  #EFF2F3;
   color: #333333;
   margin:10px;
 

@@ -18,9 +18,10 @@ function KakaoMap({ chargerInfo , Lat , Lng }) {
           title: data.title,
           latlng: new window.kakao.maps.LatLng(data.lat, data.lng),
         }));
+        
+        const imageSrc = "https://cdn-icons-png.flaticon.com/128/8608/8608084.png";
 
-        const imageSrc = "https://cdn-icons-png.flaticon.com/128/2962/2962317.png";
-
+        // "https://cdn-icons-png.flaticon.com/128/2962/2962317.png";
         positions.forEach((position) => {
           const imageSize = new window.kakao.maps.Size(45, 64);
           const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
