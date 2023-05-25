@@ -132,11 +132,11 @@ const TypedID = () => {
     //         id : email
     //     }
     //     console.log(data);
-    //     const response = await AxiosApi.signUp(data);
-    //     if(response.data === true) {
-    //         Navigate("/Login");
+    //     const response = await AxiosApi.getCustomerInfo(id);
+    //     if(response.id === true) {
+    //         Navigate("/FindPassword");
     //     } else {
-    //         console.log("로그인 에러 !!!");
+    //         console.log("존재하지 않는 이메일 !!!");
     //     }
 
     // }
