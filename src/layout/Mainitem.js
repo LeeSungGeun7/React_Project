@@ -1,52 +1,53 @@
 import React from "react";
 import styled from "styled-components";
 
-
 const Mainitems = styled.div`
+
 .Centeritem {
-    margin-top: 20px;
+    /* margin-top: 20px; */
     /* border: solid 1px; */
     width: 100%;
     height: 100vh;
     font-size: 800%;
-    background-color: #363636;
+    background-color: whitesmoke;
     position: relative;
 }
 
-
-b{ 
+b { 
     opacity: 50%;
     position: absolute;
     left: 1px;
     /* justify-content: flex-end; */
     display: flex;
     align-items: center;
-    margin-left: 1000px;
-    margin-top: 250px;
+    margin-left: 500px;
+    margin-top: 280px;
     color: royalblue;
+   font-style: oblique;
 }
+
 .Centeritem2 {
     /* border: solid 1px; */
     position: relative;
     font-style: oblique;
     left: 100px;
     top: 50px;
-    width: 900px;
-    height: 200px;
+    /* width: 900px; */
+    //height: 200px;
     font-size: 150px;
     font-weight: 500;
     color: #A1FF98;
-    
 }
+
 .type{
     /* border: solid 1px; */
     font-size: 25px;
     font-style: oblique;
     font-family:'Do Hyeon', sans-serif;
     position: relative;
-    left: 50px;
-    top: 50px;
-    width: 900px;
+    /* left: 50px;
+    top: 50px; */
+    /* width: 900px; */
     height: 150px;
     display: flex;
     align-items: center;
@@ -54,20 +55,23 @@ b{
     margin-top: 10px;
     line-height: 40px;
     font-weight: bold;
-    color: #FFFFE9;
+    color: black;
 }
 .type2 {
     /* border: solid 1px; */
-    font-size: 25px;
+    display:flex:
+    justify-content:space-evenly;
+    font-size: 20px;
     position: relative;
-    left: 50px;
-    top: 100px;
-    width: 900px;
+   // left: 90px;
+    top: 150px;
+
+   // width: 900px;
     height: 400px;
-    line-height: 70px;
+   // line-height: 70px;
     font-style: oblique;
     font-weight: bold;
-    color: white;
+    color: #363636;
 }
 `;
 
@@ -91,7 +95,7 @@ const Mainitem = () => {
                     <br/>고객만족활동과 KH 등에의 공급을 통해인정된 통합 관제 솔루션 개발 및 유지 역량, 입증된 충전기 유지, 보수 역량을 
                     바탕으로 스마트 모빌리티 분야의 다양한 서비스를 개발, 제공하고 있습니다.
                     </div>
-                   </div>
+             </div>
         </Mainitems>
     );
 };

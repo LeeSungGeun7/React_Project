@@ -1,24 +1,24 @@
-import { useState } from "react";
+import React from 'react';
+import {useState , useContext} from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "../utils/Modal";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
-
 import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
+
+import cookies from 'react-cookies';
+import cookie from 'react-cookies';
 
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
-import { async } from "q";
+
 
 
 const Container = styled.div`
-  
-
 
   .Container {
-    background-color: black ;
+    background-color: white ;
     height: 100vh;
     display: flex;
     flex-wrap: wrap;
@@ -28,103 +28,132 @@ const Container = styled.div`
   }
   .loginbar {
     
-    color: white;
-    background-color: #333333;
+    color: #30A7FE;
+    background-color: #EFF2F3;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25);
     display: flex;
     flex-direction: column;
     align-items:center;
     justify-content: space-evenly;
     //border: solid 1px black;
-    width: 50%;
-    height: 50%;
-    border-radius: 30%;
+    width: 35%;
+    height: 65%;
+    border-radius: 5%;
     border-width: 30%;
 
   }
   input {
     width: 50%;
-    height: 20%;
+    height: 10%;
+    box-shadow: 1px ;
     font-size: 15px;
     border: 0;
     border-radius: 15px;
     outline: none;
-    padding-left: 10px;
-    background-color: rgb(233, 233, 233);
+    padding-left: 20px;
+    background-color: white;
   }
   button {
-    border-top-left-radius: 20%;
-    border-bottom-right-radius: 20%;
-    //border-radius: 30%;
-    background-color: #30A7FE;
+    //#30A7FE;
+   
+    border-radius: 10%;
+    background-color:  #F5F278;
     border : none;
     width: 15%;
     height:10%;
+    cursor: pointer;
   }
   .title {
-    font-size: 50px;
+    font-size: 20px;
     weight: bold;
   }
+  a {
+    text-decoration: none;
+    color: #333333;
+  }
 `
-
-
-
-
 const Login = () => {
-  const navigate = useNavigate(); // 라우터 이동을 하기위해서
-  // 키보드 입력
-  const [inputId, setInputId] = useState("");
-  const [inputPw, setInputPw] = useState("");
 
-  // 오류메시지 
-  const [idMsg, setIdMsg] = useState("");
-  const [pwMsg, setPwMsg] = useState("");
+  //  const { loginUser } = useContext(AuthContext);
+   const clientId = "157067894615-cai8h2gq8gatlmoqpkfe08os9rhq92vp.apps.googleusercontent.com";
+    const navigate = useNavigate(); // 라우터 이동을 하기위해서
+    // 키보드 입력
+    const [inputId , setInputId] = useState("");
+    const [inputPw , setInputPw] = useState("");
+    
+    // 오류메시지 
+    // const [idMsg , setIdMsg] = useState("");
+    // const [pwMsg , setPwMsg] = useState("");
+    
+    // // 유효성 검사 
+    // const [isId , setIsId] = useState("");
+    // const [isPw , setIsPw] = useState("");
+    
 
-  // 유효성 검사 
-  const [isId, setIsId] = useState("");
-  const [isPw, setIsPw] = useState("");
+    const onChangeId = (e) => {
+       setInputId(String(e.target.value));
+    } 
 
-  const clientId = "157067894615-cai8h2gq8gatlmoqpkfe08os9rhq92vp.apps.googleusercontent.com";
-
-  const onChangeId = (e) => {
-    const regexId = /^\w{5,20}$/;
-    setInputId(e.target.value);
-    if (!regexId.test(e.target.value)) {
-      setIdMsg("5자리 이상 20자리 미만으로 입력해주세욧");
-      setIsId(false);
-    } else {
-      setIdMsg("올바른 형식 입니다.");
-      setIsId(true);
-    }
-  }
-
-  const onChangePw = (e) => {
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
-    const passwordCurrent = e.target.value;
-    setInputPw(passwordCurrent)
-    if (!passwordRegex.test(passwordCurrent)) {
-      setPwMsg('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!')
-      setIsPw(false)
-    } else {
-      setPwMsg('안전한 비밀번호에요 : )');
-      setIsPw(true);
+    const onChangePw = (e) => {
+      setInputPw(String(e.target.value))
     }
 
-  }
-  const onClickLogin = async () => {
+    const setSessionId = (uuid) => {
+      const expires = new Date()
+      expires.setMinutes(expires.getMinutes() + 60);
+      cookies.save("sessionId", uuid, {
+        path : "/",
+        expires,
+      });
+    }
+
+  //   const onClickLogin = async() => {
+  //       // 로그인을 위한 axios 호출 
+  //       const response = await AxiosApi.memberLogin(inputId,inputPw);
+  //       console.log(response.config.data);
+  //       const uuid = response.data;
+  //     //  response.config.data.map(data=> data)
+        
+  //       if(response.status === 200) {
+  //         const rsp = await AxiosApi.getSession(cookie.load("sessionId"));
+            
+  //           setSessionId(uuid);
+  //           navigate("/");
+  //       } else {         
+  //           alert("로그인 에러 !!!")
+  //   }
+   
+  // }
+  const onClickLogin = async() => {
     // 로그인을 위한 axios 호출 
-    const response = await AxiosApi.memberLogin(inputId, inputPw);
-    console.log(response.data);
-    if (response.data === true) {
-      navigate("/home");
-    } else {
-      console.log("로그인 에러 !!!")
-        ;
+    const response = await AxiosApi.memberLogin(inputId,inputPw);
+    console.log(response.config.data);
+    const uuid = response.data;
+  
+    if(response.status === 200) {
+      // Here we're now waiting for getSession to return before redirecting.
+      const rsp = await AxiosApi.getSession(cookie.load("sessionId"));
+        
+      // Check if rsp.status is 200, meaning the session data is ready.
+      if (rsp.status === 200) {
+        setSessionId(uuid);
+        navigate("/");
+      } else {
+        // Handle the case where the session data isn't ready yet.
+        // Perhaps show an error message, or redirect to a different page.
+      }
+    } else {         
+      alert("로그인 에러 !!!")
     }
-  }
+}
+
+
 
   return (
+    <>
+    <Header />
     <Container>
-      <Header />
+      
       <div className="Container">
 
         <div className="loginbar">
@@ -139,19 +168,20 @@ const Login = () => {
                 const result = await AxiosApi.googlelogin(res.credential);
                 console.log(jwtDecode(res.credential));
                 console.log(result);
-                // navigate("/signUp", {state : { data : jwtDecode(res.credential)}});
+                navigate("/signUp", {state : { data : jwtDecode(res.credential)}});
               }}
               onFailure={(err) => {
                 console.log(err);
               }}
-            />
+/>
           </GoogleOAuthProvider>
+
         </div>
       </div>
       <Footer />
     </Container>
+    </>
   );
-
-};
+            };
 
 export default Login;

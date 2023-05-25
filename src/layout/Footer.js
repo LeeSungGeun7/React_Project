@@ -4,10 +4,12 @@ import Modal from "../utils/Modal";
 
 const Footerst = styled.footer`
     display : flex;
+    width: 100%;
     align-items: center;
     justify-content : center;
     font-size: 10px;
     border: solid 1px black;
+
     background-color: black;
     color : white;
 
@@ -25,6 +27,7 @@ const Footerst = styled.footer`
     margin-right: 20px;
     text-align: center;
     justify-content: center;
+    cursor: pointer;
    }
 
    .div2 h2 {
@@ -45,20 +48,20 @@ const Footerst = styled.footer`
     justify-content: center;
    }
 
+
    h3 {
     font-size: 5px;
     margin-top: 5px;
     position: relative;
     text-align: center;
    }
-`;
+   `;
 
       const Footer = () => {
         const [isModalOpen, setIsModalOpen] = useState(false);
         const [modalContents, setModalContents] = useState("");
         const [modalTitle, setModalTitle] = useState("");
 
-      
         const handleOpenModal = (index) => {
           setIsModalOpen(true);
           if (index === 0) {
@@ -70,7 +73,6 @@ const Footerst = styled.footer`
           } else if (index === 2) {
             setModalContents("전기차 충전소 찾기 에코프렌즈에서 제공하는 모든 콘텐츠 즉, 웹 문서,첨부파일,DB정보 등은 저작권법에 의하여 보호받는 저작물로써, 별도의 저작권 표시 또는 다른 출처를 명시한 경우를 제외하고는 원칙적으로 에코프렌즈공사에 저작권이 있습니다.");
             setModalTitle("저작권정책");
-
           }
         };
       
@@ -85,13 +87,13 @@ const Footerst = styled.footer`
             <nav>
               <ul>
                 <li>
-                  <a onClick={() => handleOpenModal(0)}>개인정보처리방침</a>
+                  <div onClick={() => handleOpenModal(0)}>개인정보처리방침</div>
                 </li>
                 <li>
-                  <a onClick={() => handleOpenModal(1)}>이메일무단수집거부</a>
+                  <div onClick={() => handleOpenModal(1)}>이메일무단수집거부</div>
                 </li>
                 <li>
-                  <a onClick={() => handleOpenModal(2)}>저작권정책</a>
+                  <div onClick={() => handleOpenModal(2)}>저작권정책</div>
                 </li>
               </ul>
             </nav>
