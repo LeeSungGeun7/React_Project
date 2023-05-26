@@ -207,9 +207,7 @@ const InterestStation = () => {
             } else {
                 console.log("Email is not provided");
             }
-            if(!isLoggedIn) {
-                Navigate("/");
-            }
+            
         }
         fetchWishStations(email);
     }, [email]);
