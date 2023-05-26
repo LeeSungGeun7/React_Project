@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import AxiosApi from "../api/AxiosApi";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContextProvider";
+import { async } from "q";
 
 const Container = styled.div`
 	* {
@@ -184,23 +185,25 @@ const Input = styled.input`
 
 const FindPassword = () => {
     const {setChangeId,changeId} = useAuth();
-
+    const { email } = useParams();
     const navigate = useNavigate();
     const [id,setId] = useState("");
     const [key,setKey] = useState("");
     const [name,setName] = useState("");
 
-    const confirmPass = () => {
-       const rsp = AxiosApi.confirmKey(id,key)
-       if(rsp) {
+    const confirmPass = async() => {
+       const rsp = await AxiosApi.confirmKey(id,key)
+       if(rsp.status === 200) {
          navigate("/change");
        }
     }
-
+    useEffect(()=> {
+        setId(email);
+    },[]);
     
     return(
         <>
-          <Header/>
+        <Header/>
         <Container>
           
             <div className="Container">
@@ -230,7 +233,7 @@ const FindPassword = () => {
                     </dt>
                     <dd className="input_dd">
                         <input onChange={(e)=>{setKey(e.target.value)}} type="text" className="inputBox" placeholder="인증번호 6자리 숫자 입력"></input>
-                        </dd>
+                    </dd>
                     </div>
                     <a className="nextBtn"><span onClick={confirmPass} className="nextButton">다음</span></a>
                 </div>

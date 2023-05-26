@@ -3,12 +3,12 @@ import styled from "styled-components";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import AxiosApi from "../api/AxiosApi";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
-	* {
-		box-sizing: border-box;
-	}
+   * {
+      box-sizing: border-box;
+   }
 
     .Container {
         background-color: mintcream;
@@ -124,27 +124,45 @@ const Container = styled.div`
 `
 
 const TypedID = () => {
+    const navigate = useNavigate("");
 
-    // const [email, setEmail] = useState("");
+    const [inputEmail, setInputEmail] = useState("");
 
-    // const onClickFindPassword = async () => {
-    //     const data = {
-    //         id : email
-    //     }
-    //     console.log(data);
-    //     const response = await AxiosApi.getCustomerInfo(id);
-    //     if(response.id === true) {
-    //         Navigate("/FindPassword");
-    //     } else {
-    //         console.log("존재하지 않는 이메일 !!!");
-    //     }
+    const onChangeEmail = (e) => {
+        setInputEmail(e.target.value);
+    }
 
-    // }
+    const onClickFindPassword = async () => {
+        const response = await AxiosApi.getCustomerInfo(inputEmail);
+        
+        if(response.status === 200) {
+            navigate(`/findpass/${inputEmail}`);
+            console.log(response.data);
+        }else {
+            setModalOpen(true);
+            setModalText("존재하지 않는 아이디입니다.");
+        }
+    }
+
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalText, setModalText] = useState("");
+
+    const confirmBtn = () => {
+        setModalOpen(false);
+        console.log("확인 버튼이 눌러졌습니다.");
+    }
+    const closeModal= () => {
+        setModalOpen(false);
+    }
+
+    const data = {
+        email : "pooh9609@naver.com"
+    }
 
     return(
         <>
+        <Header />
         <Container>
-            <Header />
             <div className="Container">
                 <div className="TopMenu">
                     <a href="/FindID" className="top_findId"><li>아이디 찾기</li></a>
@@ -156,9 +174,11 @@ const TypedID = () => {
                         <h2 className="title">비밀번호를 찾고자 하는 아이디를 입력해주세요.</h2>
                     </div>
                     <div className="input_area">
-                        <input className="inputBox" ></input>
+                        <input className="inputBox" onChange={onChangeEmail}></input>
                         <br></br>
-                        <a href="/FindPassword" className="nextBtn" ><span className="nextButton">다음</span></a>
+                        <a href className="nextBtn">
+                            <span className="nextButton" onClick={onClickFindPassword}>다음</span>
+                        </a>
                     </div>
                     <div className="link_area">
                         <p className="text">아이디가 기억나지 않는다면?</p>
