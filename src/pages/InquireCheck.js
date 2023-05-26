@@ -209,9 +209,9 @@ const InquireCheck = () => {
                 <div className="chatbar" style={{width:"100%"}}>문의하기
                     <input onChange={(e)=> setTitle(e.target.value)} style={{width:"95%",height:"30px",borderRadius:"5px"}} type="text" />
                     <textarea onChange={(e)=> setContent(e.target.value)} style={{width:"95%"}} name="" id="" cols="30" rows="10"></textarea>
-                    <button  disabled={!isFormComplete()} onClick={()=>
+                    <button  disabled={isFormComplete()} onClick={async()=>
                           {
-                           AxiosApi.inQuire(email,title,content)}}>SEND</button>
+                           await AxiosApi.inQuire(email,title,content)}}>SEND</button>
                 </div>
             </div>
 

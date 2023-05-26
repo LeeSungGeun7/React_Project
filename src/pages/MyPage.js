@@ -181,7 +181,7 @@ const Container = styled.div`
 
 
 const Mypage = () => {
-
+    
 
     const [myInfo, setMyInfo] = useState("");
     const { id } = useParams();
@@ -205,26 +205,28 @@ const Mypage = () => {
     useEffect(() => {
         const getMyInfo = async() => {
             const rsp = await AxiosApi.getSession(cookies.load("sessionId"));
-
             if (rsp.status === 200) {
-
-              console.log(rsp.data);
-                 if(rsp.data){    
-                  setName(rsp.data.custNm);
-                  setNickName(rsp.data.custNnm);
-                  setEmail(rsp.data.custEmail);
-                  setTel(rsp.data.custPhone);
-                 } 
-                }}
-
-        const getInfo = async() => {
-            const rsp = await AxiosApi.getMoney(email);
-            if(rsp.status === 200)
-                setMoney(rsp.data);
-            console.log(rsp.data);
+                console.log(rsp.data); 
+                if(rsp.data) {
+                    setName(rsp.data.custNm);
+                    setNickName(rsp.data.custNnm);
+                    setEmail(rsp.data.custEmail);
+                    setTel(rsp.data.custPhone);
+                } 
+            }
+            const rs = await AxiosApi.getMoney(rsp.data.custEmail);
+            if(rs.status === 200) {
+                setMoney(rs.data);
+                console.log(rs.data);
+            }
         }
+
+        // const getInfo = async() => {
+            
+            
+        // }
         getMyInfo();
-        getInfo();
+        // getInfo();
     }, []);
 
     return(
