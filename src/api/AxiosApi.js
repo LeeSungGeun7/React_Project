@@ -93,6 +93,7 @@ const AxiosApi = {
     },
     // 충전금액조회
     getMoney : async(email) => {
+        console.log(email)
         return await axios.get(EF_DOMAIN + `/user/${email}/charge`);
     },
     
