@@ -89,6 +89,7 @@ const AxiosApi = {
             cvc: cvc,
             price: price
         };
+        console.log(payment);
         return await axios.post(EF_DOMAIN + "/payment", payment);
     },
     // 충전금액조회

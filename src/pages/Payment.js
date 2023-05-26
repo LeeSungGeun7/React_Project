@@ -87,6 +87,7 @@ const PaymentPage  = () => {
         alert('결제 정보를 모두 입력해주세요.');
         return;
       }
+      payOnclick();
   
       // 실제 결제 처리 로직을 추가
       //  결제가 완료되었다는 메시지를 출력
@@ -94,9 +95,11 @@ const PaymentPage  = () => {
     };
 
     const payOnclick = async () => {
-    const rsp = await AxiosApi.insertCard(name, email, credit, cardNumber, expirationDate, cvc, price);
-    if(rsp.data === true) {console.log(rsp.data); alert('결제가 완료되었습니다!');}
-    else console.log(rsp.data);
+      const rsp = await AxiosApi.insertCard(name, email, credit, cardNumber, expirationDate, cvc, price);
+      if(rsp.data === true) {
+        console.log(rsp.data); 
+        alert('결제가 완료되었습니다!');
+      } else console.log(rsp.data);
     };
 
     // 카카오페이 모듈 추가하고 카카오페이에 보내는 데이터가 post로 성공했을 경우 콜백함수로 payOnclikc 함수 불러올 예정.
@@ -105,10 +108,11 @@ const PaymentPage  = () => {
           const rsp = await AxiosApi.getSession(cookies.load("sessionId"));
           if (rsp.status === 200) {
             console.log(rsp.data);
-               if(rsp.data){    
-                setEmail(rsp.data.custEmail);
-               } 
-              }}
+            if(rsp.data){    
+              setEmail(rsp.data.custEmail);
+            } 
+          }
+        }
       getMyInfo();
   }, []);
 
@@ -118,9 +122,11 @@ const PaymentPage  = () => {
         
       <Container>
         <Header/>
+        
         <div className="total">
         <h1 style={{textAlign:"center"}}>충전 정보 입력</h1>
         <form onSubmit={handleFormSubmit}>
+          
             <label htmlFor="name">이름</label>
             <input
               type="text"
@@ -190,7 +196,7 @@ const PaymentPage  = () => {
             />
           </div>
           
-          <button onClick = {payOnclick} type="submit">충전</button>
+          <button type="submit">충전</button>
         </form>
         </div>
       <Footer/>
