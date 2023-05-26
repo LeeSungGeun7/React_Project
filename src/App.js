@@ -19,8 +19,12 @@ import Quest from './pages/Quest';
 import Answer from './pages/Answer';
 import InquireCheck from './pages/InquireCheck'
 
-
-
+import FindID from './pages/FindID';
+import ShowID from './pages/ShowID';
+import TpyedID from './pages/TypedID';
+import FindPassword from './pages/FindPassword';
+import ChangePassword from './pages/ChangePassword';
+import TypedID from './pages/TypedID';
 
 
 
@@ -44,6 +48,15 @@ function App() {
         <Route path="/quest" element={<Quest />} />
         <Route path="/answer" element={<Answer />} />
         <Route path="/check" element={<InquireCheck />} />
+
+
+        <Route path="/findid" element={<FindID />} />
+        <Route path="/showid" element={<ShowID />} />
+        <Route path="/typedid" element={<TypedID />} />
+        <Route path="/findpass" element={<FindPassword />} />
+        <Route path="/change" element={<ChangePassword />} />
+        
+
 
         <Route path="/ModifyInfo" element={<ModifyInfo />} />
         <Route path="/InterestStation" element={<InterestStation />} />

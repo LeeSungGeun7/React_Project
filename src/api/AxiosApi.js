@@ -56,6 +56,27 @@ const AxiosApi = {
     signUp : async(data) => {
         return await axios.post(EF_DOMAIN + "/member/signup", data);
     },
+    // 비밀번호 변경
+    updatePassword: async (email, newPwd) => {
+        try {
+          const response = await axios.post('http://localhost:3737/member/updatePassword', {
+            email,
+            newPwd
+          });
+    
+          if (response.status === 200) {
+            console.log("Password successfully updated.");
+          } else {
+            console.log("Failed to update password.");
+          }
+          
+          return response;
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
+
 
     // 금액충전
     insertCard : async( name, email, credit, cardNum, endDate, cvc, price) => {
@@ -76,7 +97,20 @@ const AxiosApi = {
     },
     
 
+    // 관심충전소 등록
+    setWishStations : async(email,csId,addr,csNm,chargeTp,cpStat) => {
+        const request = {
+            custEmail : email ,
+            csId : csId ,
+            addr : addr ,
+            csNm : csNm ,
+            chargeTp : chargeTp ,
+            cpStat : cpStat       
+        };
+        console.log(csId);
+        return await axios.post(EF_DOMAIN + "/charger/wish/add", request);
 
+    } ,
 
 
     // 관심 충전소 등록 대강 만듬 
@@ -89,6 +123,13 @@ const AxiosApi = {
         return await axios.post(EF_DOMAIN + "/charger/wish/add", request);
 
     } , 
+    
+    getWishStations : async (email) => {
+        const response = await axios.get(EF_DOMAIN+ "/charger/wish/findAll", { 
+            params: { email: email }
+        });
+        return response;
+    },
 
     // 관심 충전소 데이터 호출
     getWishStation : async (email) => {

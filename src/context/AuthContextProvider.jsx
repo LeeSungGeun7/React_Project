@@ -8,9 +8,11 @@ export const AuthContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [search, setSearch] = useState("");
   const [email, setEmail] = useState("");
+
+  const [changeId ,setChangeId] = useState("");
   
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn , email , setEmail, changeId,setChangeId}}>
       {children}
     </AuthContext.Provider>
   );

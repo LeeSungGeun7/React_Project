@@ -218,6 +218,7 @@ const Headerst = styled.div`
 
 
 const Header = (props) => {
+    const {email, setEmail} = useAuth();
     // const [isLoggedIn,setIsLoggedIn] = useState(false);
     const [userName, setUserName] = useState("");
     const [cookie,setCookie] = useState("");
@@ -245,10 +246,13 @@ const Header = (props) => {
             setIsLoggedIn(true);
             setCookie(String(cookies.load("sessionId")));
             setUserName(rsp.data.custNm);
-           } else {
-            cookies.remove("sessionId");
-            setIsLoggedIn(false);
-           }
+            setEmail(rsp.data.custEmail);
+           } 
+        //    else {
+        //     cookies.remove("sessionId");
+        //     setIsLoggedIn(false);
+        //     setEmail("");
+        //    }
       }
     }
     getMyInfo();

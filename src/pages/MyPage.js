@@ -182,6 +182,7 @@ const Container = styled.div`
 
 const Mypage = () => {
 
+
     const [myInfo, setMyInfo] = useState("");
     const { id } = useParams();
 
@@ -204,6 +205,7 @@ const Mypage = () => {
     useEffect(() => {
         const getMyInfo = async() => {
             const rsp = await AxiosApi.getSession(cookies.load("sessionId"));
+
             if (rsp.status === 200) {
 
               console.log(rsp.data);

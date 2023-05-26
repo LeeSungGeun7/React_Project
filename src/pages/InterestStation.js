@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import starIcon from "../images/star-8-64.png"
 import pointer from "../images/free-icon-location-4475519.png"
 import AxiosApi from "../api/AxiosApi";
+import { useAuth } from "../context/AuthContextProvider";
 
 const Container = styled.div`
     display: flex;
@@ -175,109 +176,49 @@ const Container = styled.div`
 // };
 
 const InterestStation = () => {
+        const {email ,isLoggedIn} = useAuth();
+    const [allCharger,setAllCharger] = useState([]);
+
+    const chargeTp = {
+        1: "완속",
+        2: "급속"
+    }
+
+    const status = {
+        1: "충전가능", // 충전 가능
+        2: "충전중", // 충전 중
+        3: "고장/점검", // 고장/점검
+        4: "통신장애", // 통신장애
+        5: "통신미연결" // 통신미연결
+    };
+
+
+
 
     const [wishStation, setWishStation] = useState([]);
-    const address = "서울특별시";
-
-    // const data = [
-    //     {
-    //         name : "강남 N 타워 전기차충전소",
-    //         addr : "서울 강남구 테헤란로 129 (역삼동 648-9)",
-    //         lat : 192.775483,
-    //         lng : 364.224689,
-    //     },
-    //     {
-    //         name : "서울 논현1동 주민센터 전기차 충전소",
-    //         addr : "서울 강남구 학동로20길 25 (논현동 133-13)",
-    //         lat : 157.114862,
-    //         lng : 370.913315,
-    //     },
-    //     {
-    //         name : "서울 서초구 서초2동 주민센터 전기차충전소",
-    //         addr : "서울 서초구 서초대로70길 51 (서초동 1332-6)",
-    //         lat : 200.854879,
-    //         lng : 399.694781,
-    //     }
-    // ]
 
 
     useEffect(() => {
-        const wishStation = async(address) => {
-            const rsp = await AxiosApi.chargerData(address);
-            if(rsp.status === 200)setWishStation(rsp.data);
-            console.log(rsp.data);
+        const fetchWishStations = async(email) => {
+            if (email) {
+                const rsp = await AxiosApi.getWishStations(email);
+                if(rsp.status === 200) setWishStation(rsp.data);
+                console.log(rsp.data);
+            } else {
+                console.log("Email is not provided");
+            }
+            if(!isLoggedIn) {
+                Navigate("/");
+            }
         }
-        wishStation("서울특별시");
-    }, []);
+        fetchWishStations(email);
+    }, [email]);
 
-    const charger = (chargeTp, cpTp) => {
-        let chargeType1;
-        let chargeType2;
-        if(chargeTp === 1) {
-            chargeType1 = "완속";
-        } else {
-            chargeType1 = "급속";
-        }
+    
 
-        switch(cpTp) {
-            case 1 : 
-                chargeType2 = "B타입(5핀)";
-                break;
-            case 2 : 
-                chargeType2 = "C타입(8핀)";
-                break;
-            case 3 : 
-                chargeType2 = "BC타입(5핀)";
-                break;
-            case 4 : 
-                chargeType2 = "BC타입(7핀)";
-                break;
-            case 5 : 
-                chargeType2 = "DC차데모";
-                break;
-            case 6 : 
-                chargeType2 = "AC3상";
-                break;
-            case 7 : 
-                chargeType2 = "DC콤보";
-                break;
-            case 8 :
-                chargeType2 = "DC차데모+DC콤보";
-                break;
-            case 10 :
-                chargeType2 = "DC콤보+AC3상+차데모";
-                break;
-            default :
-                break;
-        }
+       
 
-        return chargeType1 + "  " + chargeType2;
-    }
-
-    const chargerState = (cpStat) => {
-        let cpState;
-
-        switch(cpStat) {
-            case 1 :
-                cpState = "충전 가능";
-                break;
-            case 2 :
-                cpState = "충전중";
-                break;
-            case 3 :
-                cpState = "고장/점검";
-                break;
-            case 4 :
-                cpState = "통신 장애";
-                break;
-            case 5 :
-                cpState = "통신 미연결";
-                break;
-            default :
-                break;
-        }
-        return cpState;
-    }
+      
 
     return(
 
@@ -295,24 +236,24 @@ const InterestStation = () => {
                         </ul>
                         <br></br>
 
-                        {wishStation && wishStation.map(e => (
+                        {wishStation && wishStation.map((e ,idx) => (
                             <div className="bookmark">
                             <div className="starIcon">
-                                <img className="star" src={starIcon} alt="star_icon"></img>
+                                <img onClick={()=>{AxiosApi.deleteWishStation(e.csId,email)}} className="star" src={starIcon} alt="star_icon"></img>
                             </div>
                             <div className="stationInfo">
-                                <h2 key={wishStation}>{e.csNm}</h2>
+                                <h2 key={idx}>{e.csNm}</h2>
                                 <tr className="detailInfo">
-                                    <th className="category">주소</th>
-                                    <td className="content" key={wishStation}>{e.addr}</td>
+                                    <th className="category">{e.addr}</th>
+                                    <td className="content" key={idx}>{e.addr}</td>
                                 </tr>
                                 <tr className="detailInfo">
                                     <th className="category">충전타입</th>
-                                    <td className="content" key={wishStation}>{charger(e.chargeTp, e.cpTp)}</td>
+                                    <td className="content" key={idx}>{chargeTp[e.chargeTp]}</td>
                                 </tr>
                                 <tr className="detailInfo">
                                     <th className="category">상태</th>
-                                    <td className="content" key={wishStation}>{chargerState(e.cpStat)}</td>
+                                    <td className="content" key={idx}>{status[e.cpStat]}</td>
                                 </tr>
                                 
 

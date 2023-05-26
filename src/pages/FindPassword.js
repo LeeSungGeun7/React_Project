@@ -3,6 +3,9 @@ import styled from "styled-components";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import AxiosApi from "../api/AxiosApi";
+import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContextProvider";
 
 const Container = styled.div`
 	* {
@@ -131,12 +134,75 @@ const Input = styled.input`
 `
 
 
-const FindPassword = () => {
+// const FindPassword = () => {
+//     const [id,setId] = useState("");
+//     const [key,setKey] = useState("");
+    
+//     return(
+//         <>
+//         <Container>
+//             <Header/>
+//             <div className="Container">
+//                 <div className="TopMenu">
+//                     <a href="/FindID" className="top_findId"><li>아이디 찾기</li></a>
+//                     <a href="/TypedID" className="top_findPw"><li>비밀번호 찾기</li></a>
+//                 </div>
 
+//                 <h2 className="title">비밀번호 찾기</h2>
+//                 <div className="FindPw">
+//                     <p className="text">본인확인 이메일 주소와 입력한 이메일 주소가 같아야 인증번호를 받을 수 있습니다.</p>
+//                     <dt className="label_dt">
+//                         <label onChange={(e)=>{setId(e.target.value)}} className="label">이름</label>
+//                     </dt>
+//                     <dd className="input_dd">
+//                         <Input type="text" className="inputBox"></Input>
+//                     </dd>
+//                     {/* <br></br> */}
+//                     <dt className="label_dt">
+//                         <label className="label">이메일 주소</label>
+//                     </dt>
+//                     <dd className="input_dd">
+//                         <Input type="text" className="inputBox"></Input>
+//                         <button onClick={()=>{ AxiosApi.getKeyCode}} className="sendCode">인증번호 받기</button>
+//                     </dd>
+//                     {/* <br></br> */}
+//                     <dt className="label_dt">
+//                         <label onChange={(e)=>{setKey(e.target.value)}} className="label">인증번호</label>
+//                     </dt>
+//                     <dd className="input_dd">
+//                         <Input type="text" className="inputBox" placeholder="인증번호 6자리 숫자 입력"></Input>
+//                         </dd>
+//                     </div>
+//                     <a href="/ChangePassword" className="nextBtn"><span onClick={()=>{AxiosApi.confirmKey(id,key)}} className="nextButton">다음</span></a>
+//                 </div>
+//             <Footer/>
+//         </Container>
+//         </>
+//     );
+// };
+// export default FindPassword;
+
+const FindPassword = () => {
+    const {setChangeId,changeId} = useAuth();
+
+    const navigate = useNavigate();
+    const [id,setId] = useState("");
+    const [key,setKey] = useState("");
+    const [name,setName] = useState("");
+
+    const confirmPass = () => {
+       const rsp = AxiosApi.confirmKey(id,key)
+       if(rsp) {
+         navigate("/change");
+       }
+    }
+
+    
     return(
         <>
+          <Header/>
         <Container>
-            <Header/>
+          
             <div className="Container">
                 <div className="TopMenu">
                     <a href="/FindID" className="top_findId"><li>아이디 찾기</li></a>
@@ -150,28 +216,27 @@ const FindPassword = () => {
                         <label className="label">이름</label>
                     </dt>
                     <dd className="input_dd">
-                        <Input type="text" className="inputBox"></Input>
+                        <input type="text" className="inputBox" onChange={(e)=>{setName(e.target.value)}}></input>
                     </dd>
-                    {/* <br></br> */}
                     <dt className="label_dt">
                         <label className="label">이메일 주소</label>
                     </dt>
                     <dd className="input_dd">
-                        <Input type="text" className="inputBox"></Input>
-                        <button className="sendCode">인증번호 받기</button>
+                        <input type="text" className="inputBox" onChange={(e)=>{setChangeId(e.target.value)}}></input>
+                        <button onClick={()=>{ AxiosApi.getKeyCode(changeId); console.log(id); console.log(key)}} className="sendCode">인증번호 받기</button>
                     </dd>
-                    {/* <br></br> */}
                     <dt className="label_dt">
                         <label className="label">인증번호</label>
                     </dt>
                     <dd className="input_dd">
-                        <Input type="text" className="inputBox" placeholder="인증번호 6자리 숫자 입력"></Input>
+                        <input onChange={(e)=>{setKey(e.target.value)}} type="text" className="inputBox" placeholder="인증번호 6자리 숫자 입력"></input>
                         </dd>
                     </div>
-                    <a href="/ChangePassword" className="nextBtn"><span className="nextButton">다음</span></a>
+                    <a className="nextBtn"><span onClick={confirmPass} className="nextButton">다음</span></a>
                 </div>
-            <Footer/>
+           
         </Container>
+        <Footer/>
         </>
     );
 };

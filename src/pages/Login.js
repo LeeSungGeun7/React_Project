@@ -161,7 +161,7 @@ const Login = () => {
           <input type="text" placeholder="이메일 입력" value={inputId} onChange={onChangeId} />
           <input type="password" placeholder="비밀번호 입력" value={inputPw} onChange={onChangePw} />
           <button onClick={onClickLogin}>Login</button>
-          <a href="/FindID">Forgot to Password?</a>
+          <a onClick={()=>{navigate("/findpass")}}>Forgot to Password?</a>
           <GoogleOAuthProvider clientId={clientId}>
             <GoogleLogin
               onSuccess={async(res) => {

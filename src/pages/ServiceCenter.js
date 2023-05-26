@@ -7,6 +7,7 @@ import { SlEarphonesAlt } from "react-icons/sl";
 import { FaSearch } from 'react-icons/fa';
 
 import { useContext } from "react";
+import { useAuth } from "../context/AuthContextProvider";
 
 
 const Contain = styled.div`
@@ -160,7 +161,7 @@ const Contain = styled.div`
 const ServiceCenter = () => {
     const [isLoggedIn,setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
-
+    const {email} = useAuth();
 
     return(
         <>

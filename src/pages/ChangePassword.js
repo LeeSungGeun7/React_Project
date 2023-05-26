@@ -4,6 +4,7 @@ import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import AxiosApi from "../api/AxiosApi";
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContextProvider";
 
 const Container = styled.div`
     * {
@@ -103,6 +104,7 @@ const Input = styled.input`
 `
 
 const ChangePassword = () => {
+    const {changeId} = useAuth();
 
     // 입력란
     const [pwd, setPwd] = useState("");
@@ -111,7 +113,7 @@ const ChangePassword = () => {
     // 정규식 유효성 검사
     const [pwdReg, setPwdReg] = useState(false);
     const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
-
+    
     // 오류 메세지
     const [pwMessage, setPwMessage] = useState("");
     const [pwConfirmMessage, setPwConfirmMessage] = useState("");
@@ -141,23 +143,14 @@ const ChangePassword = () => {
     }
 
     const onClickChangePassword = async () => {
-		const data = {
-			password: pwd,
-			pwdRegex: pwdReg,
-		}
-		console.log(data);
-		const response = await AxiosApi.signUp(data);
-		if (response.data === true) {
-      Navigate("/Login");
-    } else {
-      console.log("로그인 에러 !!!");
-    }
+		AxiosApi.updatePassword(changeId,pwd);
 	}
 
     return(
         <>
+          <Header />
         <Container>
-            <Header />
+          
             <div className="Container">
                 <div className="TopMenu">
                     <a href="/FindID" className="top_findId"><li>아이디 찾기</li></a>
@@ -165,13 +158,13 @@ const ChangePassword = () => {
                 </div>
                 <div className="changePw">
                     <h2 className="title">비밀번호 변경</h2>
-                    <Input 
+                    <input 
                         placeholder="새 비밀번호" 
                         type="password"
                         onChange={onChangePwd}
                         />
                         {pwd.length > 0 && <span className={`${pwdReg ? "success" : "error"}`}>{pwMessage}</span>}
-                    <Input 
+                    <input 
                         placeholder="새 비밀번호 확인" 
                         type="password"
                         onChange={onChangePwdConfirm}

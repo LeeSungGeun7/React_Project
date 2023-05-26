@@ -275,7 +275,7 @@ const CarSerachst = styled.div`
 const CarSerach = () => {
   const { searchValue } = useParams();
 
-  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const { isLoggedIn, setIsLoggedIn , email , setEmail} = useAuth();
   const statusColors = {
     1: "#52F911", // 충전 가능
     2: "#FFF94E", // 충전 중
@@ -284,13 +284,13 @@ const CarSerach = () => {
     5: "red" // 통신미연결
 };
 
-  const email = "sungkeno3o@gmail.com";
+  
 
   const [chargers, setChargers] = useState([]);
 
-  const addWishStationData = async (email,csId) => {
+  const addWishStationData = async (email,csId,addr,csNm,chargeTp,cpStat) => {
      try {
-        const response = await AxiosApi.setWishStation(email,csId);
+        const response = await AxiosApi.setWishStations(email,csId,addr,csNm,chargeTp,cpStat);
         console.log(response); // 로그를 통해 응답 내용 확인
     } catch (error) {
         console.error(error);
@@ -307,7 +307,7 @@ const CarSerach = () => {
    }
   }
 
-  const toggleSwitch = async (email, csId) => {
+  const toggleSwitch = async (email,csId,addr,csNm,chargeTp,cpStat) => {
     const isWishStation = wishList.some(item => item.csId === csId);
     
     if (isWishStation) {
@@ -318,7 +318,7 @@ const CarSerach = () => {
       // wishList에 먼저 추가하고, 그 다음에 서버에 변경 사항을 보냅니다.
       const newWishStation = { csId };
       setWishList(prev => [...prev, newWishStation]);
-      await addWishStationData(email, csId);
+      await addWishStationData(email,csId,addr,csNm,chargeTp,cpStat);
     }
   }
 
@@ -521,8 +521,8 @@ const CarSerach = () => {
                            setChargers(chargers);
                           }} 
                             key={index}>
-                              
-                            <h4 style={{color:"#0F2121"}}> {charger.csNm} {isLoggedIn && <FaStar onClick={(e)=> {e.stopPropagation();toggleSwitch(email, charger.csId)}} style={{color: wishList.some(item => item.csId === charger.csId) ? "yellow" : "pink"}}/>}</h4> 
+                                                                                                                                             
+                            <h4 style={{color:"#0F2121"}}> {charger.csNm} {isLoggedIn && <FaStar onClick={(e)=> {e.stopPropagation();toggleSwitch(email, charger.csId,charger.addr,charger.csNm,charger.chargeTp,charger.cpStat)}} style={{color: wishList.some(item => item.csId === charger.csId) ? "yellow" : "pink"}}/>}</h4> 
                             <p style={{fontSize:"20px" , color:"#0F2121"}}> {charger.addr}</p>
                   
                             <HiOutlineEmojiHappy className="HP" style={{color:statusColors[charger.cpStat], fontSize:"50px"}}/>
