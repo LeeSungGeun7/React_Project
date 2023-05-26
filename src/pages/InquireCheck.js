@@ -129,7 +129,7 @@ const InquireCheck = () => {
     const [content, setContent] = useState("");
     const [email,setEmail] = useState("");
    
-   
+
     const isFormComplete = () => {
         return title.length > 2 && content.length > 10;
     }
