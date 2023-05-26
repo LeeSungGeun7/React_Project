@@ -53,7 +53,7 @@ function App() {
         <Route path="/findid" element={<FindID />} />
         <Route path="/showid" element={<ShowID />} />
         <Route path="/typedid" element={<TypedID />} />
-        <Route path="/findpass" element={<FindPassword />} />
+        <Route path="/findpass/:email" element={<FindPassword />} />
         <Route path="/change" element={<ChangePassword />} />
         
 
