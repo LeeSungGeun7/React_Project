@@ -240,14 +240,14 @@ const ServiceCenter = () => {
                  {!isLoggedIn ? (
                       <div className="custom-box">
                                    
-                      <div onClick={()=> {navigate("/quest")}} style={{backgroundColor: "#FFE83C"}} className="custom-item1">
+                      <div onClick={()=> {navigate("/check")}} style={{backgroundColor: "#FFE83C"}} className="custom-item1">
 
-                          1:1문의하기
+                          1:1문의 및 조회
                           <p style={{fontSize:"10px" , backgroundColor: "#FFE83C"}}>궁금한 점이 있으시면 1:1문의를 남겨주세요</p>
                           <p style={{fontSize:"5px" , fontWeight: "100"}}>^&^</p>
                       </div>
-                      <div onClick={()=> {navigate("/check")}} className="custom-item2" style={{backgroundColor: "#C2FF30"}}>
-                          문의내역 조회
+                      <div onClick={()=> {navigate("/answer")}} className="custom-item2" style={{backgroundColor: "#C2FF30"}}>
+                          관리자전용-답변달기-기능
                       </div>
                   </div>
                 ) : (

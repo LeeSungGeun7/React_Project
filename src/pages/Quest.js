@@ -86,7 +86,7 @@ const Quest = () => {
         <div className="quest">
             <div className="title"> <input onChange={(e)=> setTitle(e.target.value)} type="text" placeholder="제목"/> </div> 
             <textarea className="content" onChange={(e)=> setContent(e.target.value)} name="" id="" cols="30" rows="10"></textarea>
-            <button onClick={()=>  {AxiosApi.inQuire("2",email,title,content)}}>  
+            <button onClick={()=>  {AxiosApi.inQuire(email,title,content)}}>  
             문의하기 </button> 
         </div>
 

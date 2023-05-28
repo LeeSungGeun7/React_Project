@@ -158,7 +158,6 @@ const AxiosApi = {
             inqContent : content
            
         }
-
         return await axios.post(EF_DOMAIN + "/inquires", request);
     } ,
 

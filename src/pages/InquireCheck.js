@@ -7,6 +7,7 @@ import Footer from "../layout/Footer";
 import { useNavigate } from 'react-router-dom';
 import cookies from 'react-cookies';
 import { AiFillAliwangwang } from "react-icons/ai";
+import { InquireModal } from "../utils/InquireModal";
 
 const InquireCheckst = styled.div`
     height: 100vh;
@@ -107,7 +108,7 @@ const InquireCheckst = styled.div`
         border:none;
         background-color: white;
         border-radius: 15px;
-        color:silver;
+        color:black;
     }
     .chatbar textarea {
         padding: 10px;
@@ -124,7 +125,9 @@ const InquireCheckst = styled.div`
 `;
 
 const InquireCheck = () => {
-   
+    const [modalOpen,setModalOpen] = useState(false);
+    const [modalContent,setModalContent] = useState("");
+
     const [title,setTitle] = useState("");
     const [content, setContent] = useState("");
     const [email,setEmail] = useState("");
@@ -134,6 +137,13 @@ const InquireCheck = () => {
         return title.length > 2 && content.length > 10;
     }
 
+    const handleClick = (movie) => {
+        setModalOpen(true);
+    }
+
+    const handleClick2 = (movie) => {
+        setModalOpen(false);
+    }
 
 
     
@@ -175,8 +185,10 @@ const InquireCheck = () => {
         <Header/>
         <InquireCheckst>
          
-
-
+        
+        <InquireModal modalOpen={modalOpen} handleClose={handleClick2}>
+                <p>{modalContent}</p>
+        </InquireModal>
 
            
         <div className="container">
@@ -207,16 +219,31 @@ const InquireCheck = () => {
                 )
                 }
                 <div className="chatbar" style={{width:"100%"}}>문의하기
-                    <input onChange={(e)=> setTitle(e.target.value)} style={{width:"95%",height:"30px",borderRadius:"5px"}} type="text" />
-                    <textarea onChange={(e)=> setContent(e.target.value)} style={{width:"95%"}} name="" id="" cols="30" rows="10"></textarea>
-                    <button  disabled={isFormComplete()} onClick={async()=>
+                    <input onChange={(e)=> setTitle(e.target.value)} style={{width:"95%",height:"30px",borderRadius:"5px"}} type="text" placeholder="2글자이상 입력"/>
+                    <textarea onChange={(e)=> setContent(e.target.value)} style={{width:"95%"}} name="" id="" cols="30" rows="10" placeholder="11글자 이상 입력"></textarea>
+                    <button  style={{color: isFormComplete() ? "black" : "silver" }} disabled={!isFormComplete()} onClick={async()=>
                           {
-                           await AxiosApi.inQuire(email,title,content)}}>SEND</button>
+                            try {
+                              const rsp =  await AxiosApi.inQuire(email,title,content); 
+                              if(rsp.status === 200){
+                             
+                                setModalContent("정상적으로 보내졌습니다!!");
+                                handleClick();
+                              } else {
+
+                                setModalContent("보내지지 않았습니다.");
+                                handleClick();
+                              }
+                            } catch (error) {
+                              console.error(error);
+                              setModalContent("오류가 발생했습니다.");
+                            }
+                          }}>SEND</button>
                 </div>
             </div>
 
             <div className="card">
-                카드컨테이너
+                <div>고객센터 바로가기</div>
             </div>
             </div>     
         
